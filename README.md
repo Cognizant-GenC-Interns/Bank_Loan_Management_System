@@ -1,1 +1,0 @@
-# Bank_Loan_Management_System
