@@ -1,6 +1,7 @@
 package com.cts.blms.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,4 +31,17 @@ public class CustomerServiceImpl implements CustomerService {
 		return repository.save(customer);
 	}
 
+	@Override
+	public Customer validateCustomer(String email, String password) {
+		Customer customer=repository.findByEmail(email);
+		if(customer!=null && customer.getPassword().equals(password)) {
+			return customer;
+		}
+		return null;
+	}
+
+	@Override
+	public Customer getCustomerDetailsById(long id) {
+		return repository.findById(id).orElse(null);
+	}
 }

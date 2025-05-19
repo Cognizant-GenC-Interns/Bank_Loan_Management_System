@@ -1,6 +1,7 @@
 package com.cts.blms.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.cts.blms.model.Customer;
 
@@ -14,4 +15,7 @@ public interface CustomerService {
 
 	Customer updateCustomerProfile(Customer customer);
 
+	Customer validateCustomer(String email, String password);
+
+	Customer getCustomerDetailsById(long id);
 }
