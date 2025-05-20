@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
@@ -27,7 +28,7 @@ public class Customer {
 	@Column(name="email")
 	private String email;
 	
-	@NotBlank(message = "passwod is mandatory")
+	@NotBlank(message = "password is mandatory")
 	@Column(name="password")
 	private String password;
 	
