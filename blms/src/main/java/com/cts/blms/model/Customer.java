@@ -44,5 +44,5 @@ public class Customer {
 	
 	@Enumerated(EnumType.STRING)
     @Column(name="kyc_status")
-	private KycStatus kycStatus=KycStatus.PENDING;
+	private KycStatus kycStatus;
 }

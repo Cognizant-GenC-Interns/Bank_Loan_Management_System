@@ -19,6 +19,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer addCustomer(@Valid Customer customer) {
+		customer.setKycStatus(KycStatus.PENDING);
 		return repository.save(customer);
 	}
 
@@ -49,7 +50,8 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer updateKycStatus(long id) {
 		Customer customer=repository.findById(id).orElse(null);
-		customer.setKycStatus(KycStatus.VERIFIRD);
+		System.out.println("Customer Status"+customer.getKycStatus());
+		customer.setKycStatus(KycStatus.VERIFIED);
 		return repository.save(customer);
 	}
 }
