@@ -35,7 +35,7 @@ public class Customer {
 	@Column(name="address")
 	private String address;
 	
-	@NotBlank(message = "Kycstatus is mandatory")
+	
 	@Column(name="kyc_status")
 	private KycStatus kycStatus=KycStatus.PENDING;
 }

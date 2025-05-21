@@ -21,10 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
 		return repository.save(customer);
 	}
 
-	@Override
-	public List<Customer> getCustomerDetails() {
-		return repository.findAll();
-	}
+	
 
 	@Override
 	public Customer updateCustomerProfile(Customer customer) {

@@ -1,12 +1,13 @@
 package com.cts.blms.controller;
 
-import java.util.Optional;
 
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import jakarta.validation.Valid;
 
 @Controller
 public class CustomerController {
+	private static final  Logger logger = LogManager.getLogger(CustomerController.class);
 	
 	@Autowired
 	private CustomerService service;
@@ -29,10 +31,32 @@ public class CustomerController {
 	public String home(Model model) {
 		Customer customer=new Customer();
 		model.addAttribute("customer",customer);
+		logger.info("Directed to Home page ");
+		logger.debug("Null value"+customer);
 		return "home";
 	}
+	@GetMapping("/userDashboard")
+	public String welcome() {
+		return "welcome";
+	}
 	
-
+	@PostMapping("/adminLogin")
+	public String adminLogin(@RequestParam("email")String email,@RequestParam("password")String password,Model model) {
+		
+//		if(email.equals("$") && password.equals("${admin.password}")) {
+//			model.addAttribute("customer", customer);
+		
+			logger.debug("Admin logged in");
+			return "redirect:admin/adminDashboard";
+//		}
+//			return "redirect:/";
+	}
+	
+//	@GetMapping("/adminDashboard")
+//	public String Dashboard(Model model) {
+//		model.addAttribute("Customer",service.getCustomerDetails());
+//		return "adminDashboard";
+//	}
 	
 	@PostMapping("/signup")
 	public String registerCustomer(@Valid @ModelAttribute("customer")  Customer customer,BindingResult result) {
@@ -45,18 +69,15 @@ public class CustomerController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("/welcome")
-	public String welcome() {
-		return "welcome";
-	}
+	
 	
 	@PostMapping("/login")
 	public String customerLogin(@RequestParam("email")String email,@RequestParam("password")String password,Model model) {
 		Customer customer=service.validateCustomer(email,password);
-		System.out.println("");
+	
 		if(customer!=null) {
 			model.addAttribute("customer", customer);
-			return "redirect:/welcome";
+			return "redirect:/userDashboard";
 		}
 			return "redirect:/";
 	}
@@ -72,11 +93,11 @@ public class CustomerController {
 	}
 	
 	
-	@GetMapping("/customerDetails")
-	public String getCustomerDetails(Model model) {
-		model.addAttribute("CustomerDetails",service.getCustomerDetails());
-		return "customerDetails";
-	}
+//	@GetMapping("/customerDetails")
+//	public String getCustomerDetails(Model model) {
+//		model.addAttribute("CustomerDetails",service.getCustomerDetails());
+//		return "customerDetails";
+//	}
 	
 	@PutMapping("/updateCustomer")
 	public String updateCustomerProfile(@ModelAttribute("customer") Customer customer) {
