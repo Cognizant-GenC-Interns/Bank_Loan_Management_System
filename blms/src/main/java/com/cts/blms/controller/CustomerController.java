@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cts.blms.model.Customer;
 import com.cts.blms.service.CustomerService;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 
@@ -47,20 +49,20 @@ public class CustomerController {
 //			model.addAttribute("customer", customer);
 		
 			logger.debug("Admin logged in");
-			return "redirect:admin/adminDashboard";
+			return "redirect:/adminDashboard";
 //		}
 //			return "redirect:/";
 	}
 	
-//	@GetMapping("/adminDashboard")
-//	public String Dashboard(Model model) {
-//		model.addAttribute("Customer",service.getCustomerDetails());
-//		return "adminDashboard";
-//	}
+	
+	@GetMapping("/adminDashboard")
+	public String Dashboard(Model model) {
+		model.addAttribute("Customer",service.getCustomerDetails());
+		return "adminDashboard";
+	}
 	
 	@PostMapping("/signup")
 	public String registerCustomer(@Valid @ModelAttribute("customer")  Customer customer,BindingResult result) {
-		System.out.println(customer.getEmail());
 		if(result.hasErrors()) {
 			
 			return "redirect:/";
@@ -69,15 +71,29 @@ public class CustomerController {
 		return "redirect:/";
 	}
 	
-	
-	
+
+	@GetMapping("/welcome")
+	public String welcome(HttpSession session, Model model) {
+	    Customer customer = (Customer) session.getAttribute("loggedCustomer");
+	   
+	    
+	    if (customer != null) {
+	        model.addAttribute("loggedCustomer", customer);
+	        model.addAttribute("editCustomer",new Customer());
+	        
+	        return "welcome";
+	    }
+	    return "redirect:/";
+	}
+
+
 	@PostMapping("/login")
-	public String customerLogin(@RequestParam("email")String email,@RequestParam("password")String password,Model model) {
+	public String customerLogin(@RequestParam("email")String email,@RequestParam("password")String password,HttpSession session) {
 		Customer customer=service.validateCustomer(email,password);
-	
-		if(customer!=null) {
-			model.addAttribute("customer", customer);
-			return "redirect:/userDashboard";
+
+		if(customer!=null) {	
+		session.setAttribute("loggedCustomer", customer);
+			return "redirect:/welcome";
 		}
 			return "redirect:/";
 	}
@@ -99,10 +115,21 @@ public class CustomerController {
 //		return "customerDetails";
 //	}
 	
-	@PutMapping("/updateCustomer")
-	public String updateCustomerProfile(@ModelAttribute("customer") Customer customer) {
-		service.updateCustomerProfile(customer);
-		return "home"; 
-
+	@PostMapping("/updateCustomer")
+	public String updateCustomerProfile(@Valid @ModelAttribute("loggedCustomer") Customer customer, BindingResult result, HttpSession session) {
+	    if (result.hasErrors()) {
+	        return "redirect:/";
+	    }
+	    Customer updatedCust=service.updateCustomerProfile(customer);
+	    session.setAttribute("loggedCustomer", updatedCust);
+	    return "redirect:/welcome";
+	}
+	
+	@PostMapping("/updateKyc/{customerId}")
+	public String updateKycStatus(@PathVariable("customerId") long id,Model model) {
+		System.out.println("customer id:" + id);
+		Customer customer=service.updateKycStatus(id);
+		model.addAttribute("updateCustomer", customer);
+		return "redirect:/adminDashboard";
 	}
 }

@@ -2,11 +2,14 @@ package com.cts.blms.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
@@ -27,15 +30,19 @@ public class Customer {
 	@Column(name="email")
 	private String email;
 	
-	@NotBlank(message = "passwod is mandatory")
+	@NotBlank(message = "password is mandatory")
 	@Column(name="password")
 	private String password;
+	
+	@NotBlank(message = "phone is mandatory")
+	@Column(name="phone")
+	private String phone;
 	
 	@NotBlank(message = "address is mandatory")
 	@Column(name="address")
 	private String address;
 	
-	
-	@Column(name="kyc_status")
-	private KycStatus kycStatus=KycStatus.PENDING;
+	@Enumerated(EnumType.STRING)
+    @Column(name="kyc_status")
+	private KycStatus kycStatus;
 }

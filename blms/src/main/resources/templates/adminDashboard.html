@@ -31,7 +31,7 @@ footer {
  
 .content-wrapper {
     position: absolute;
-    top: 50px; /* height of header */
+    top: 72px; /* height of header */
     bottom: 40px; /* height of footer */
     left: 0;
     right: 0;
@@ -42,7 +42,7 @@ footer {
 .sidebar {
     width: 200px;
     background-color: #2c3e50;
-    padding:20px;
+    padding-top:20px;
     color: white;
     overflow-y: auto;
 }
@@ -130,16 +130,21 @@ footer {
         <td th:text="${cust.customerId}"></td>
         <td th:text="${cust.name}"></td>
         <td>
-            <button class="btn btn-sm btn-primary" 
+         <p>  <button class="btn btn-sm btn-primary" 
                     type="button" 
                     data-bs-toggle="collapse" 
                     th:attr="data-bs-target='#details__' + ${iterStat.index}">
                 View Details
             </button>
+            
+           <form th:action="@{/updateKyc/{id}(id=${cust.customerId})}" method="post">
+           	<input type="submit" class="btn btn-success" value="Verify"/>
+           </form>
+           </p>
            
-<a class="btn btn-sm btn-success me-2" 
-		th:href="@{/verify/{id}(id=${cust.customerId})}">Verify </a>
-           
+<!--<a class="btn btn-sm btn-success me-2" 
+		th:href="@{/updateKyc/{id}(id=${cust.customerId})}">Verify </a>
+           -->
         </td>
         
     </tr>
@@ -148,8 +153,9 @@ footer {
         class="collapse">
         <td colspan="3">
             <div class="card card-body">
-                <strong>Address:</strong> <span th:text="${cust.address}"></span><br>
-                 <strong>Address:</strong> <span th:text="${cust.email}"></span>
+                <p><strong>Address:</strong> <span th:text="${cust.address}"></span></p>
+                 <p><strong>Email:</strong> <span th:text="${cust.email}"></span></p>
+                <p> <strong>Phone:</strong> <span th:text="${cust.phone}"></span></p>
             </div>
         </td>
     </tr>
