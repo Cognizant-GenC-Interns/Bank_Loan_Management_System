@@ -18,4 +18,6 @@ public interface CustomerService {
 	Customer validateCustomer(String email, String password);
 
 	Customer getCustomerDetailsById(long id);
+
+	Customer updateKycStatus(long id);
 }

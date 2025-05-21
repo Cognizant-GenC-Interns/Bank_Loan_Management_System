@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cts.blms.model.Customer;
+import com.cts.blms.model.KycStatus;
 import com.cts.blms.repository.CustomerRepository;
 
 import jakarta.validation.Valid;
@@ -43,5 +44,12 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer getCustomerDetailsById(long id) {
 		return repository.findById(id).orElse(null);
+	}
+
+	@Override
+	public Customer updateKycStatus(long id) {
+		Customer customer=repository.findById(id).orElse(null);
+		customer.setKycStatus(KycStatus.VERIFIRD);
+		return repository.save(customer);
 	}
 }
