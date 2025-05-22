@@ -65,6 +65,7 @@ public class CustomerController {
 	@GetMapping("/adminDashboard")
 	public String Dashboard(Model model) {
 		model.addAttribute("Customer",customerService.getCustomerDetails());
+		model.addAttribute("loanProducts",loanProductService.getLoanProductDetails());
 		model.addAttribute("newLoanProduct",new LoanProduct());
 		return "adminDashboard";
 	}

@@ -26,19 +26,22 @@ public class LoanProductController {
 	LoanProductService loanProductService;
 	
 	@PostMapping("/loanproducts")
-    public LoanProduct addLoanProduct(@Valid @ModelAttribute("newLoanProduct") LoanProduct loanProduct) {
-        return loanProductService.addLoanProduct(loanProduct);
+    public String addLoanProduct(@Valid @ModelAttribute("newLoanProduct") LoanProduct loanProduct) {
+        loanProductService.addLoanProduct(loanProduct);
+        return "redirect:/adminDashboard";
     }
 	
 	
 	@PostMapping("/loanproducts/{loanproductid}")
-    public LoanProduct updateLoanProduct(@Valid @ModelAttribute("existingLoanProduct") LoanProduct loanProduct) {
-        return loanProductService.updateLoanProduct(loanProduct);
+    public String updateLoanProduct(@Valid @ModelAttribute("existingLoanProduct") LoanProduct loanProduct) {
+        loanProductService.updateLoanProduct(loanProduct);
+        return "redirect:/adminDashboard";
     }
 	
 	@PostMapping("/loanproducts/{loanproductid}")
-	public void deleteLoanProduct(@PathVariable Long loanProductId) {
+	public String deleteLoanProduct(@PathVariable Long loanProductId) {
 	    loanProductService.deleteLoanProduct(loanProductId);
+	    return "redirect:/adminDashboard";
 	}
 
 	
