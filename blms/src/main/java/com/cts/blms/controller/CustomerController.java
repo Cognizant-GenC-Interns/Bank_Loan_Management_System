@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cts.blms.model.Customer;
+import com.cts.blms.model.LoanProduct;
 import com.cts.blms.service.CustomerService;
 import com.cts.blms.service.LoanProductService;
 
@@ -36,13 +37,14 @@ public class CustomerController {
 	public String home(Model model) {
 		Customer customer=new Customer();
 		model.addAttribute("customer",customer);
-		model.addAttribute("loanProducts",loanProductService.getLoanProductDetails());
+		model.addAttribute("loanProducts",loanProductService.getName());
 		logger.info("Directed to Home page ");
 		logger.debug("Null value"+customer);
 		return "home";
 	}
 	@GetMapping("/userDashboard")
-	public String welcome() {
+	public String welcome(Model model) {
+		model.addAttribute("loanProducts",loanProductService.getLoanProductDetails());
 		return "welcome";
 	}
 	
@@ -53,6 +55,7 @@ public class CustomerController {
 //			model.addAttribute("customer", customer);
 		
 			logger.debug("Admin logged in");
+			
 			return "redirect:/adminDashboard";
 //		}
 //			return "redirect:/";
@@ -62,6 +65,7 @@ public class CustomerController {
 	@GetMapping("/adminDashboard")
 	public String Dashboard(Model model) {
 		model.addAttribute("Customer",customerService.getCustomerDetails());
+		model.addAttribute("newLoanProduct",new LoanProduct());
 		return "adminDashboard";
 	}
 	
@@ -123,7 +127,7 @@ public class CustomerController {
 	public String updateCustomerProfile(@Valid @ModelAttribute("loggedCustomer") Customer customer, BindingResult result, HttpSession session) {
 	    if (result.hasErrors()) {
 	        return "redirect:/";
-	    }
+	        }
 	    Customer updatedCust=customerService.updateCustomerProfile(customer);
 	    session.setAttribute("loggedCustomer", updatedCust);
 	    return "redirect:/welcome";
