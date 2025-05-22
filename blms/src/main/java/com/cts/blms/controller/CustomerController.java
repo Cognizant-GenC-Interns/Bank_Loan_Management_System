@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cts.blms.model.Customer;
 import com.cts.blms.service.CustomerService;
+import com.cts.blms.service.LoanProductService;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -27,12 +27,16 @@ public class CustomerController {
 	private static final  Logger logger = LogManager.getLogger(CustomerController.class);
 	
 	@Autowired
-	private CustomerService service;
+	private CustomerService customerService;
+	
+	@Autowired
+	private LoanProductService loanProductService;
 	
 	@GetMapping("/")
 	public String home(Model model) {
 		Customer customer=new Customer();
 		model.addAttribute("customer",customer);
+		model.addAttribute("loanProducts",loanProductService.getLoanProductDetails());
 		logger.info("Directed to Home page ");
 		logger.debug("Null value"+customer);
 		return "home";
@@ -57,7 +61,7 @@ public class CustomerController {
 	
 	@GetMapping("/adminDashboard")
 	public String Dashboard(Model model) {
-		model.addAttribute("Customer",service.getCustomerDetails());
+		model.addAttribute("Customer",customerService.getCustomerDetails());
 		return "adminDashboard";
 	}
 	
@@ -67,7 +71,7 @@ public class CustomerController {
 			
 			return "redirect:/";
 		}
-		service.addCustomer(customer);
+		customerService.addCustomer(customer);
 		return "redirect:/";
 	}
 	
@@ -89,7 +93,7 @@ public class CustomerController {
 
 	@PostMapping("/login")
 	public String customerLogin(@RequestParam("email")String email,@RequestParam("password")String password,HttpSession session) {
-		Customer customer=service.validateCustomer(email,password);
+		Customer customer=customerService.validateCustomer(email,password);
 
 		if(customer!=null) {	
 		session.setAttribute("loggedCustomer", customer);
@@ -100,7 +104,7 @@ public class CustomerController {
 	
 	@GetMapping("/customerDetailsById")
 	public String getCustomerDetailsById(@RequestParam("id") long id,Model model) {
-		Customer customer=service.getCustomerDetailsById(id);
+		Customer customer=customerService.getCustomerDetailsById(id);
 		if(customer!=null) {
 			model.addAttribute("customer", customer);
 			return "customerDetails";
@@ -120,7 +124,7 @@ public class CustomerController {
 	    if (result.hasErrors()) {
 	        return "redirect:/";
 	    }
-	    Customer updatedCust=service.updateCustomerProfile(customer);
+	    Customer updatedCust=customerService.updateCustomerProfile(customer);
 	    session.setAttribute("loggedCustomer", updatedCust);
 	    return "redirect:/welcome";
 	}
@@ -128,7 +132,7 @@ public class CustomerController {
 	@PostMapping("/updateKyc/{customerId}")
 	public String updateKycStatus(@PathVariable("customerId") long id,Model model) {
 		System.out.println("customer id:" + id);
-		Customer customer=service.updateKycStatus(id);
+		Customer customer=customerService.updateKycStatus(id);
 		model.addAttribute("updateCustomer", customer);
 		return "redirect:/adminDashboard";
 	}

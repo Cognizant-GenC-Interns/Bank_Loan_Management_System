@@ -111,3 +111,13 @@
 2025-05-21 14:41:22 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 6036 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
 2025-05-21 14:41:22 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
 2025-05-21 14:41:22 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 18:04:00 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 11608 (C:\Users\2400743\OneDrive - Cognizant\Desktop\final project\blms\Bank_Loan_Management_System\blms\target\classes started by 2400743 in C:\Users\2400743\OneDrive - Cognizant\Desktop\final project\blms\Bank_Loan_Management_System\blms)
+2025-05-21 18:04:00 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 18:04:00 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 18:04:07 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 7.401 seconds (process running for 9.272)
+2025-05-21 18:04:34 [http-nio-8081-exec-1] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-21 18:04:34 [http-nio-8081-exec-1] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-21 18:05:25 [http-nio-8081-exec-4] DEBUG com.cts.blms.controller.CustomerController - Admin logged in
+2025-05-21 18:06:02 [http-nio-8081-exec-10] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-21 18:06:02 [http-nio-8081-exec-10] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-21 18:06:09 [http-nio-8081-exec-1] DEBUG com.cts.blms.controller.CustomerController - Admin logged in

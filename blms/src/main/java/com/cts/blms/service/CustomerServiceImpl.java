@@ -20,6 +20,10 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer addCustomer(@Valid Customer customer) {
 		customer.setKycStatus(KycStatus.PENDING);
+		if(repository.findByEmail(customer.getEmail()) != null) {
+			return customer;
+		}
+		
 		return repository.save(customer);
 	}
 

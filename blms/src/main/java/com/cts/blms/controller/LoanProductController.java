@@ -28,7 +28,7 @@ public class LoanProductController {
     }
 	
 	
-	@PutMapping("/loanproducts/{loanProductid}")
+	@PostMapping("/loanproducts/{loanProductid}")
     public LoanProduct updateLoanProduct(@PathVariable Integer loanProductId, @RequestBody LoanProduct loanProduct) {
         return loanProductService.updateLoanProduct(loanProductId, loanProduct);
     }

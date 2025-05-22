@@ -2,6 +2,7 @@ package com.cts.blms.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cts.blms.model.LoanProduct;
@@ -9,8 +10,8 @@ import com.cts.blms.repository.LoanProductRepository;
 
 @Service
 public class LoanProductServiceImpl implements LoanProductService{
-
-	LoanProductRepository loanProductRepository;
+	@Autowired
+	private LoanProductRepository loanProductRepository;
 	
 	@Override
 	public LoanProduct addLoanProduct(LoanProduct loan) {
