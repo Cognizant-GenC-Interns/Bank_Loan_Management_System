@@ -20,6 +20,10 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer addCustomer(@Valid Customer customer) {
 		customer.setKycStatus(KycStatus.PENDING);
+		if(repository.findByEmail(customer.getEmail()) != null) {
+			return customer;
+		}
+		
 		return repository.save(customer);
 	}
 
@@ -53,5 +57,27 @@ public class CustomerServiceImpl implements CustomerService {
 		System.out.println("Customer Status"+customer.getKycStatus());
 		customer.setKycStatus(KycStatus.VERIFIED);
 		return repository.save(customer);
+	}
+
+	@Override
+	public List<Customer> getVerifiedCustomer() {
+		// TODO Auto-generated method stub
+		List<Customer> verifiedCust=repository.findAll().stream().filter(v->v.getKycStatus().equals(KycStatus.VERIFIED)).toList();
+		System.out.println("Verified Customer :");
+		for (Customer customer : verifiedCust) {
+			System.out.println(customer.getCustomerId());
+		}
+		return verifiedCust;
+	}
+
+	@Override
+	public List<Customer> getPendingCustomer() {
+		// TODO Auto-generated method stub
+		List<Customer> pendingCust=repository.findAll().stream().filter(v->v.getKycStatus().equals(KycStatus.PENDING)).toList();
+		System.out.println("Pending Customer :");
+		for (Customer customer : pendingCust) {
+			System.out.println(customer.getCustomerId());
+		}
+		return pendingCust;
 	}
 }

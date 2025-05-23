@@ -5,7 +5,13 @@
   <meta charset="UTF-8">
   <title>Big Bank</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  
   <style>
+  	.content{
+  		padding-left:200px;
+  		padding-top:50px;
+  	}
     .navbar {
       height: 80px;
     }
@@ -17,15 +23,17 @@
     }
     .sidebar {
       width: 200px;
+      margin-top:50px;
       background-color:  #384959;
       height: 100vh;
-      padding-top: 20px;
+      padding-top: 40px;
       position: fixed;
       color:white
     }
     .sidebar a {
+    	
       display: block;
-      padding: 10px 20px;
+      padding: 15px 20px;
       color: #333;
       text-decoration: none;
       
@@ -33,6 +41,7 @@
     .sidebar a:hover {
       background-color: #6A89A7;
     }
+    
     .content-wrapper {
       margin-left: 200px;
       padding: 20px;
@@ -52,23 +61,70 @@
   </style>
 </head>
 <body>
-
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #6A89A7;">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #6A89A7;">
   <div class="container-fluid d-flex justify-content-between align-items-center">
-    <a class="navbar-brand d-flex align-items-center" th:href="@{/}">
-      <img th:src="@{images/logo.png}" alt="Logo" width="90" height="20" class="d-inline-block align-text-top">
+    <a class="navbar-brand d-flex align-items-center">
+      <img th:src="@{/images/logo.png}" alt="Logo" width="90" height="20" class="d-inline-block align-text-top">
       <span class="ms-2">Big Bank</span>
     </a>
-    <div class="profile-section me-3">
-      <img th:src="@{images/user.png}" width="40" height="40" alt="User" class="rounded-circle ms-2" onclick="showProfileModal()">
+    
+    <div class="d-flex align-items-center gap-3 me-3">
+     
+
+      <!-- Profile Icon -->
+      <img th:src="@{/images/user.png}" width="40" height="40" alt="User" class="rounded-circle" onclick="showProfileModal()">
+    	 <!-- Logout Icon -->
+      <a th:href="@{/logout}" class="text-blue" title="Log Out">
+        <img th:src="@{/images/logout.png}" width="40" height="40" alt="User" class="rounded-circle">
+      </a>
+    
     </div>
   </div>
 </nav>
 
+
 <div class="sidebar" >
   <a onclick="showProfile()">Edit Profile</a>
+   <a onclick="showSection('applyLoans')">Apply Loans</a>
+</div>
+<div class="content ">
+<div id="loanProducts" class="section active container mt-5">
+    <h3 class="mt-4">Available Loan Products</h3>
+    
+	<div class="d-flex justify-content-end mb-3">
+    	<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal">
+        + Add Product
+    	</button>
+	</div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" th:each="loan : ${loanProducts}">
+            <div class="card h-100 border-0 shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h5 class="card-title mb-0" th:text="${loan.ProductName}">Loan Name</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mb-3">
+                        <li><strong>Interest Rate:</strong> <span th:text="${loan.interestRate} + '%'"></span></li>
+                        <li><strong>Min Amount:</strong> ₹<span th:text="${loan.minAmount}"></span></li>
+                        <li><strong>Max Amount:</strong> ₹<span th:text="${loan.maxAmount}"></span></li>
+                        <li><strong>Tenure:</strong> <span th:text="${loan.tenure}"></span> months</li>
+                    </ul>
+                </div>
+                <div class="card-footer d-flex justify-content-around">
+                   
+                    <form th:action="@{/loanProduct/remove/{id}(id=${loan.loanProductId})}" method="post"
+                          onsubmit="return confirm('Are you sure you want to apply this loan product?');">
+                        <button type="submit" class="btn btn-outline-danger btn-sm">Apply Loan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
+    </div>
 <!-- Profile Modal -->
 <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
   <div class="modal-dialog" >
@@ -93,7 +149,7 @@
 <div class="modal fade" id="profile" tabindex="-1" aria-labelledby="profileLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content" th:if="${loggedCustomer!= null}">
-      <form id="editProfile" th:action="@{/updateCustomer}" method="post" th:object="${loggedCustomer}">
+      <form id="editProfile" th:action="@{/user/updateCustomer}" method="post" th:object="${loggedCustomer}">
         <div class="modal-header">
           <h5 class="modal-title" id="profileLabel">Edit Profile</h5>
         </div>
@@ -125,6 +181,7 @@
       </form>
     </div>
   </div>
+  
 </div>
 
 
@@ -137,6 +194,11 @@ function showProfile() {
 	    var modal = new bootstrap.Modal(document.getElementById('profile'));
 	    modal.show();
 	  }
+function showSection(id) {
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => section.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

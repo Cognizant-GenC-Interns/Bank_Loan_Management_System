@@ -20,5 +20,11 @@ public interface CustomerService {
 
 	Customer updateKycStatus(long id);
 
+	List<Customer> getVerifiedCustomer();
+
+	List<Customer> getPendingCustomer();
+
+	
+
 	
 }
