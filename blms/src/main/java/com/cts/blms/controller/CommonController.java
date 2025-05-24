@@ -1,5 +1,7 @@
 package com.cts.blms.controller;
 
+import java.io.IOException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cts.blms.model.Customer;
 import com.cts.blms.service.CustomerService;
@@ -58,12 +61,12 @@ public class CommonController {
 	}
 
 	@PostMapping("/signup")
-	public String registerCustomer(@Valid @ModelAttribute("customer")  Customer customer,BindingResult result) {
+	public String registerCustomer(@Valid @ModelAttribute("customer")  Customer customer,@RequestParam("panCard") MultipartFile panCard,@RequestParam("salarySlip") MultipartFile salarySlip,BindingResult result) throws IOException {
 		if(result.hasErrors()) {
 			
 			return "redirect:/";
 		}
-		customerService.addCustomer(customer);
+		customerService.addCustomer(customer,panCard,salarySlip);
 		return "redirect:/";
 	}
 }

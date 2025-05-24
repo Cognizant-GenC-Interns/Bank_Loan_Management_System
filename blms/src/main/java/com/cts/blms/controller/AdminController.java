@@ -1,10 +1,13 @@
 package com.cts.blms.controller;
 
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -68,4 +71,42 @@ public class AdminController {
 		model.addAttribute("updateCustomer", customer);
 		return "redirect:/admin/adminDashboard";
 	}
+	
+	@GetMapping("/images/pan/{id}")
+	public ResponseEntity<byte[]> getPanCardImage(@PathVariable Long id) {
+	    Customer customer = customerService.getCustomerDetailsById(id);
+
+	    if (customer == null || customer.getPanImage() == null) {
+	        return ResponseEntity.notFound().build();
+	    }
+
+	    // Guess MIME type from file name
+	    String mimeType = URLConnection.guessContentTypeFromName(customer.getPanImageName());
+	    if (mimeType == null) {
+	        mimeType = "application/octet-stream"; // Fallback if unknown
+	    }
+
+	    return ResponseEntity.ok()
+	            .contentType(MediaType.parseMediaType(mimeType))
+	            .body(customer.getPanImage());
+	}
+	@GetMapping("/images/salary/{id}")
+	public ResponseEntity<byte[]> getSalarySlipImage(@PathVariable Long id) {
+	    Customer customer = customerService.getCustomerDetailsById(id);
+
+	    if (customer == null || customer.getSalarySlipImage() == null) {
+	        return ResponseEntity.notFound().build();
+	    }
+
+	    // Guess MIME type from file name
+	    String mimeType = URLConnection.guessContentTypeFromName(customer.getSalarySlipImageName());
+	    if (mimeType == null) {
+	        mimeType = "application/octet-stream"; // Fallback if unknown
+	    }
+
+	    return ResponseEntity.ok()
+	            .contentType(MediaType.parseMediaType(mimeType))
+	            .body(customer.getSalarySlipImage());
+	}
+ 
 }

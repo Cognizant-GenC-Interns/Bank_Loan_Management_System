@@ -8,6 +8,8 @@
  
     <title>Admin Dashboard</title>
     <style>
+
+    
      html, body {
     margin: 0;
     padding: 0;
@@ -134,37 +136,53 @@ footer {
 		<td colspan="3" class="text-center">No pending customers available</td>
 	</tr>
     
-    <tr th:each="cust, iterStat : ${pendingCustomer}"
-    	th:unless="${pendingCustomer == null or #lists.isEmpty(pendingCustomer)}">
-        <td th:text="${cust.customerId}"></td>
-        <td th:text="${cust.name}"></td>
-        <td>
-    <div class="d-flex justify-content-center align-items-center gap-4">
-        <button class="btn btn-sm btn-primary" 
-                type="button" 
-                data-bs-toggle="collapse" 
-                th:attr="data-bs-target='#pendingdetails__' + ${iterStat.index}">
-            View Details
-        </button>
+    <tr th:each="cust, iterStat : ${pendingCustomer}">
+    <td th:text="${cust.customerId}"></td>
+    <td th:text="${cust.name}"></td>
+    <td>
+        <div class="d-flex justify-content-center align-items-center gap-4">
+            <button class="btn btn-sm btn-primary"
+                    type="button"
+                    data-bs-toggle="modal"
+                    th:attr="data-bs-target='#pendingModal__' + ${iterStat.index}">
+                View Details
+            </button>
 
-        <form th:action="@{/admin/updateKyc/{id}(id=${cust.customerId})}" method="post" class="m-0">
-            <input type="submit" class="btn btn-success btn-sm" value="Verify"/>
-        </form>
-    </div>
-</td>
+            <form th:action="@{/admin/updateKyc/{id}(id=${cust.customerId})}" method="post" class="m-0">
+                <input type="submit" class="btn btn-success btn-sm" value="Verify"/>
+            </form>
+        </div>
+    
 
-    </tr>
-    <tr th:each="cust, iterStat : ${pendingCustomer}" 
-        th:id="'pendingdetails__' + ${iterStat.index}" 
-        class="collapse">
-        <td colspan="3">
-            <div class="card card-body">
-                <p><strong>Address:</strong> <span th:text="${cust.address}"></span></p>
-                 <p><strong>Email:</strong> <span th:text="${cust.email}"></span></p>
-                <p> <strong>Phone:</strong> <span th:text="${cust.phone}"></span></p>
+    <!-- Modal must be inside the same loop -->
+   <div class="modal fade"  th:id="'pendingModal__' + ${iterStat.index}" tabindex="-1"
+         aria-labelledby="pendingModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Customer Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-start">
+                    <p><strong>Name:</strong> <span th:text="${cust.name}"></span></p>
+                    <p><strong>Email:</strong> <span th:text="${cust.email}"></span></p>
+                    <p><strong>Phone:</strong> <span th:text="${cust.phone}"></span></p>
+                    <p><strong>Address:</strong> <span th:text="${cust.address}"></span></p>
+                    <p><strong>Annual Salary:</strong> ₹<span th:text="${cust.annualSalary}"></span></p>
+                    <p><strong>PAN Card:</strong></p>
+                    <p><strong>PAN Card:</strong></p>
+                  <img th:src="@{/admin/images/pan/{id}(id=${cust.customerId})}" class="img-fluid mb-2" alt="PAN Card">
+                    <p><strong>Salary Slip:</strong></p>
+                <img th:src="@{/admin/images/salary/{id}(id=${cust.customerId})}" class="img-fluid" alt="Salary Slip">
+                    </div>
             </div>
-        </td>
-    </tr>
+        </div>
+        
+    </div>
+    </td>
+</tr>
+
     
     
 </tbody>
@@ -187,35 +205,48 @@ footer {
 		<td colspan="3" class="text-center">No Verified customers available</td>
 	</tr>
     
-    <tr th:each="vcust, piterStat : ${verifiedCustomer}"
-    	th:unless="${verifiedCustomer == null or #lists.isEmpty(verifiedCustomer)}">
-        <td th:text="${vcust.customerId}"></td>
-        <td th:text="${vcust.name}"></td>
-        <td>
-    <div class="d-flex justify-content-center align-items-center gap-4">
-        <button class="btn btn-sm btn-primary" 
-                type="button" 
-                data-bs-toggle="collapse" 
-                th:attr="data-bs-target='#verifieddetails__' + ${piterStat.index}">
-            View Details
-        </button>
-
-    </div>
-</td>
-
-    </tr>
-    <tr th:each="vcust, piterStat : ${verifiedCustomer}" 
-        th:id="'verifieddetails__' + ${piterStat.index}" 
-        class="collapse">
-        <td colspan="3">
-            <div class="card card-body">
-                <p><strong>Address:</strong> <span th:text="${vcust.address}"></span></p>
-                 <p><strong>Email:</strong> <span th:text="${vcust.email}"></span></p>
-                <p> <strong>Phone:</strong> <span th:text="${vcust.phone}"></span></p>
-            </div>
-        </td>
-    </tr>
+   <tr th:each="vcust, viterStat : ${verifiedCustomer}">
+    <td th:text="${vcust.customerId}"></td>
+    <td th:text="${vcust.name}"></td>
+    <td>
+        <div class="d-flex justify-content-center align-items-center gap-4">
+            <button class="btn btn-sm btn-primary"
+                    type="button"
+                    data-bs-toggle="modal"
+                    th:attr="data-bs-target='#verifiedModal__' + ${viterStat.index}">
+                View Details
+            </button>
+        </div>
     
+
+    <!-- Modal -->
+    <div class="modal fade"
+         th:id="'verifiedModal__' + ${viterStat.index}"
+         tabindex="-1"
+         aria-labelledby="verifiedModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Customer Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-start">
+                    <p><strong>Name:</strong> <span th:text="${vcust.name}"></span></p>
+                    <p><strong>Email:</strong> <span th:text="${vcust.email}"></span></p>
+                    <p><strong>Phone:</strong> <span th:text="${vcust.phone}"></span></p>
+                    <p><strong>Address:</strong> <span th:text="${vcust.address}"></span></p>
+                    <p><strong>Annual Salary:</strong> ₹<span th:text="${vcust.annualSalary}"></span></p>
+                    <p><strong>PAN Card:</strong></p>
+                    <img th:src="@{/admin/images/pan/{id}(id=${vcust.customerId})}" class="img-fluid mb-2" alt="PAN Card">
+                    <p><strong>Salary Slip:</strong></p>
+                    <img th:src="@{/admin/images/salary/{id}(id=${vcust.customerId})}" class="img-fluid" alt="Salary Slip">
+                </div>
+            </div>
+        </div>
+    </div>
+    </td>
+</tr>
     
 </tbody>
 </table>

@@ -248,7 +248,7 @@ background-color:#6A89A7;
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form th:action="@{/adminLogin}" method="post">
+                    <form th:action="@{admin/adminLogin}" method="post">
                         <div class="mb-3">
                             <input type="text" class="form-control" name="email" placeholder="Email" required>
                         </div>
@@ -296,7 +296,7 @@ background-color:#6A89A7;
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="#" th:action="@{/signup}" method="post" th:object="${customer}">
+                    <form action="#" th:action="@{/signup}" method="post" th:object="${customer}" enctype="multipart/form-data">
                         <div class="mb-3">
                             <input type="text" class="form-control" placeholder="Name" th:field="*{name}" required>
                         </div>
@@ -310,10 +310,19 @@ background-color:#6A89A7;
                             <input type="text" class="form-control" placeholder="Address" th:field="*{address}" required>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Password" th:field="*{password}" id="pwd" required>
+                            <input type="number" class="form-control" placeholder="Annual Salary" th:field="*{annualSalary}" required>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Confirm Password" id="confirmPwd" required>
+                            <input type="file" class="form-control" placeholder="Pan Card Imagr" id="pan_card" name="panCard" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="file" class="form-control" placeholder="Salary Slip Image" id="salary_slip" name="salarySlip" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="Password" th:field="*{password}" id="pwd" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="Confirm Password" id="confirmPwd" required>
                         </div>
                         <button type="submit" class="btn btn-custom">Sign Up</button>
                     </form>

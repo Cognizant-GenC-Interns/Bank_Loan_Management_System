@@ -7,6 +7,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -45,4 +46,25 @@ public class Customer {
 	@Enumerated(EnumType.STRING)
     @Column(name="kyc_status")
 	private KycStatus kycStatus;
+	
+	@Column(name = "annual_salary")
+	private Integer annualSalary;
+	
+	
+	@Column(name = "pan_image_name")
+	private String panImageName;
+	
+	@Lob
+	@Column(name = "pan_card_image" , columnDefinition = "LONGBLOB")
+	private byte[] panImage;
+	
+	@Column(name = "salary_slip_image_name")
+	private String salarySlipImageName;
+	
+	@Lob
+	@Column(name = "salary_slip_image" , columnDefinition = "LONGBLOB")
+	private byte[] salarySlipImage;
+
+	
+	
 }

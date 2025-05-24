@@ -211,3 +211,43 @@
 2025-05-23 15:10:24 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 4.233 seconds (process running for 5.894)
 2025-05-23 15:10:40 [http-nio-8081-exec-4] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
 2025-05-23 15:10:40 [http-nio-8081-exec-4] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-23 15:14:16 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 20676 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-23 15:14:16 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-23 15:14:16 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-23 15:14:20 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 3.831 seconds (process running for 4.991)
+2025-05-23 15:19:09 [http-nio-8081-exec-9] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-23 15:19:09 [http-nio-8081-exec-9] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-23 15:19:16 [http-nio-8081-exec-3] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-23 15:19:16 [http-nio-8081-exec-3] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-23 15:20:21 [http-nio-8081-exec-9] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-23 15:20:21 [http-nio-8081-exec-9] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-23 15:20:22 [http-nio-8081-exec-10] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-23 15:20:22 [http-nio-8081-exec-10] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-23 15:21:14 [http-nio-8081-exec-2] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-23 15:21:14 [http-nio-8081-exec-2] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-23 15:21:50 [http-nio-8081-exec-5] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-23 15:21:50 [http-nio-8081-exec-5] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-23 15:23:34 [http-nio-8081-exec-9] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-23 15:23:34 [http-nio-8081-exec-9] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-23 15:23:59 [http-nio-8081-exec-1] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-23 15:23:59 [http-nio-8081-exec-1] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-23 15:24:24 [http-nio-8081-exec-4] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-23 15:24:24 [http-nio-8081-exec-4] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-23 15:24:44 [http-nio-8081-exec-8] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-23 15:24:44 [http-nio-8081-exec-8] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-23 15:25:38 [http-nio-8081-exec-10] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-23 15:25:38 [http-nio-8081-exec-10] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-23 15:28:39 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 20676 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-23 15:28:39 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-23 15:28:39 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-23 15:28:39 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 0.718 seconds (process running for 864.393)
+2025-05-23 15:30:00 [http-nio-8081-exec-1] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-23 15:30:00 [http-nio-8081-exec-1] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-23 15:33:51 [http-nio-8081-exec-3] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-23 15:33:51 [http-nio-8081-exec-3] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-23 15:35:05 [http-nio-8081-exec-10] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-23 15:35:05 [http-nio-8081-exec-10] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-23 15:37:05 [http-nio-8081-exec-9] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-23 15:37:05 [http-nio-8081-exec-9] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-23 16:06:20 [http-nio-8081-exec-6] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-23 16:06:20 [http-nio-8081-exec-6] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)

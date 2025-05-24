@@ -172,6 +172,10 @@
             <input type="text" th:value="${loggedCustomer.address}" th:field="*{address}" class="form-control" id="address">
           </div>
           <div class="mb-3">
+            <label for="annualSalary" class="form-label">Annual Salary</label>
+            <input type="text" th:value="${loggedCustomer.annualSalary}" th:field="*{annualSalary}" class="form-control" id="annualSalary">
+          </div>
+          <div class="mb-3">
             <input   type="hidden" th:value="${loggedCustomer.password}" th:field="*{password}" class="form-control" id="address">
           </div>
         </div>
