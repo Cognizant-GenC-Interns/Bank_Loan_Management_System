@@ -46,27 +46,13 @@ public class CommonController {
 	}
 	
 	
-	
-	
-	
-	@PostMapping("/login")
-	public String customerLogin(@RequestParam("email")String email,@RequestParam("password")String password,HttpSession session) {
-		Customer customer=customerService.validateCustomer(email,password);
-
-		if(customer!=null) {	
-		session.setAttribute("loggedCustomer", customer);
-			return "redirect:user/userDashboard";
-		}
-			return "redirect:/";
+	@GetMapping("/invalidCredentials")
+	public String invalidData() {
+		return "InvalidCredentials";
 	}
+	
+	
+	
 
-	@PostMapping("/signup")
-	public String registerCustomer(@Valid @ModelAttribute("customer")  Customer customer,@RequestParam("panCard") MultipartFile panCard,@RequestParam("salarySlip") MultipartFile salarySlip,BindingResult result) throws IOException {
-		if(result.hasErrors()) {
-			
-			return "redirect:/";
-		}
-		customerService.addCustomer(customer,panCard,salarySlip);
-		return "redirect:/";
-	}
+	
 }

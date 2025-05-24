@@ -72,9 +72,15 @@
      
 
       <!-- Profile Icon -->
-      <img th:src="@{/images/user.png}" width="40" height="40" alt="User" class="rounded-circle" onclick="showProfileModal()">
-    	 <!-- Logout Icon -->
-      <a th:href="@{/logout}" class="text-blue" title="Log Out">
+      
+<img th:if="${loggedCustomer.profileImage}"  th:src="@{/user/profile/{id}(id=${loggedCustomer.customerId})}" 
+		width="40" height="40" alt="User" class="rounded-circle" onclick="showProfileModal()">
+
+<!-- If user does NOT have a profile image -->
+<img th:unless="${loggedCustomer.profileImage}" 
+	th:src="@{/images/user.png}" 
+	width="40" height="40" alt="Default User" class="rounded-circle" onclick="showProfileModal()">
+<a th:href="@{/logout}" class="text-blue" title="Log Out">
         <img th:src="@{/images/logout.png}" width="40" height="40" alt="User" class="rounded-circle">
       </a>
     
@@ -134,6 +140,16 @@
         <h5 class="modal-title" id="profileModalLabel">User Profile</h5>
       </div>
       <div class="modal-body" id="userData">
+      <div class="text-center">
+      <img th:if="${loggedCustomer.profileImage}"  th:src="@{/user/profile/{id}(id=${loggedCustomer.customerId})}" 
+						width="70" height="70" alt="User" class="rounded-circle" onclick="showProfileModal()">
+
+					<!-- If user does NOT have a profile image -->
+				<img th:unless="${loggedCustomer.profileImage}" 
+						th:src="@{/images/user.png}" 
+						width="70" height="70" alt="Default User" class="rounded-circle" onclick="showProfileModal()">
+		</div>
+      		
         <p><strong>Name:</strong> <span th:text="${loggedCustomer.name}"></span></p>
         <p><strong>Email:</strong> <span th:text="${loggedCustomer.email}"></span></p>
         <p><strong>Phone no:</strong> <span th:text="${loggedCustomer.phone}"></span></p>
@@ -155,6 +171,15 @@
         </div>
         <div class="modal-body">
           <input type="hidden" th:value="${loggedCustomer.customerId}" th:field="*{customerId}"/>
+          <div class="text-center mb-3">
+           		<img th:if="${loggedCustomer.profileImage}"  th:src="@{/user/profile/{id}(id=${loggedCustomer.customerId})}" 
+						width="40" height="40" alt="User" class="rounded-circle" onclick="showProfileModal()">
+
+					<!-- If user does NOT have a profile image -->
+				<img th:unless="${loggedCustomer.profileImage}" 
+						th:src="@{/images/user.png}" 
+						width="40" height="40" alt="Default User" class="rounded-circle" onclick="showProfileModal()">
+		  </div> 
           <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" th:value="${loggedCustomer.name}" th:field="*{name}" class="form-control" id="name">

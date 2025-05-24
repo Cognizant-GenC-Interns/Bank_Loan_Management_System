@@ -20,16 +20,13 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerRepository repository;
 
 	@Override
-	public Customer addCustomer(@Valid Customer customer, MultipartFile panCard, MultipartFile salarySlip) throws IOException {
-		// TODO Auto-generated method stub
+	public Customer addCustomer(@Valid Customer customer) {		// TODO Auto-generated method stub
 		customer.setKycStatus(KycStatus.PENDING);
 		if(repository.findByEmail(customer.getEmail()) != null) {
 			return customer;
 		}
-		customer.setPanImageName(panCard.getOriginalFilename());
-		customer.setPanImage(panCard.getBytes());
-		customer.setSalarySlipImageName(salarySlip.getOriginalFilename());
-		customer.setSalarySlipImage(salarySlip.getBytes());
+
+		
 		return repository.save(customer);
 	}
 

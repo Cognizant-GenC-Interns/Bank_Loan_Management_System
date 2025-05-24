@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +27,14 @@ public class Customer {
 	@NotBlank(message = "Name is mandatory")
 	@Column(name="name")
 	private String name;
+	
+	@Column(name = "profile_image_name")
+	private String profileImageName;
+	
+	@Lob
+	@Column(name = "profile_image" , columnDefinition = "LONGBLOB")
+	private byte[] profileImage;
+	
 	
 	@NotBlank(message = "Email is mandatory")
 	@Column(name="email")

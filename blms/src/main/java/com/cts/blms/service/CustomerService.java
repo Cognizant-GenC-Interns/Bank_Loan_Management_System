@@ -12,8 +12,7 @@ import jakarta.validation.Valid;
 
 public interface CustomerService {
 
-	Customer addCustomer(@Valid Customer customer, MultipartFile panCard, MultipartFile salarySlip) throws IOException;
-
+	Customer addCustomer(@Valid Customer customer);
 	Customer updateCustomerProfile(Customer customer);
 	List<Customer> getCustomerDetails();
 

@@ -61,7 +61,7 @@ public class AdminController {
 			}
 			
 			
-			return "redirect:/";
+			return "redirect:/invalidCredentials";
 		}
 	
 	@PostMapping("/updateKyc/{customerId}")
