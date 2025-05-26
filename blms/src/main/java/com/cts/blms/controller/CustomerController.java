@@ -127,7 +127,6 @@ public class CustomerController {
 	
 	@PostMapping("/updateKyc/{customerId}")
 	public String updateKycStatus(@PathVariable("customerId") long id,Model model) {
-		System.out.println("customer id:" + id);
 		Customer customer=service.updateKycStatus(id);
 		model.addAttribute("updateCustomer", customer);
 		return "redirect:/adminDashboard";

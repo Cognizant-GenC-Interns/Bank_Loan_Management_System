@@ -111,3 +111,35 @@
 2025-05-21 14:41:22 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 6036 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
 2025-05-21 14:41:22 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
 2025-05-21 14:41:22 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 16:37:42 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 15172 (C:\Users\2401096\OneDrive - Cognizant\Desktop\project final\Bank_Loan_Management_System\blms\target\classes started by 2401096 in C:\Users\2401096\OneDrive - Cognizant\Desktop\project final\Bank_Loan_Management_System\blms)
+2025-05-21 16:37:42 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 16:37:42 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 16:37:49 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 7.281 seconds (process running for 10.317)
+2025-05-21 16:39:54 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 20596 (C:\Users\2401096\OneDrive - Cognizant\Desktop\project final\Bank_Loan_Management_System\blms\target\classes started by 2401096 in C:\Users\2401096\OneDrive - Cognizant\Desktop\project final\Bank_Loan_Management_System\blms)
+2025-05-21 16:39:54 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 16:39:54 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 16:40:02 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 8.547 seconds (process running for 10.711)
+2025-05-21 16:40:31 [http-nio-8081-exec-1] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-21 16:40:31 [http-nio-8081-exec-1] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-21 16:41:17 [http-nio-8081-exec-8] DEBUG com.cts.blms.controller.CustomerController - Admin logged in
+2025-05-21 16:42:19 [http-nio-8081-exec-7] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-21 16:42:19 [http-nio-8081-exec-7] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-21 16:42:28 [http-nio-8081-exec-9] DEBUG com.cts.blms.controller.CustomerController - Admin logged in
+2025-05-21 16:45:13 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 24532 (C:\Users\2401096\OneDrive - Cognizant\Desktop\project final\Bank_Loan_Management_System\blms\target\classes started by 2401096 in C:\Users\2401096\OneDrive - Cognizant\Desktop\project final\Bank_Loan_Management_System\blms)
+2025-05-21 16:45:13 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 16:45:13 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 16:45:21 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 8.185 seconds (process running for 11.064)
+2025-05-21 16:45:44 [http-nio-8081-exec-2] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-21 16:45:44 [http-nio-8081-exec-2] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-21 16:45:57 [http-nio-8081-exec-3] DEBUG com.cts.blms.controller.CustomerController - Admin logged in
+2025-05-21 16:46:49 [http-nio-8081-exec-7] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-21 16:46:49 [http-nio-8081-exec-7] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-21 16:47:26 [http-nio-8081-exec-4] DEBUG com.cts.blms.controller.CustomerController - Admin logged in
+2025-05-21 16:49:55 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 24532 (C:\Users\2401096\OneDrive - Cognizant\Desktop\project final\Bank_Loan_Management_System\blms\target\classes started by 2401096 in C:\Users\2401096\OneDrive - Cognizant\Desktop\project final\Bank_Loan_Management_System\blms)
+2025-05-21 16:49:55 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 16:49:55 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 16:49:56 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 1.432 seconds (process running for 286.666)
+2025-05-21 16:52:10 [http-nio-8081-exec-1] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-21 16:52:10 [http-nio-8081-exec-1] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-21 16:52:23 [http-nio-8081-exec-4] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-21 16:52:23 [http-nio-8081-exec-4] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
