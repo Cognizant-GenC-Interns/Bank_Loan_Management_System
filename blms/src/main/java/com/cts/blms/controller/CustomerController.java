@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cts.blms.model.Customer;
+import com.cts.blms.model.LoanApplication;
 import com.cts.blms.service.CustomerService;
 import com.cts.blms.service.LoanProductService;
 
@@ -135,6 +136,12 @@ public class CustomerController {
 	    Customer updatedCust=customerService.updateCustomerProfile(customer);
 	    session.setAttribute("loggedCustomer", updatedCust);
 	    return "redirect:/user/userDashboard";
+	}
+	
+	@GetMapping("/applyLoan")
+	public String applyLoan(Model model) {
+		model.addAttribute(new LoanApplication());
+		return "loanApplicationForm";
 	}
 	
 	

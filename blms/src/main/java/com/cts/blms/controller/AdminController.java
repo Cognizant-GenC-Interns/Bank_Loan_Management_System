@@ -1,7 +1,10 @@
 package com.cts.blms.controller;
 
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map;
 
@@ -18,9 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cts.blms.model.Admin;
 import com.cts.blms.model.Customer;
+import com.cts.blms.model.LoanApplication;
 import com.cts.blms.model.LoanProduct;
 import com.cts.blms.service.AdminService;
 import com.cts.blms.service.CustomerService;
+import com.cts.blms.service.LoanApplicationService;
+import com.cts.blms.service.LoanApplicationServiceImpl;
 import com.cts.blms.service.LoanProductService;
 
 import jakarta.servlet.http.HttpSession;
@@ -36,6 +42,9 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired
+	private LoanApplicationService loanApplicationService;
 	
 	@GetMapping("/adminDashboard")
 	public String Dashboard(Model model,HttpSession session) {
@@ -108,5 +117,36 @@ public class AdminController {
 	            .contentType(MediaType.parseMediaType(mimeType))
 	            .body(customer.getSalarySlipImage());
 	}
+	
+	@GetMapping("/loanApplications")
+	public String viewLoanApplications(Model model) {
+	    List<LoanApplication> applications = loanApplicationService.getAllApplications();
  
+	    List<Map<String, Object>> applicationDetails = new ArrayList<>();
+ 
+	    for (LoanApplication app : applications) {
+	        Map<String, Object> details = new HashMap<>();
+	        Customer customer = app.getCustomerId();
+ 
+	        double monthlySalary = customer.getAnnualSalary() / 12.0;
+	        double maxAffordableEMI = monthlySalary * 0.4;
+	        double emi = app.getEmiAmount();
+ 
+	        details.put("application", app);
+	        details.put("customer", customer);
+	        details.put("assetImage", Base64.getEncoder().encodeToString(app.getAssetImage()));
+	        details.put("emi", emi);
+	        details.put("maxAffordableEMI", maxAffordableEMI);
+	        details.put("canAfford", emi <= maxAffordableEMI);
+ 
+	        applicationDetails.add(details);
+	    }
+ 
+	    model.addAttribute("loanApplications", applicationDetails);
+	    return "loanApprovalPage";
+	}
+ 
+
 }
+ 
+

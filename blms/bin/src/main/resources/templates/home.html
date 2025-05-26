@@ -1,329 +1,344 @@
-<!DOCTYPE html>
- 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
  
 <head>
- 
     <meta charset="UTF-8">
- 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
     <title>Loan Portal</title>
  
     <!-- Bootstrap CSS -->
- 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
  
     <style>
  
-        .btn-custom {
+   body {
  
-            background-color: #384959;
+            font-family: Arial, sans-serif;
  
-            color: #fff;
+            margin: 0;
  
-            border: none;
+            background-color: #fff;
+			
+			background: #eef5fc;
+			
+        }
+ 
+        .marquee {
+ 
+            background-color: #35B1E9;
+ 
+            color: #151940;
+ 
+            padding: 10px 0;
+ 
+            font-weight: bold;
+ 
+            font-size: 16px;
+ 
+            white-space: nowrap;
+ 
+            overflow: hidden;
+ 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
  
         }
  
-    </style>
+        .marquee span {
  
+            display: inline-block;
+ 
+            padding-left: 100%;
+ 
+            animation: marquee 15s linear infinite;
+ 
+        }
+ 
+        @keyframes marquee {
+ 
+            from { transform: translateX(0); }
+ 
+            to { transform: translateX(-100%); }
+ 
+        }
+ 
+        .main-container {
+            display: flex;
+            height: 300px; /* Full height minus marquee */
+        }
+      
+ 
+      
+          .card-1,.card-2 {
+            width: 60%;
+            padding:5px;
+            padding-left:15px;
+            background: linear-gradient(to right,#6A89A7, #384959);
+            height:120px;
+            margin-left:70px;
+            margin-top:10px;
+            
+        }
+ 
+        .steps-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+ 
+        .step {
+            font-size: 13px;
+            
+        }
+ 
+        .step-number {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color:#110C28;
+        }
+ 
+      
+       
+ 
+        .right-panel {
+            width: 40%;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+ 
+        .right-panel img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+ 
+      
+.btn {
+color:white;
+background-color:#6A89A7;
+}
+     
+ 
+     
+ 
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+ 
+        footer {
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+			margin-top: 110px;
+        }
+ 
+     
+    </style>
 </head>
  
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#6A89A7;">
  
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #6A89A7;">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" th:href="@{/}">
+                <img th:src="@{images/logo.png}" alt="Logo" width="70" class="d-inline-block align-text-top">
+                <span class="ms-2">Big Bank</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <button type="button" class="btn btn-custom me-2" data-bs-toggle="modal"
+                    data-bs-target="#AdminloginModal" >Admin</button>
+                <button type="button" class="btn btn-custom me-2" data-bs-toggle="modal"
+                    data-bs-target="#loginModal">Login</button>
+                <button type="button" class="btn btn-custom me-2" data-bs-toggle="modal"
+                    data-bs-target="#signupModal">Sign Up</button>
+            </div>
+        </div>
+    </nav>
  
-  <div class="container-fluid">
+    <!-- About section -->
+    <section id="about" class="py-1" style="background-color: #8EC3EC;">
+        <div class="container">
+            <h4 class="text-center" style="color: #1e3a5f;">About Us</h4>
+            <p class="lead text-center mt-4" style="color: #1e3a5f; font-size:15px;">
+                We provide the best loan services to help you achieve your dreams. Our quick and easy loan process ensures
+                you get financial assistance when you need it most.
+            </p>
+        </div>
+    </section>
+<div class="marquee">
  
-    <a class="navbar-brand d-flex align-items-center" th:href="@{/}">
- 
-      <img th:src="@{images/logo.png}" alt="Logo" width="70" height="" class="d-inline-block align-text-top">
- 
-      <span class="ms-2">Big Bank</span>
- 
-    </a>
- 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
- 
-      <span class="navbar-toggler-icon"></span>
- 
-    </button>
- 
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
- 
-      <button type="button"  class="btn btn-custom me-2" data-bs-toggle="modal" data-bs-target="#AdminloginModal">Admin</button>
- 
-      <button type="button" class="btn btn-custom  me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-      
-      <button type="button" class="btn btn-custom  me-2" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</button>
-      
+        <span>Special Loan Offers Available! Apply now and enjoy low-interest personal loans, car loans, and home loans!</span>
  
     </div>
  
-  </div>
- 
-</nav>
- 
-<!-- About section -->
- 
-<section id="about" class="py-5" style="background-color: #BDDDFC;">
- 
-  <div class="container">
- 
-    <h2 class="text-center" style="color: #384959;">About Us</h2>
- 
-    <p class="lead text-center mt-4" style="color: #384959;">We provide the best loan services to help you achieve your dreams. Our quick and easy loan process ensures you get financial assistance when you need it most.</p>
- 
-  </div>
- 
-</section>
- 
-<!-- Loan Types section -->
- 
-<section id="loan-types" class="py-5">
- 
-  <div class="container">
- 
-    <h2 class="text-center mb-4" style="color: #384959;">Loan Types</h2>
- 
-    <div class="row">
- 
-      <div class="col-md-4 mb-4">
- 
-        <div class="card h-100" style="background-color: #BDDDFC; color: #384959;">
- 
-          <div class="card-body d-flex flex-column">
- 
-            <h5 class="card-title">Home Loan</h5>
- 
-            <p class="card-text">Finance your dream home with competitive interest rates and flexible repayment options.</p>
- 
-            <div class="mt-auto">
- 
-              <a href="#" class="btn btn-custom">Learn More</a>
- 
+    <div class="main-container">
+    <div class="cards">
+        <!-- Left Panel -->
+        <div >
+            <div class="steps-container">
+            <div class="card-1">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <p style="color:#170F3B;">Use your user ID and password to access your account.</p>
+                </div>
+                </div>
+                <div class="card-1">
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <p style="color:#170F3B;">Click on the 'Loans' tab or section in the menu.' button</p>
+                </div>
+                </div>
+                <div class="card-2">
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <p style="color:#170F3B;">Complete the online loan application form with the required details.</p>
+                </div>
+                </div>
+                <div class="card-2">
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <p style="color:#170F3B;">Submit your application and track its status online.</p>
+                </div>
+                </div>
             </div>
  
-          </div>
- 
+          
+        </div>
         </div>
  
-      </div>
- 
-      <div class="col-md-4 mb-4">
- 
-        <div class="card h-100" style="background-color: #88BDF2; color: #384959;">
- 
-          <div class="card-body d-flex flex-column">
- 
-            <h5 class="card-title">Personal Loan</h5>
- 
-            <p class="card-text">Get quick personal loans for any purpose like weddings, education, or travel with easy eligibility.</p>
- 
-            <div class="mt-auto">
- 
-              <a href="#" class="btn btn-custom">Learn More</a>
- 
-            </div>
- 
-          </div>
- 
+        <!-- Right Panel -->
+        <div class="right-panel">
+            <img th:src="@{images/k.png}" alt="Banking Image" />
         </div>
- 
-      </div>
- 
-      <div class="col-md-4 mb-4">
- 
-        <div class="card h-100" style="background-color: #6A89A7; color: #fff;">
- 
-          <div class="card-body d-flex flex-column">
- 
-            <h5 class="card-title">Vehicle Loan</h5>
- 
-            <p class="card-text">Drive your dream vehicle home with our affordable auto loans and low interest rates.</p>
- 
-            <div class="mt-auto">
- 
-              <a href="#" class="btn btn-custom">Learn More</a>
- 
-            </div>
- 
-          </div>
- 
-        </div>
- 
-      </div>
- 
     </div>
  
-  </div>
+    
  
-</section>
+   
  
-<!-- Footer -->
- 
-<footer class="py-4" style="background-color: #384959;">
- 
-  <div class="container text-center">
- 
-    <p class="mb-0" style="color: #fff;">&copy; 2025 LoanPortal. All Rights Reserved.</p>
- 
-  </div>
- 
-</footer>
- 
-<!-- Modals -->
-<div class="modal fade" id="AdminloginModal" tabindex="-1" aria-labelledby="AdminloginModalLabel" aria-hidden="true">
- 
-  <div class="modal-dialog">
- 
-    <div class="modal-content">
- 
-      <div class="modal-header" style="background-color: #6A89A7; color: #fff;">
- 
-        <h5 class="modal-title" id="AdminloginModalLabel">Admin</h5>
- 
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
- 
-      </div>
-      
-      
- 
-      <div class="modal-body">
- 
-        <form th:action="@{/login}" method="post">
- 
-          <div class="mb-3">
- 
-            <input type="text" class="form-control" name="email" placeholder="Email" required>
- 
-          </div>
- 
-          <div class="mb-3">
- 
-            <input type="password" class="form-control" name="password" placeholder="Password" required>
- 
-          </div>
- 
-          <button type="submit" class="btn btn-custom">Login</button>
- 
-        </form>
- 
-      </div>
- 
-    </div>
- 
-  </div>
- 
-</div>
 
-
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
  
-  <div class="modal-dialog">
- 
-    <div class="modal-content">
- 
-      <div class="modal-header" style="background-color: #6A89A7; color: #fff;">
- 
-        <h5 class="modal-title" id="loginModalLabel">User</h5>
- 
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
- 
-      </div>
-      
-      
- 
-      <div class="modal-body">
- 
-        <form th:action="@{/login}" method="post">
- 
-          <div class="mb-3">
- 
-            <input type="text" class="form-control" name="email" placeholder="Email" required>
- 
-          </div>
- 
-          <div class="mb-3">
- 
-            <input type="password" class="form-control" name="password" placeholder="Password" required>
- 
-          </div>
- 
-          <button type="submit" class="btn btn-custom">Login</button>
- 
-        </form>
- 
-      </div>
- 
+    <!-- Modals -->
+    <!-- Admin Login -->
+    <div class="modal fade" id="AdminloginModal" tabindex="-1" aria-labelledby="AdminloginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #345b8c; color: #fff;">
+                    <h5 class="modal-title" id="AdminloginModalLabel">Admin</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{admin/adminLogin}" method="post">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" name="password" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="btn btn-custom">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
  
-  </div>
- 
-</div>
- 
-<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
- 
-  <div class="modal-dialog">
- 
-    <div class="modal-content">
- 
-      <div class="modal-header" style="background-color: #6A89A7; color: #fff;">
- 
-        <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
- 
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
- 
-      </div>
- 
-      <div class="modal-body">
- 
-        <form  action="#" th:action="@{/signup}" method="post" th:object="${customer}">
- 
-          <div class="mb-3">
- 
-            <input type="text"   placeholder="Name"  th:field="*{name}" required>
- 
-          </div>
- 
-          <div class="mb-3">
- 
-            <input type="text"   placeholder="Email"  th:field="*{email}" required>
- 
-          </div>
-           <div class="mb-3">
- 
-           <input type="text"   placeholder="Address"  th:field="*{address}" required>
-          </div>
- 
-          <div class="mb-3">
- 
-           <input type="text"   placeholder="Password"  th:field="*{password}" id="pwd" required>
-          </div>
-          <div class="mb-3">
- 
-           <input type="text"   placeholder="Confirm Password"  id="confirmPwd" required>
-           
-          </div>
-         
- 
-          <button type="submit" class="btn btn-custom">Sign Up</button>
- 
-        </form>
- 
-      </div>
- 
+    <!-- User Login -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #345b8c; color: #fff;">
+                    <h5 class="modal-title" id="loginModalLabel">User</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/user/login}" method="post">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" name="password" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="btn btn-custom">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
  
-  </div>
+    <!-- Sign Up -->
+    <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #345b8c; color: #fff;">
+                    <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" th:action="@{/user/signup}" method="post" th:object="${customer}" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Name" th:field="*{name}" required>
+                        </div>
+                        <div class="mb-3">
+                        	<label for="profile_image">Profile : </label>
+                            <input type="file" class="form-control" id="profile_image" name="profile_image" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Email" th:field="*{email}" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Phone no" th:field="*{phone}" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Address" th:field="*{address}" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" class="form-control" placeholder="Annual Salary" th:field="*{annualSalary}" required>
+                        </div>
+                        <div class="mb-3">
+                        	<label for="pan_card">Pan Card : </label>
+                            <input type="file" class="form-control" placeholder="Pan Card Imagr" id="pan_card" name="panCard" required>
+                        </div>
+                        <div class="mb-3">
+                        	<label for="salary_slip">Salary Slip : </label>
+                            <input type="file" class="form-control" placeholder="Salary Slip Image" id="salary_slip" name="salarySlip" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="Password" th:field="*{password}" id="pwd" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="Confirm Password" id="confirmPwd" required>
+                        </div>
+                        <button type="submit" class="btn btn-custom">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<!-- Footer -->
+	<footer class="py-4" style="background-color: #6A89A7;">
+	    <div class="container text-center">
+	        <p class="mb-0" style="color: #fff;">&copy; 2025 LoanPortal. All Rights Reserved.</p>
+	    </div>
+	</footer>
  
-</div>
- 
-<!-- Bootstrap JS bundle -->
- 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
- 
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
  
 </html>
