@@ -38,7 +38,9 @@ public class LoanApplication {
 	
 	@Column(name = "asset_Name")
 	private String assetName;
-
+	
+	@Column(name="eligibility")
+	private String eligibility;
 	
 	@Lob
 	@Column(name = "asset_Image" , columnDefinition = "LONGBLOB")

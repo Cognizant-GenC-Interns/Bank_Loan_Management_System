@@ -7,9 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cts.blms.model.Customer;
 import com.cts.blms.model.LoanApplication;
@@ -40,21 +42,7 @@ public class LoanApplicationController {
 			loanApplication.setAssetImage(assetImage.getBytes());
 			loanApplication.setAssetName(assetImage.getOriginalFilename());
 			}
-		
-		
-		
-		
-		double monthlySalary = customer.getAnnualSalary() / 12.0;
-        double maxAffordableAmount = monthlySalary * 0.4;
-        double principle=loanApplication.getRequestAmount();
-        double monthlyIntrestRate=loanProduct.getInterestRate()/12/100;
-        double ratePower=Math.pow(1+monthlyIntrestRate,loanProduct.getTenure());
-        double emiAmount=(principle*monthlyIntrestRate*ratePower)/(ratePower-1);
-        
-        loanApplication.setEmiAmount(emiAmount);
-        loanApplication.setCustomer(customer);
-        loanApplication.setLoanProduct(loanProduct);
-		
+		loanApplication=loanApplicationService1.getEligibility(customer,loanProduct,loanApplication);
 		
 		loanApplicationService1.addLoanApplication(loanApplication);
 		model.addAttribute("loanApplication",loanApplication);
@@ -71,5 +59,11 @@ public class LoanApplicationController {
 //        return "userDashboard";
 //        
 //    }
+	
+	@PostMapping("/deleteLoan/{loanApplicationId}")
+	public String deleteLoan(@PathVariable long loanApplicationId, RedirectAttributes redirectAttributes) {
+		loanApplicationService1.deleteLoan(loanApplicationId);
+		return "redirect:/user/userDashboard";
+	}
 
 }
