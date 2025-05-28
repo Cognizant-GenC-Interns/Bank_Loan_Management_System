@@ -1,5 +1,6 @@
 package com.cts.blms.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,7 +32,12 @@ public class LoanApplication {
 	
 	@Column(name="application_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date applicationDate;
+	private LocalDate applicationDate;
+	
+	
+	@Column(name="approved_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate approvedDate;
 	
 	@Column(name="name_of_asset")
 	private String nameOfAsset;

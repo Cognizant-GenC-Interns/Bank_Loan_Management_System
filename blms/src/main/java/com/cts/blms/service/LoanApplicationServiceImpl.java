@@ -1,5 +1,6 @@
 package com.cts.blms.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
  
@@ -34,6 +35,30 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 	@Override
 	public List<LoanApplication> getLoanApplicationByCustomer(Customer customer) {
 		return repository.findByCustomer(customer);
+	}
+
+	@Override
+	public LoanApplication approveLoan(Long id) {
+		// TODO Auto-generated method stub
+		LoanApplication loanApplication=repository.findById(id).get();
+		loanApplication.setLoanApplicationStatus(LoanApplicationStatus.APPROVED);
+		loanApplication.setApprovedDate(LocalDate.now());
+		return repository.save(loanApplication);
+		
+	}
+
+	@Override
+	public LoanApplication rejectLoan(Long id) {
+		// TODO Auto-generated method stub
+		LoanApplication loanApplication=repository.findById(id).get();
+		loanApplication.setLoanApplicationStatus(LoanApplicationStatus.REJECTED);
+		return repository.save(loanApplication);		
+	}
+
+	@Override
+	public LoanApplication getLoanApplicationById(Long id) {
+		// TODO Auto-generated method stub
+		return repository.findById(id).get();
 	}
 
 	

@@ -18,5 +18,11 @@ public interface LoanApplicationService {
 	List<LoanApplication> getAllLoanapplicationDetails();
 
 	List<LoanApplication> getLoanApplicationByCustomer(Customer customer);
+
+	LoanApplication approveLoan(Long id);
+
+	LoanApplication rejectLoan(Long id);
+
+	LoanApplication getLoanApplicationById(Long id);
 }
 

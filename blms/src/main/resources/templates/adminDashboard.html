@@ -24,12 +24,14 @@ header {
     z-index: 1000;
 }
  
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    z-index: 1000;
-}
+   footer {
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+			margin-top: 110px;
+        }
+
  
 .content-wrapper {
     position: absolute;
@@ -114,7 +116,7 @@ footer {
     <div class="sidebar">
         <a onclick="showSection('customers')">View Customers</a>
         <a onclick="showSection('loanProducts')">Loan Product Details</a>
-        <a onclick="showSection(appliedLoans)">Applied Loans</a>
+        <a th:href="@{/loans/appliedLoans}">Applied Loans</a>
         <a onclick="showSection('profile')">Admin Profile</a>
         <a></a>
         <!-- Add more options here -->
