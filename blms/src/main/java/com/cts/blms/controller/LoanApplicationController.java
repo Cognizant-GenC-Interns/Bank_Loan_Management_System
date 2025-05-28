@@ -1,6 +1,7 @@
 package com.cts.blms.controller;
 import java.io.IOException;
 import java.net.URLConnection;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,8 @@ public class LoanApplicationController {
 	private LoanApplicationService loanApplicationService1;
 	
 	@PostMapping("/approveLoan")
-	public String approveLoan(@RequestParam("loanId") Long id) {
-		loanApplicationService1.approveLoan(id);
+	public String approveLoan(@RequestParam("loanId") Long id,@RequestParam("approvedDate") LocalDate approveDate) {
+		loanApplicationService1.approveLoan(id,approveDate);
 		System.out.print("Approved loans");
 		return "redirect:/loans/appliedLoans";// return "/createRepayment";
 		

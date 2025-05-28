@@ -2,6 +2,7 @@ package com.cts.blms.service;
 
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.cts.blms.model.Customer;
@@ -19,7 +20,7 @@ public interface LoanApplicationService {
 
 	List<LoanApplication> getLoanApplicationByCustomer(Customer customer);
 
-	LoanApplication approveLoan(Long id);
+	LoanApplication approveLoan(Long id, LocalDate approveDate);
 
 	LoanApplication rejectLoan(Long id);
 

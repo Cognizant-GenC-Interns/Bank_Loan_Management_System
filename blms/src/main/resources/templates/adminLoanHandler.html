@@ -61,8 +61,16 @@
 <!-- Main Content -->
 <div class="content-wrapper">
     <div class="container">
-        <h2 class="mb-4 text-center text-primary">Pending Loan Applications</h2>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="text-center mb-4">
+   <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-primary mb-0">Pending Loan Applications</h2>
+    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#approvedLoansModal">
+        ✅ View Approved Loans
+    </button>
+</div>
+   
+
+           <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col" th:each="loan : ${requestPendingLoans}">
                 <div class="card h-100 border-warning shadow-sm">
                     <div class="card-header bg-warning text-dark fw-bold">
@@ -77,39 +85,45 @@
                             <li class="list-group-item"><strong>Mobile Number:</strong> <span th:text="${loan.customer.phone}"></span></li>
                         </ul>
                         
-						
+	<div class="mb-3 text-center">
+    	<a th:href="@{'/loans/assetImage/' + ${loan.loanApplicationId}}" class="btn btn-outline-primary w-100" download>
+        	📥 Download Asset Image
+    	</a>
+	</div>
                         
-                        <div class="d-flex justify-content-between">
-                            <form th:action="@{/loans/approveLoan}" method="post">
-                                <input type="hidden" name="loanId" th:value="${loan.loanApplicationId}" />
-                                <button type="submit" class="btn btn-outline-success w-100 me-2">✅ Approve</button>
-                            </form>
-                            <form th:action="@{/loans/rejectLoan}" method="post">
-                                <input type="hidden" name="loanId" th:value="${loan.loanApplicationId}" />
-                                <button type="submit" class="btn btn-outline-danger w-100">❌ Reject</button>
-                            </form>
-                        </div>
-                    </div>
+						
+  <div class="row g-2 align-items-end">
+    <!-- Approve Form -->
+    <div class="col-md-8">
+        <form th:action="@{/loans/approveLoan}" method="post">
+            <input type="hidden" name="loanId" th:value="${loan.loanApplicationId}" />
+            <div class="row g-2">
+                <div class="col-md-8">
+                    <input type="date" name="approvedDate" class="form-control approved-date" required />
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-outline-success w-100">✅</button>
                 </div>
             </div>
-        </div>
+        </form>
+    </div>
 
-       <!--  <h2 class="mt-5 mb-4 text-center text-success">Approved Loan Applications</h2>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col" th:each="loan : ${approvedLoans}">
-                <div class="card border-success shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="'Loan ID: ' + ${loan.loanApplicationId}"></h5>
-                        <p class="card-text" th:text="'Amount: ₹' + ${loan.requestAmount}"></p>
-                        <p class="card-text" th:text="'Applicant ID: ' + ${loan.customer.customerId}"></p>
-                        <p class="card-text" th:text="'Applicant Name: ' + ${loan.customer.name}"></p>
-                        <p class="card-text" th:text="'Applicant Email: ' + ${loan.customer.email}"></p>
-                        <span class="badge bg-success">Approved</span>
+    <!-- Reject Form -->
+    <div class="col-md-4">
+        <form th:action="@{/loans/rejectLoan}" method="post">
+            <input type="hidden" name="loanId" th:value="${loan.loanApplicationId}" />
+            <button type="submit" class="btn btn-outline-danger w-100">❌ </button>
+        </form>
+    </div>
+</div>
+
+
                     </div>
                 </div>
             </div>
         </div>
-    </div> -->
+</div>
+      </div> 
 </div>
 
 
@@ -119,6 +133,54 @@
         <p class="mb-0 text-white">&copy; 2025 LoanPortal. All Rights Reserved.</p>
     </div>
 </footer>
+<!-- Approved Loans Modal -->
+<div class="modal fade" id="approvedLoansModal" tabindex="-1" aria-labelledby="approvedLoansModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="approvedLoansModalLabel">Approved Loan Applications</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped align-middle">
+                        <thead class="table-success">
+                            <tr>
+                                <th>Loan ID</th>
+                                <th>Amount</th>
+                                <th>Applicant ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="loan : ${approvedLoans}">
+                                <td th:text="${loan.loanApplicationId}"></td>
+                                <td th:text="${loan.customer.customerId}"></td>
+                                <td th:text="${loan.customer.name}"></td>
+                                <td th:text="${loan.customer.email}"></td>
+                                <td th:text="${loan.customer.phone}"></td>
+                                
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-</body>
+</body><script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const today = new Date().toISOString().split('T')[0];
+        document.querySelectorAll(".approved-date").forEach(input => {
+            input.value = today;
+            input.min = today;
+        });
+    });
+</script>
+
+
 </html>

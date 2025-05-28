@@ -37,15 +37,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 		return repository.findByCustomer(customer);
 	}
 
-	@Override
-	public LoanApplication approveLoan(Long id) {
-		// TODO Auto-generated method stub
-		LoanApplication loanApplication=repository.findById(id).get();
-		loanApplication.setLoanApplicationStatus(LoanApplicationStatus.APPROVED);
-		loanApplication.setApprovedDate(LocalDate.now());
-		return repository.save(loanApplication);
-		
-	}
+	
 
 	@Override
 	public LoanApplication rejectLoan(Long id) {
@@ -59,6 +51,15 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 	public LoanApplication getLoanApplicationById(Long id) {
 		// TODO Auto-generated method stub
 		return repository.findById(id).get();
+	}
+
+	@Override
+	public LoanApplication approveLoan(Long id, LocalDate approveDate) {
+		// TODO Auto-generated method stub
+		LoanApplication loanApplication=repository.findById(id).get();
+		loanApplication.setLoanApplicationStatus(LoanApplicationStatus.APPROVED);
+		loanApplication.setApprovedDate(approveDate);
+		return repository.save(loanApplication);
 	}
 
 	
