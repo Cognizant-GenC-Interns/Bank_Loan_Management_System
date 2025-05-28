@@ -1,12 +1,11 @@
 package com.cts.blms.controller;
 import java.io.IOException;
-import java.util.List;
 
+ 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,11 +20,12 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 
+ 
 @Controller
 public class LoanApplicationController {
 	
 	@Autowired
-	private LoanApplicationService loanApplicationService;
+	private LoanApplicationService loanApplicationService1;
 	
 	
 	@PostMapping("/saveAppliedLoan")
@@ -51,26 +51,25 @@ public class LoanApplicationController {
         double ratePower=Math.pow(1+monthlyIntrestRate,loanProduct.getTenure());
         double emiAmount=(principle*monthlyIntrestRate*ratePower)/(ratePower-1);
         
-        loanApplication.setMaxAffordableAmount(maxAffordableAmount);
         loanApplication.setEmiAmount(emiAmount);
         loanApplication.setCustomer(customer);
         loanApplication.setLoanProduct(loanProduct);
 		
 		
-		loanApplicationService.addLoanApplication(loanApplication);
+		loanApplicationService1.addLoanApplication(loanApplication);
 		model.addAttribute("loanApplication",loanApplication);
 		
 		return "redirect:/user/userDashboard";
 	}
-	
-	@GetMapping("/appliedLoans")
-    public String getLoanProductsDetails(Model model,HttpSession session) {
-		Customer customer=(Customer) session.getAttribute("loggedCustomer");
-        List<LoanApplication>appliedLoans=loanApplicationService.getLoanApplicationByCustomer(customer);
-        model.addAttribute("appliedLoans", appliedLoans);
-        
-        return "userDashboard";
-        
-    }
-	
+//	
+//	@GetMapping("/appliedLoans")
+//    public String getLoanProductsDetails(Model model,HttpSession session) {
+//		Customer customer=(Customer) session.getAttribute("loggedCustomer");
+//        List<LoanApplication>appliedLoans=loanApplicationService.getLoanApplicationByCustomer(customer);
+//        model.addAttribute("appliedLoans", appliedLoans);
+//        
+//        return "userDashboard";
+//        
+//    }
+
 }

@@ -1,13 +1,8 @@
 package com.cts.blms.controller;
 
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.Base64;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cts.blms.model.Admin;
 import com.cts.blms.model.Customer;
-import com.cts.blms.model.LoanApplication;
 import com.cts.blms.model.LoanProduct;
 import com.cts.blms.service.AdminService;
 import com.cts.blms.service.CustomerService;
@@ -40,21 +34,22 @@ public class AdminController {
 	private LoanProductService loanProductService;
 	
 	@Autowired
-	private LoanApplicationService loanApplicationService;
+	private AdminService adminService;
 	
 	@Autowired
-	private AdminService adminService;
+	private LoanApplicationService loanApplicationService;
+	
 	
 	@GetMapping("/adminDashboard")
 	public String Dashboard(Model model,HttpSession session) {
 		
 		Admin admin=(Admin)session.getAttribute("admin");
-		System.out.println("Admin email:"+admin.getEmail());
 		Map<String,Object> dataForAdmin=new HashMap<>();
 		dataForAdmin.put("verifiedCustomer",customerService.getVerifiedCustomer() );
 		dataForAdmin.put("pendingCustomer",customerService.getPendingCustomer());
 		dataForAdmin.put("loanProducts",loanProductService.getLoanProductDetails());
 		dataForAdmin.put("newLoanProduct",new LoanProduct());
+		dataForAdmin.put("appliedLoans",loanApplicationService.getAllLoanapplicationDetails());
 		dataForAdmin.put("admin", admin);
 		model.addAllAttributes(dataForAdmin);
 		return "adminDashboard";
@@ -116,11 +111,7 @@ public class AdminController {
 	            .contentType(MediaType.parseMediaType(mimeType))
 	            .body(customer.getSalarySlipImage());
 	}
-	
-//	@GetMapping("/loanApplications")
-//	public String viewLoanApplications(Model model) {
-//	    
-//	}
 
- 
 }
+ 
+

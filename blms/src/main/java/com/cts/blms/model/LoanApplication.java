@@ -52,9 +52,6 @@ public class LoanApplication {
 	@JoinColumn(name = "loan_product_id",referencedColumnName = "loanProductId")
 	private LoanProduct loanProduct;
 	
-	@Column(name="affordable_amount")
-	private double maxAffordableAmount;
-	
 	@Column(name="Emi_amount")
 	private double emiAmount;
 	

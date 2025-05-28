@@ -9,7 +9,8 @@ import com.cts.blms.model.LoanApplication;
 
 import jakarta.validation.Valid;
 
-
+ 
+ 
 public interface LoanApplicationService {
 
 	LoanApplication addLoanApplication(@Valid LoanApplication loanApplication);
@@ -18,3 +19,4 @@ public interface LoanApplicationService {
 
 	List<LoanApplication> getLoanApplicationByCustomer(Customer customer);
 }
+

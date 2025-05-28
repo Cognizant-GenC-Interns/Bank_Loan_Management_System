@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +21,8 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private CustomerRepository repository;
 
+	private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	
 	@Override
 	public Customer addCustomer(@Valid Customer customer) {		// TODO Auto-generated method stub
 		customer.setKycStatus(KycStatus.PENDING);
@@ -29,7 +32,9 @@ public class CustomerServiceImpl implements CustomerService {
 			return customer;
 		}
 
-		
+		String hashedPassword = passwordEncoder.encode(customer.getPassword());
+		customer.setPassword(hashedPassword);
+	 
 		return repository.save(customer);
 	}
 
@@ -46,7 +51,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer validateCustomer(String email, String password) {
 		Customer customer=repository.findByEmail(email);
-		if(customer!=null && customer.getPassword().equals(password)) {
+		if(customer!=null && passwordEncoder.matches(password, customer.getPassword())) {
 			return customer;
 		}
 		return null;

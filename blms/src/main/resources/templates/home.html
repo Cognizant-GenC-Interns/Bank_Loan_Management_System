@@ -9,11 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
  
     <style>
-    
-       body {
-    background: #eef5fc;
-    font-family: Arial, sans-serif;
-}
  
    body {
  
@@ -22,7 +17,9 @@
             margin: 0;
  
             background-color: #fff;
- 
+			
+			background: #eef5fc;
+			
         }
  
         .marquee {
@@ -89,7 +86,7 @@
  
         .step {
             font-size: 13px;
-            color:
+            
         }
  
         .step-number {
@@ -136,10 +133,11 @@ background-color:#6A89A7;
         }
  
         footer {
-            position: fixed;
+            position: relative;
             bottom: 0;
             width: 100%;
             z-index: 1000;
+			margin-top: 110px;
         }
  
      
@@ -230,12 +228,7 @@ background-color:#6A89A7;
  
    
  
-    <!-- Footer -->
-    <footer class="py-4" style="background-color: #6A89A7;">
-        <div class="container text-center">
-            <p class="mb-0" style="color: #fff;">&copy; 2025 LoanPortal. All Rights Reserved.</p>
-        </div>
-    </footer>
+
  
     <!-- Modals -->
     <!-- Admin Login -->
@@ -336,6 +329,13 @@ background-color:#6A89A7;
             </div>
         </div>
     </div>
+	
+	<!-- Footer -->
+	<footer class="py-4" style="background-color: #6A89A7;">
+	    <div class="container text-center">
+	        <p class="mb-0" style="color: #fff;">&copy; 2025 LoanPortal. All Rights Reserved.</p>
+	    </div>
+	</footer>
  
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
