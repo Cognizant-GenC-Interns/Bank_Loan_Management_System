@@ -7,7 +7,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +27,14 @@ public class Customer {
 	@NotBlank(message = "Name is mandatory")
 	@Column(name="name")
 	private String name;
+	
+	@Column(name = "profile_image_name")
+	private String profileImageName;
+	
+	@Lob
+	@Column(name = "profile_image" , columnDefinition = "LONGBLOB")
+	private byte[] profileImage;
+	
 	
 	@NotBlank(message = "Email is mandatory")
 	@Column(name="email")
@@ -45,4 +55,27 @@ public class Customer {
 	@Enumerated(EnumType.STRING)
     @Column(name="kyc_status")
 	private KycStatus kycStatus;
+	
+	@Column(name = "annual_salary")
+	private Integer annualSalary;
+	
+	
+	@Column(name = "pan_image_name")
+	private String panImageName;
+	
+	@Lob
+	@Column(name = "pan_card_image" , columnDefinition = "LONGBLOB")
+	private byte[] panImage;
+	
+	@Column(name = "salary_slip_image_name")
+	private String salarySlipImageName;
+	
+	@Lob
+	@Column(name = "salary_slip_image" , columnDefinition = "LONGBLOB")
+	private byte[] salarySlipImage;
+
+	@Column(name = "credit_score")
+	private Integer creditScore;
+
+	
 }

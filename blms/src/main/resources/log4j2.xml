@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="DEBUG">
-    
+    <Properties>
+        <Property name="log-path">logs</Property>
+    </Properties> 
+ 
     <Appenders>
         <Console name="ConsoleAppender" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
-       	<File name="FileAppender1" filename="application-${date:yyyMMdd}.log"  immediateFlush="false" append="true">
+       	<File name="FileAppender1" filename="${log-path}/application-${date:yyyMMdd}.log"  immediateFlush="false" append="true">
 			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
        	</File>
     </Appenders>
@@ -23,9 +26,6 @@
         </Root>
     </Loggers>
 </Configuration>
-<!-- 
-<Properties>
-        <Property name="log-path">logs</Property>
-    </Properties> 
- -->
+
+
     

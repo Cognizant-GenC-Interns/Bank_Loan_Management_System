@@ -1,0 +1,113 @@
+2025-05-21 14:04:37 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 21268 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:04:37 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:04:37 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:05:22 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 22208 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:05:22 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:05:22 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:06:28 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 19480 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:06:28 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:06:28 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:07:16 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 25200 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:07:16 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:07:16 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:07:22 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 6.554 seconds (process running for 8.454)
+2025-05-21 14:07:31 [http-nio-8080-exec-1] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-21 14:07:31 [http-nio-8080-exec-1] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=PENDING)
+2025-05-21 14:08:12 [http-nio-8080-exec-5] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-21 14:08:12 [http-nio-8080-exec-5] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=PENDING)
+2025-05-21 14:09:50 [http-nio-8080-exec-10] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-21 14:09:50 [http-nio-8080-exec-10] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=PENDING)
+2025-05-21 14:09:57 [http-nio-8080-exec-1] DEBUG com.cts.blms.controller.CustomerController - Admin logged in
+2025-05-21 14:10:50 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 25200 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:10:50 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:10:50 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:10:51 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 1.029 seconds (process running for 217.08)
+2025-05-21 14:11:12 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 25200 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:11:12 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:11:12 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:11:13 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 1.324 seconds (process running for 239.717)
+2025-05-21 14:12:22 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 25200 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:12:22 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:12:22 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:12:24 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 1.759 seconds (process running for 310.358)
+2025-05-21 14:12:33 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 25200 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:12:33 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:12:33 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:12:34 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 0.811 seconds (process running for 320.037)
+2025-05-21 14:12:59 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 25200 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:12:59 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:12:59 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:13:00 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 0.739 seconds (process running for 346.149)
+2025-05-21 14:13:04 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 25200 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:13:04 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:13:04 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:13:05 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 0.761 seconds (process running for 351.603)
+2025-05-21 14:13:23 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 25200 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:13:23 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:13:23 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:13:25 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 1.542 seconds (process running for 371.232)
+2025-05-21 14:13:30 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 25200 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:13:30 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:13:30 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:13:31 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 0.873 seconds (process running for 377.768)
+2025-05-21 14:13:54 [http-nio-8080-exec-1] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-21 14:13:54 [http-nio-8080-exec-1] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=PENDING)
+2025-05-21 14:13:59 [http-nio-8080-exec-3] DEBUG com.cts.blms.controller.CustomerController - Admin logged in
+2025-05-21 14:20:19 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 25200 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:20:19 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:20:19 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:20:20 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 1.14 seconds (process running for 786.285)
+2025-05-21 14:21:54 [http-nio-8080-exec-2] DEBUG com.cts.blms.controller.CustomerController - Admin logged in
+2025-05-21 14:26:23 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 25200 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:26:23 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:26:23 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:26:25 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 1.521 seconds (process running for 1151.128)
+2025-05-21 14:26:42 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 25200 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:26:42 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:26:42 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:26:43 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 0.921 seconds (process running for 1169.407)
+2025-05-21 14:28:11 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 13584 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:28:11 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:28:11 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:28:21 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 10.581 seconds (process running for 13.528)
+2025-05-21 14:28:33 [http-nio-8080-exec-3] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-21 14:28:33 [http-nio-8080-exec-3] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=PENDING)
+2025-05-21 14:28:39 [http-nio-8080-exec-5] DEBUG com.cts.blms.controller.CustomerController - Admin logged in
+2025-05-21 14:29:59 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 13584 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:29:59 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:29:59 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:30:00 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 1.071 seconds (process running for 112.14)
+2025-05-21 14:31:23 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 13584 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:31:23 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:31:23 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:31:23 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 0.849 seconds (process running for 195.554)
+2025-05-21 14:31:27 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 13584 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:31:27 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:31:27 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:31:29 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 1.56 seconds (process running for 200.753)
+2025-05-21 14:31:48 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 13584 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:31:48 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:31:48 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:31:49 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 0.839 seconds (process running for 220.749)
+2025-05-21 14:31:57 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 16268 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:31:57 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:31:57 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:32:02 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 5.627 seconds (process running for 8.29)
+2025-05-21 14:32:07 [http-nio-8080-exec-3] INFO  com.cts.blms.controller.CustomerController - Directed to Home page 
+2025-05-21 14:32:07 [http-nio-8080-exec-3] DEBUG com.cts.blms.controller.CustomerController - Null valueCustomer(customerId=0, name=null, email=null, password=null, phone=null, address=null, kycStatus=null)
+2025-05-21 14:32:12 [http-nio-8080-exec-5] DEBUG com.cts.blms.controller.CustomerController - Admin logged in
+2025-05-21 14:34:08 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 16268 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:34:08 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:34:08 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:34:09 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 1.804 seconds (process running for 135.841)
+2025-05-21 14:34:19 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 16268 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:34:19 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:34:19 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:34:20 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 1.582 seconds (process running for 146.408)
+2025-05-21 14:35:00 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 21912 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:35:00 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:35:00 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-21 14:35:14 [restartedMain] INFO  com.cts.blms.BlmsApplication - Started BlmsApplication in 14.686 seconds (process running for 18.682)
+2025-05-21 14:41:22 [restartedMain] INFO  com.cts.blms.BlmsApplication - Starting BlmsApplication using Java 21.0.6 with PID 6036 (C:\Users\2400632\git\Bank_Loan_Management_System\blms\target\classes started by 2400632 in C:\Users\2400632\git\Bank_Loan_Management_System\blms)
+2025-05-21 14:41:22 [restartedMain] DEBUG com.cts.blms.BlmsApplication - Running with Spring Boot v3.4.5, Spring v6.2.6
+2025-05-21 14:41:22 [restartedMain] INFO  com.cts.blms.BlmsApplication - No active profile set, falling back to 1 default profile: "default"
