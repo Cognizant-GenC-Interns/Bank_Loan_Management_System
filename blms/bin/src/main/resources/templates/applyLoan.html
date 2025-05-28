@@ -55,7 +55,7 @@
 <body>
 <div class="form-container">
     <h2>Asset Request Form</h2>
-    <form th:action="@{/loans/saveAppliedLoan}" method="post" enctype="multipart/form-data" th:object="${loanApplication}">
+    <form th:action="@{/saveAppliedLoan}" method="post" enctype="multipart/form-data" th:object="${loanApplication}">
         <div class="form-group">
             <label for="requestedAmount">Requested Amount</label>
             <input type="number" id="requestedAmount" name="requestedAmount" th:field="*{requestAmount}" required />
