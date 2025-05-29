@@ -73,17 +73,20 @@
            <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col" th:each="loan : ${requestPendingLoans}">
                 <div class="card h-100 border-warning shadow-sm">
-                    <div class="card-header bg-warning text-dark fw-bold">
-                        Loan ID: <span th:text="${loan.loanApplicationId}"></span>
-                    </div>
+                   <div class="card-header bg-warning text-dark fw-bold d-flex justify-content-between">
+   					 <p class="mb-0">Loan ID: <span th:text="${loan.loanApplicationId}"></span></p>
+    				 <p class="mb-0">Applied on: <span th:text="${loan.applicationDate}"></span></p>
+					</div>
                     <div class="card-body">
-                        <ul class="list-group list-group-flush mb-3">
-                            <li class="list-group-item"><strong>Amount:</strong> ₹<span th:text="${loan.requestAmount}"></span></li>
+                        <ul class="list-group list-group-flush text-start">
+                            <li class="list-group-item "><strong>Amount:</strong> ₹<span th:text="${loan.requestAmount}"></span></li>
                             <li class="list-group-item"><strong>Applicant ID:</strong> <span th:text="${loan.customer.customerId}"></span></li>
                             <li class="list-group-item"><strong>Name:</strong> <span th:text="${loan.customer.name}"></span></li>
                             <li class="list-group-item"><strong>Email:</strong> <span th:text="${loan.customer.email}"></span></li>
                             <li class="list-group-item"><strong>Mobile Number:</strong> <span th:text="${loan.customer.phone}"></span></li>
-                        </ul>
+                            <li class="list-group-item"><strong>Suggestion:</strong> <span th:if="${loan.eligibility != null}" th:text="${loan.eligibility}" style="color: red;"></span><span th:if="${loan.eligibility == null}" style="color: green;">Eligible</span>
+							</li>
+                            </ul>
                         
 	<div class="mb-3 text-center">
     	<a th:href="@{'/loans/assetImage/' + ${loan.loanApplicationId}}" class="btn btn-outline-primary w-100" download>
@@ -147,11 +150,12 @@
                         <thead class="table-success">
                             <tr>
                                 <th>Loan ID</th>
-                                <th>Amount</th>
                                 <th>Applicant ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
+                                <th>Applied Date</th>
+                                <th>Approved Date</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -161,6 +165,8 @@
                                 <td th:text="${loan.customer.name}"></td>
                                 <td th:text="${loan.customer.email}"></td>
                                 <td th:text="${loan.customer.phone}"></td>
+                                <td><span th:text="${loan.applicationDate}"></span></td>
+                                <td><span th:text="${loan.approvedDate}"></span></td>
                                 
                                 
                             </tr>
