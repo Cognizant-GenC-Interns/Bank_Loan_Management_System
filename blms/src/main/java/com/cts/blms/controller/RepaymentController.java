@@ -1,9 +1,76 @@
 package com.cts.blms.controller;
 
-import org.springframework.stereotype.Controller;
+import java.time.LocalDate;
+import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import com.cts.blms.model.LoanApplication;
+import com.cts.blms.service.LoanApplicationService; 
+import com.cts.blms.service.RepaymentService;
+
+@RestController
+@RequestMapping("/repayments")
 public class RepaymentController {
-	
+
+	@Autowired
+	private RepaymentService repaymentService;
+
+	@Autowired
+	private LoanApplicationService loanApplicationService;
+
+	@PostMapping("/makePayment/{repaymentId}")
+	public ResponseEntity<String> makePayment(
+			@PathVariable Long repaymentId,
+			@RequestParam double amountPaid,
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate paymentDate) {
+		try {
+			repaymentService.makePayment(repaymentId, amountPaid, paymentDate);
+			return new ResponseEntity<>("Payment processed successfully for repayment ID: " + repaymentId, HttpStatus.OK);
+		} catch (RuntimeException e) {
+			return new ResponseEntity<>("Error processing payment: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			return new ResponseEntity<>("An unexpected error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+
+	@GetMapping("/outstandingBalance/{loanApplicationId}")
+	public ResponseEntity<String> getOutstandingBalance(@PathVariable Long loanApplicationId) {
+		try {
+			LoanApplication loanApplication = loanApplicationService.getLoanApplicationById(loanApplicationId); // Assuming a method exists in LoanApplicationService
+			if (loanApplication == null) {
+				return new ResponseEntity<>("Loan Application not found with ID: " + loanApplicationId, HttpStatus.NOT_FOUND);
+			}
+			String outstandingBalance = repaymentService.getOutstandingBalance(loanApplication);
+			return new ResponseEntity<>(outstandingBalance, HttpStatus.OK);
+		} catch (RuntimeException e) {
+			return new ResponseEntity<>("Error retrieving outstanding balance: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			return new ResponseEntity<>("An unexpected error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+
+	@GetMapping("/paymentSchedule/{loanApplicationId}")
+	public ResponseEntity<Date> getPaymentSchedule(@PathVariable Long loanApplicationId) {
+		try {
+			Date paymentScheduleDate = repaymentService.getPaymentSchedule(loanApplicationId);
+			return new ResponseEntity<>(paymentScheduleDate, HttpStatus.OK);
+		} catch (RuntimeException e) {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 }

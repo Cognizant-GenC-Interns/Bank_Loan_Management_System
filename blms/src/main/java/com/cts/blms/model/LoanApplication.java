@@ -61,6 +61,9 @@ public class LoanApplication {
 	@Column(name="Emi_amount")
 	private double emiAmount;
 	
+	@Column(name="Balance")
+	private double balance;
+	
 	@Enumerated(EnumType.STRING)
     @Column(name="loan_application_staus")
 	private LoanApplicationStatus loanApplicationStatus;
