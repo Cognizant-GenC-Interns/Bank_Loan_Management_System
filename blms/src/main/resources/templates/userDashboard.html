@@ -96,7 +96,7 @@
 <div class="sidebar">
 	<a onclick="showSection('loanProducts')">Loan Products</a>
 	  <!-- Only show these links if KYC is not pending -->
-  <div th:if="${loggedCustomer.kycStatus == T(com.cts.blms.model.KycStatus).VERIFIED}">
+  <div th:if="${loggedCustomer.kycStatus.name() =='VERIFIED'}">
   		<a href="#" onclick="showSection('applyLoans')">Apply Loans</a>
   		<a href="#" onclick="showSection('loanApplied')">Loan Applied</a>
 </div>
@@ -172,7 +172,14 @@
                     <ul class="list-unstyled">
                         <li><strong>Requested Amount:</strong> ₹<span th:text="${loan2.requestAmount}"></span></li>
                         <li><strong>Status:</strong> <span th:text="${loan2.loanApplicationStatus}"></span></li>
+                        
                     </ul>
+                    
+<div th:if="${loan2.loanApplicationStatus.name() == 'APPROVED'}" class="text-center mt-3">
+      <a class="btn btn-info" type="button" th:href="@{/repayments/paymentSchedule/{Id}(Id=${loan2.loanApplicationId})}">View Schedule</a>
+
+ </div>
+                    
                 </div>
                 <form th:if="${loan2.loanApplicationStatus.name() == 'PENDING'}"
                 th:action="@{/loans/deleteLoan/{Id}(Id=${loan2.loanApplicationId})}" method="post"
@@ -219,6 +226,7 @@
     </div>
   </div>
 </div>
+<!-- Payment Modal -->
 
 <!-- Profile Modal -->
 <div class="modal fade" id="profile" tabindex="-1" aria-labelledby="profileLabel" aria-hidden="true">

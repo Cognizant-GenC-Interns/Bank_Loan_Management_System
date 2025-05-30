@@ -23,6 +23,7 @@ public class RepaymentServiceImpl implements RepaymentService{
 	@Autowired
 	private LoanApplicationRepository loanApplicationRepository;
 
+	
 	@Autowired
 	private RepaymentRepository repaymentRepository;
 	
@@ -229,5 +230,18 @@ public class RepaymentServiceImpl implements RepaymentService{
 	    int tenure = loanApplication.getLoanProduct().getTenure();
 	    double interestRate = loanApplication.getLoanProduct().getInterestRate();
 	    return (balance * interestRate) / 100.0;
+	}
+
+
+	@Override
+	public List<Repayment> getRepayementByLoanApplicationBy(Long loanApplicationId) {
+		LoanApplication loanApplication=loanApplicationRepository.findById(loanApplicationId).get();
+		
+		
+		List<Repayment> repayments= repaymentRepository.findByLoanApplication(loanApplication);
+		return repayments;
+		
+		// TODO Auto-generated method stub
+		
 	}
 }

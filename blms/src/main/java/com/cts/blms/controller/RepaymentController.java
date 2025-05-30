@@ -1,12 +1,18 @@
 package com.cts.blms.controller;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.blms.model.LoanApplication;
+import com.cts.blms.model.PaymentStatus;
+import com.cts.blms.model.Repayment;
 import com.cts.blms.service.LoanApplicationService; 
 import com.cts.blms.service.RepaymentService;
 
-@RestController
+@Controller
 @RequestMapping("/repayments")
 public class RepaymentController {
 
@@ -27,20 +35,25 @@ public class RepaymentController {
 
 	@Autowired
 	private LoanApplicationService loanApplicationService;
-
+	
+	
+	
 	@PostMapping("/makePayment/{repaymentId}")
-	public ResponseEntity<String> makePayment(
+	public String makePayment(
 			@PathVariable Long repaymentId,
 			@RequestParam double amountPaid,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate paymentDate) {
-		try {
-			repaymentService.makePayment(repaymentId, amountPaid, paymentDate);
-			return new ResponseEntity<>("Payment processed successfully for repayment ID: " + repaymentId, HttpStatus.OK);
-		} catch (RuntimeException e) {
-			return new ResponseEntity<>("Error processing payment: " + e.getMessage(), HttpStatus.BAD_REQUEST);
-		} catch (Exception e) {
-			return new ResponseEntity<>("An unexpected error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		repaymentService.makePayment(repaymentId, amountPaid, paymentDate);
+		return "redirect:/user/userDashboard";
+		
+//		try {
+//			
+//			return new ResponseEntity<>("Payment processed successfully for repayment ID: " + repaymentId, HttpStatus.OK);
+//		} catch (RuntimeException e) {
+//			return new ResponseEntity<>("Error processing payment: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+//		} catch (Exception e) {
+//			return new ResponseEntity<>("An unexpected error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+//		}
 	}
 
 
@@ -59,18 +72,33 @@ public class RepaymentController {
 			return new ResponseEntity<>("An unexpected error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
-
+	
+	
+	
+	
+	
 	@GetMapping("/paymentSchedule/{loanApplicationId}")
-	public ResponseEntity<Date> getPaymentSchedule(@PathVariable Long loanApplicationId) {
-		try {
-			Date paymentScheduleDate = repaymentService.getPaymentSchedule(loanApplicationId);
-			return new ResponseEntity<>(paymentScheduleDate, HttpStatus.OK);
-		} catch (RuntimeException e) {
-			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	public String getPaymentSchedule(@PathVariable Long loanApplicationId,Model model) {
+
+List<Repayment> repaymentDetails = repaymentService.getRepayementByLoanApplicationBy(loanApplicationId).stream().sorted(Comparator.comparing(Repayment::getDueDate)).toList();
+Map<String,Object> repay=new HashMap<>();
+		repay.put("loanApplication", loanApplicationService.getLoanApplicationById(loanApplicationId));
+		for (Repayment repayment : repaymentDetails) {
+			System.out.println(repayment.getInterestPaid());
+			System.out.println(repayment.getPaymentStatus());
 		}
+		repay.put("UpcomingDue", repaymentDetails.stream().filter(v-> v.getPaymentStatus().equals(PaymentStatus.PENDING)).toList());
+		repay.put("CompletedDues",repaymentDetails.stream().filter(v-> v.getPaymentStatus().equals(PaymentStatus.COMPLETED)).toList());
+		model.addAllAttributes(repay);
+		return "repayment";
+//		try {
+//			Date paymentScheduleDate = repaymentService.getPaymentSchedule(loanApplicationId);
+//			return new ResponseEntity<>(paymentScheduleDate, HttpStatus.OK);
+//		} catch (RuntimeException e) {
+//			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//		} catch (Exception e) {
+//			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//		}
 	}
 
 }

@@ -40,8 +40,8 @@ public class LoanApplicationController {
 	@PostMapping("/approveLoan")
 	public String approveLoan(@RequestParam("loanId") Long id,@RequestParam("approvedDate") LocalDate approveDate) {
 		loanApplicationService1.approveLoan(id,approveDate);
-		System.out.print("Approved loans");
-		return "redirect:/loans/appliedLoans";// return "/createRepayment";
+		return "redirect:/loans/appliedLoans";// 
+//		return "/createRepayment";
 		
 	}
 	
