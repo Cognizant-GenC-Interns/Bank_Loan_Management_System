@@ -1,85 +1,94 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Asset Request Form</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
-        .form-container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 300px;
-        }
-        .form-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="text"],
-        input[type="number"],
-        input[type="file"] {
-            width: 100%;
-            padding: 8px;
-            font-size: 14px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Asset Request Form</title>
+<style>
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f4;
+}
+
+.form-container {
+	background: white;
+	padding: 30px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	width: 300px;
+}
+
+.form-container h2 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.form-group {
+	margin-bottom: 15px;
+}
+
+label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+input[type="text"], input[type="number"], input[type="file"] {
+	width: 100%;
+	padding: 8px;
+	font-size: 14px;
+}
+
+button {
+	width: 100%;
+	padding: 10px;
+	font-size: 16px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #0056b3;
+}
+</style>
 </head>
 <body>
-<div class="form-container">
-    <h2>Asset Request Form</h2>
-    <form th:action="@{/loans/saveAppliedLoan}" method="post" enctype="multipart/form-data" th:object="${loanApplication}">
-        <div class="form-group">
-            <label for="requestedAmount">Requested Amount</label>
-            
-			<input type="number" id="requestedAmount" name="requestedAmount" th:field="*{requestAmount}"
-				th:attr="min=${session.selectedLoanProduct.minAmount}, max=${session.selectedLoanProduct.maxAmount}"
-				required />
-				<small class="text-muted">Amount must be between ₹<span th:text="${session.selectedLoanProduct.minAmount}"></span> and ₹<span th:text="${session.selectedLoanProduct.maxAmount}"></span></small>
-				
-</div>
-        <div class="form-group">
-            <label for="Date">Date</label>
-            <input type="Date" id="applicationDate" class="applicationDate" name="applicationDate" th:field="*{applicationDate}" required />
-        </div>
-        <div class="form-group">
-            <label for="assetName">Asset Name</label>
-            <input type="text" id="assetName" name="assetName" th:field="*{nameOfAsset}"  />
-        </div>
-        <div class="form-group">
-            <label for="assetImage">Upload Asset Image</label>
-            <input type="file" id="assetImage" name="assetFile" accept="image/*"/>
-        </div>
-        <button type="submit">Apply</button>
-    </form>
-</div>
+	<div class="form-container">
+		<h2>Asset Request Form</h2>
+		<form th:action="@{/loans/saveAppliedLoan}" method="post"
+			enctype="multipart/form-data" th:object="${loanApplication}">
+			<div class="form-group">
+				<label for="requestedAmount">Requested Amount</label> <input
+					type="number" id="requestedAmount" name="requestedAmount"
+					th:field="*{requestAmount}"
+					th:attr="min=${session.selectedLoanProduct.minAmount}, max=${session.selectedLoanProduct.maxAmount}"
+					required /> <small class="text-muted">Amount must be
+					between ₹<span th:text="${session.selectedLoanProduct.minAmount}"></span>
+					and ₹<span th:text="${session.selectedLoanProduct.maxAmount}"></span>
+				</small>
+
+			</div>
+			<div class="form-group">
+				<label for="Date">Date</label> <input type="Date"
+					id="applicationDate" class="applicationDate" name="applicationDate"
+					th:field="*{applicationDate}" required />
+			</div>
+			<div class="form-group">
+				<label for="assetName">Asset Name</label> <input type="text"
+					id="assetName" name="assetName" th:field="*{nameOfAsset}" />
+			</div>
+			<div class="form-group">
+				<label for="assetImage">Upload Asset Image</label> <input
+					type="file" id="assetImage" name="assetFile" accept="image/*" />
+			</div>
+			<button type="submit">Apply</button>
+		</form>
+	</div>
 </body>
 <script>
 document.addEventListener("DOMContentLoaded", function () {

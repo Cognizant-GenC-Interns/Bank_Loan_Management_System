@@ -12,7 +12,7 @@ public class ExceptionHandlerController {
 	public String handleInternalServerError(Exception ex, Model model) {
 		model.addAttribute("message", ex.getMessage());
 		return "error";
-		
+
 	}
 
 }

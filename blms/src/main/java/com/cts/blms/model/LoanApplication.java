@@ -1,7 +1,6 @@
 package com.cts.blms.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,51 +21,50 @@ import lombok.Data;
 @Data
 @Table(name = "loanapplication")
 public class LoanApplication {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long loanApplicationId;
-	
+
 	@Column(name = "request_Amount")
 	private double requestAmount;
-	
-	@Column(name="application_date")
+
+	@Column(name = "application_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate applicationDate;
-	
-	
-	@Column(name="approved_date")
+
+	@Column(name = "approved_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate approvedDate;
-	
-	@Column(name="name_of_asset")
+
+	@Column(name = "name_of_asset")
 	private String nameOfAsset;
-	
+
 	@Column(name = "asset_Name")
 	private String assetName;
-	
-	@Column(name="eligibility")
+
+	@Column(name = "eligibility")
 	private String eligibility;
-	
+
 	@Lob
-	@Column(name = "asset_Image" , columnDefinition = "LONGBLOB")
+	@Column(name = "asset_Image", columnDefinition = "LONGBLOB")
 	private byte[] assetImage;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "customer_id",referencedColumnName ="customer_id")
+	@JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
 	private Customer customer;
 
 	@ManyToOne
-	@JoinColumn(name = "loan_product_id",referencedColumnName = "loanProductId")
+	@JoinColumn(name = "loan_product_id", referencedColumnName = "loanProductId")
 	private LoanProduct loanProduct;
-	
-	@Column(name="Emi_amount")
+
+	@Column(name = "Emi_amount")
 	private double emiAmount;
-	
-	@Column(name="Balance")
+
+	@Column(name = "Balance")
 	private double balance;
-	
+
 	@Enumerated(EnumType.STRING)
-    @Column(name="loan_application_staus")
+	@Column(name = "loan_application_staus")
 	private LoanApplicationStatus loanApplicationStatus;
 }

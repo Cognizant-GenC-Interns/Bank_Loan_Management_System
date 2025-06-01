@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.cts.blms.model.Admin;
 
 @Repository
-public interface AdminRepository extends JpaRepository<Admin, Long>{
+public interface AdminRepository extends JpaRepository<Admin, Long> {
 
 	Admin findByEmail(String email);
 

@@ -10,7 +10,6 @@ public interface ReportService {
 
 	byte[] generateCustomerOutStandingLoanReport(Long id);
 
-
 	byte[] getPortfolio(Long id);
 
 }

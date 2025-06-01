@@ -7,5 +7,5 @@ import com.cts.blms.model.LoanProduct;
 
 @Repository
 public interface LoanProductRepository extends JpaRepository<LoanProduct, Long> {
-	
+
 }

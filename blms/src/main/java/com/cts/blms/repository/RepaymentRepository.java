@@ -8,9 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.cts.blms.model.LoanApplication;
 import com.cts.blms.model.Repayment;
 
-
 @Repository
-public interface RepaymentRepository extends JpaRepository<Repayment, Long>{
+public interface RepaymentRepository extends JpaRepository<Repayment, Long> {
 
 	List<Repayment> findByLoanApplication(LoanApplication loanApplication);
 

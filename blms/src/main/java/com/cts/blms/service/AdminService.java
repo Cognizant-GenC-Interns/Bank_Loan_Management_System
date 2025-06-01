@@ -7,7 +7,5 @@ public interface AdminService {
 	boolean validateAdmin(String email, String password);
 
 	Admin findAdmin(String email);
-	
-	
 
 }

@@ -18,7 +18,6 @@ import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.kernel.pdf.xobject.PdfImageXObject;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.AreaBreak;
 import com.itextpdf.layout.element.Cell;
@@ -169,9 +168,11 @@ public class ReportServiceImpl implements ReportService {
 	private Table getCustomerIntable(Customer customer) {
 		// TODO Auto-generated method stub
 
-		Table customerDetails = new Table(UnitValue.createPercentArray(new float[]{1, 1, 2, 1, 2})).useAllAvailableWidth();
+		Table customerDetails = new Table(UnitValue.createPercentArray(new float[] { 1, 1, 2, 1, 2 }))
+				.useAllAvailableWidth();
 
-		customerDetails.addHeaderCell(new Cell(1, 9).add(new Paragraph("CUSTOMER DETAILS")) .setBackgroundColor(ColorConstants.LIGHT_GRAY) .setBold() .setTextAlignment(TextAlignment.CENTER));
+		customerDetails.addHeaderCell(new Cell(1, 9).add(new Paragraph("CUSTOMER DETAILS"))
+				.setBackgroundColor(ColorConstants.LIGHT_GRAY).setBold().setTextAlignment(TextAlignment.CENTER));
 
 		customerDetails.addCell(new Paragraph(String.valueOf(customer.getCustomerId())));
 		customerDetails.addCell(new Paragraph(customer.getName()));
@@ -244,23 +245,27 @@ public class ReportServiceImpl implements ReportService {
 		List<Repayment> paidRepayments = repayments.stream().sorted(Comparator.comparing(Repayment::getDueDate))
 				.toList();
 		int i = 0;
-		double accumulated=0;
-		if(paidRepayments.size()>0) {
-		for (Repayment r : paidRepayments) {
-			accumulated+=r.getAmountDue() + r.getInterestAmount();
-			paymentSchedule.addCell(new Cell().add(new Paragraph("" + (i + 1))));
-			paymentSchedule.addCell(new Cell().add(new Paragraph("" + String.format("%.2f", r.getPrincipalPaid()!=null? r.getPrincipalPaid():0))));
-			paymentSchedule.addCell(new Cell().add(new Paragraph("" + String.format("%.2f", (r.getInterestPaid()!=null?r.getInterestPaid():0)))));
-			paymentSchedule.addCell(new Cell()
-					.add(new Paragraph("" + String.format("%.2f",( r.getPrincipalPaid()!=null? r.getPrincipalPaid():0 )+ (r.getInterestPaid()!=null?r.getInterestPaid():0)))));
-			paymentSchedule.addCell(new Cell().add(new Paragraph("" + (r.getDueDate()!=null?r.getDueDate():"-"))));
-			paymentSchedule.addCell(new Cell().add(new Paragraph("" + (r.getPaymentDate()!=null?r.getPaymentDate():"-"))));
-			paymentSchedule.addCell(new Cell().add(new Paragraph("" + r.getFineAmount())));
-			paymentSchedule.addCell(new Cell()
-					.add(new Paragraph("" + String.format("%.2f", accumulated))));
-			paymentSchedule.addCell(new Cell().add(new Paragraph("" + r.getPaymentStatus())));
-			i++;
-		}
+		double accumulated = 0;
+		if (paidRepayments.size() > 0) {
+			for (Repayment r : paidRepayments) {
+				accumulated += r.getAmountDue() + r.getInterestAmount();
+				paymentSchedule.addCell(new Cell().add(new Paragraph("" + (i + 1))));
+				paymentSchedule.addCell(new Cell().add(new Paragraph(
+						"" + String.format("%.2f", r.getPrincipalPaid() != null ? r.getPrincipalPaid() : 0))));
+				paymentSchedule.addCell(new Cell().add(new Paragraph(
+						"" + String.format("%.2f", (r.getInterestPaid() != null ? r.getInterestPaid() : 0)))));
+				paymentSchedule.addCell(new Cell().add(new Paragraph(
+						"" + String.format("%.2f", (r.getPrincipalPaid() != null ? r.getPrincipalPaid() : 0)
+								+ (r.getInterestPaid() != null ? r.getInterestPaid() : 0)))));
+				paymentSchedule
+						.addCell(new Cell().add(new Paragraph("" + (r.getDueDate() != null ? r.getDueDate() : "-"))));
+				paymentSchedule.addCell(
+						new Cell().add(new Paragraph("" + (r.getPaymentDate() != null ? r.getPaymentDate() : "-"))));
+				paymentSchedule.addCell(new Cell().add(new Paragraph("" + r.getFineAmount())));
+				paymentSchedule.addCell(new Cell().add(new Paragraph("" + String.format("%.2f", accumulated))));
+				paymentSchedule.addCell(new Cell().add(new Paragraph("" + r.getPaymentStatus())));
+				i++;
+			}
 		}
 		return paymentSchedule;
 
@@ -281,69 +286,69 @@ public class ReportServiceImpl implements ReportService {
 																									// outstanding loans
 		return documentOutStandingLoanReport(loanApplications);
 	}
-	
+
 	@Override
 	public byte[] getPortfolio(Long id) {
-	
-		Customer customer=customerService.getCustomerDetailsById(id);
+
+		Customer customer = customerService.getCustomerDetailsById(id);
 		try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
 			PdfWriter writer = new PdfWriter(out);
 			PdfDocument pdf = new PdfDocument(writer);
 
 			Document document = new Document(pdf, PageSize.A4);
-			Paragraph title = new Paragraph("CUSTOMER PORTFOLIO").setBold().setFontSize(18).setTextAlignment(TextAlignment.CENTER).setMarginBottom(10);
+			Paragraph title = new Paragraph("CUSTOMER PORTFOLIO").setBold().setFontSize(18)
+					.setTextAlignment(TextAlignment.CENTER).setMarginBottom(10);
 			document.add(title);
 			if (customer.getProfileImage() != null) {
 				ImageData imageData = ImageDataFactory.create(customer.getProfileImage());
-			
-			
-			Image profileImage = new Image(imageData).scaleToFit(100, 100);
-			profileImage.setHorizontalAlignment(HorizontalAlignment.CENTER);
-			document.add(profileImage);
+
+				Image profileImage = new Image(imageData).scaleToFit(100, 100);
+				profileImage.setHorizontalAlignment(HorizontalAlignment.CENTER);
+				document.add(profileImage);
 			}
 
-		Table table = new Table(UnitValue.createPercentArray(new float[]{2, 5})).useAllAvailableWidth();
-		table.addCell(new Cell().add(new Paragraph("Customer ID").setBold()));
-		table.addCell(new Cell().add(new Paragraph(String.valueOf(customer.getCustomerId()))));
-		table.addCell(new Cell().add(new Paragraph("Name").setBold()));
-		table.addCell(new Cell().add(new Paragraph(customer.getName())));
-		table.addCell(new Cell().add(new Paragraph("Email").setBold()));
-		table.addCell(new Cell().add(new Paragraph(customer.getEmail())));
-		table.addCell(new Cell().add(new Paragraph("Phone").setBold()));
-		table.addCell(new Cell().add(new Paragraph(customer.getPhone())));
-		table.addCell(new Cell().add(new Paragraph("Address").setBold()));
-		table.addCell(new Cell().add(new Paragraph(customer.getAddress())));
-		
-		document.add(table);
-		document.add(new Paragraph("Loan History : ").setBold().setFontSize(16));
-		List<LoanApplication> loans=loanApplicationService.getLoanApplicationByCustomer(customer);
-		Table loanDetails=new Table(UnitValue.createPercentArray(new float[]{ 1, 2, 2, 3, 3, 2, 1, 2})).useAllAvailableWidth();
-		String[] headers = { "LOAN ID","LOAN TYPE","REQUESTED AMOUNT","APPLIED ON","APPROVED ON","INTEREST RATE","TENURE","BALANCE"};
-		for (String header : headers) {
-			loanDetails.addHeaderCell(new Cell().add(new Paragraph(header))
-					.setBackgroundColor(ColorConstants.LIGHT_GRAY).setBold().setTextAlignment(TextAlignment.CENTER));
-		}
-		
-	
-		for(LoanApplication loan:loans) {
-			loanDetails.addCell(new Cell().add(new Paragraph(String.valueOf(loan.getLoanApplicationId()))));
-			loanDetails.addCell(new Cell().add(new Paragraph(loan.getLoanProduct().getProductName())));
-			loanDetails.addCell(new Cell().add(new Paragraph(String.format("%.2f", loan.getRequestAmount()))));
-			loanDetails.addCell(new Cell().add(new Paragraph(String.valueOf(loan.getApplicationDate()))));
-			loanDetails.addCell(new Cell().add(new Paragraph(String.valueOf(loan.getApprovedDate()))));
-			loanDetails.addCell(new Cell().add(new Paragraph(String.format("%.2f%%", loan.getLoanProduct().getInterestRate()))));
-			loanDetails.addCell(new Cell().add(new Paragraph(String.valueOf(loan.getLoanProduct().getTenure()))));
-			loanDetails.addCell(new Cell().add(new Paragraph(String.format("%.2f", loan.getBalance()))));
-		}
+			Table table = new Table(UnitValue.createPercentArray(new float[] { 2, 5 })).useAllAvailableWidth();
+			table.addCell(new Cell().add(new Paragraph("Customer ID").setBold()));
+			table.addCell(new Cell().add(new Paragraph(String.valueOf(customer.getCustomerId()))));
+			table.addCell(new Cell().add(new Paragraph("Name").setBold()));
+			table.addCell(new Cell().add(new Paragraph(customer.getName())));
+			table.addCell(new Cell().add(new Paragraph("Email").setBold()));
+			table.addCell(new Cell().add(new Paragraph(customer.getEmail())));
+			table.addCell(new Cell().add(new Paragraph("Phone").setBold()));
+			table.addCell(new Cell().add(new Paragraph(customer.getPhone())));
+			table.addCell(new Cell().add(new Paragraph("Address").setBold()));
+			table.addCell(new Cell().add(new Paragraph(customer.getAddress())));
 
-		
-		document.add(loanDetails);
-		document.close();
-		return out.toByteArray();
-	} catch (Exception e) {
-		throw new RuntimeException("Error generating PDF report", e);
+			document.add(table);
+			document.add(new Paragraph("Loan History : ").setBold().setFontSize(16));
+			List<LoanApplication> loans = loanApplicationService.getLoanApplicationByCustomer(customer);
+			Table loanDetails = new Table(UnitValue.createPercentArray(new float[] { 1, 2, 2, 3, 3, 2, 1, 2 }))
+					.useAllAvailableWidth();
+			String[] headers = { "LOAN ID", "LOAN TYPE", "REQUESTED AMOUNT", "APPLIED ON", "APPROVED ON",
+					"INTEREST RATE", "TENURE", "BALANCE" };
+			for (String header : headers) {
+				loanDetails.addHeaderCell(
+						new Cell().add(new Paragraph(header)).setBackgroundColor(ColorConstants.LIGHT_GRAY).setBold()
+								.setTextAlignment(TextAlignment.CENTER));
+			}
+
+			for (LoanApplication loan : loans) {
+				loanDetails.addCell(new Cell().add(new Paragraph(String.valueOf(loan.getLoanApplicationId()))));
+				loanDetails.addCell(new Cell().add(new Paragraph(loan.getLoanProduct().getProductName())));
+				loanDetails.addCell(new Cell().add(new Paragraph(String.format("%.2f", loan.getRequestAmount()))));
+				loanDetails.addCell(new Cell().add(new Paragraph(String.valueOf(loan.getApplicationDate()))));
+				loanDetails.addCell(new Cell().add(new Paragraph(String.valueOf(loan.getApprovedDate()))));
+				loanDetails.addCell(new Cell()
+						.add(new Paragraph(String.format("%.2f%%", loan.getLoanProduct().getInterestRate()))));
+				loanDetails.addCell(new Cell().add(new Paragraph(String.valueOf(loan.getLoanProduct().getTenure()))));
+				loanDetails.addCell(new Cell().add(new Paragraph(String.format("%.2f", loan.getBalance()))));
+			}
+
+			document.add(loanDetails);
+			document.close();
+			return out.toByteArray();
+		} catch (Exception e) {
+			throw new RuntimeException("Error generating PDF report", e);
+		}
 	}
 }
-}
-
-

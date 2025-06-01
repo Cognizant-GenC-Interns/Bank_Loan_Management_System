@@ -1,14 +1,11 @@
 package com.cts.blms.service;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.cts.blms.model.Customer;
 import com.cts.blms.model.KycStatus;
@@ -22,21 +19,21 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerRepository repository;
 
 	private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	
+
 	@Override
-	public Customer addCustomer(@Valid Customer customer) {		// TODO Auto-generated method stub
+	public Customer addCustomer(@Valid Customer customer) { // TODO Auto-generated method stub
 		customer.setKycStatus(KycStatus.PENDING);
-		Random random=new Random();
-        int creditScore = random.nextInt(900 - 300 + 1) + 300;
+		Random random = new Random();
+		int creditScore = random.nextInt(900 - 300 + 1) + 300;
 
 		customer.setCreditScore(creditScore);
-		if(repository.findByEmail(customer.getEmail()) != null) {
+		if (repository.findByEmail(customer.getEmail()) != null) {
 			return customer;
 		}
 
 		String hashedPassword = passwordEncoder.encode(customer.getPassword());
 		customer.setPassword(hashedPassword);
-	 
+
 		return repository.save(customer);
 	}
 
@@ -47,8 +44,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer updateCustomerProfile(Customer customer) {
-		Customer originalCust=getCustomerDetailsById(customer.getCustomerId());
-		if(originalCust!=null) {
+		Customer originalCust = getCustomerDetailsById(customer.getCustomerId());
+		if (originalCust != null) {
 			originalCust.setEmail(customer.getEmail());
 			originalCust.setName(customer.getName());
 			originalCust.setPhone(customer.getPhone());
@@ -60,8 +57,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer validateCustomer(String email, String password) {
-		Customer customer=repository.findByEmail(email);
-		if(customer!=null && passwordEncoder.matches(password, customer.getPassword())) {
+		Customer customer = repository.findByEmail(email);
+		if (customer != null && passwordEncoder.matches(password, customer.getPassword())) {
 			return customer;
 		}
 		return null;
@@ -74,8 +71,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer updateKycStatus(long id) {
-		Customer customer=repository.findById(id).orElse(null);
-		System.out.println("Customer Status"+customer.getKycStatus());
+		Customer customer = repository.findById(id).orElse(null);
+		System.out.println("Customer Status" + customer.getKycStatus());
 		customer.setKycStatus(KycStatus.VERIFIED);
 		return repository.save(customer);
 	}
@@ -83,7 +80,8 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<Customer> getVerifiedCustomer() {
 		// TODO Auto-generated method stub
-		List<Customer> verifiedCust=repository.findAll().stream().filter(v->v.getKycStatus().equals(KycStatus.VERIFIED)).toList();
+		List<Customer> verifiedCust = repository.findAll().stream()
+				.filter(v -> v.getKycStatus().equals(KycStatus.VERIFIED)).toList();
 		System.out.println("Verified Customer :");
 		for (Customer customer : verifiedCust) {
 			System.out.println(customer.getCustomerId());
@@ -94,7 +92,8 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<Customer> getPendingCustomer() {
 		// TODO Auto-generated method stub
-		List<Customer> pendingCust=repository.findAll().stream().filter(v->v.getKycStatus().equals(KycStatus.PENDING)).toList();
+		List<Customer> pendingCust = repository.findAll().stream()
+				.filter(v -> v.getKycStatus().equals(KycStatus.PENDING)).toList();
 		System.out.println("Pending Customer :");
 		for (Customer customer : pendingCust) {
 			System.out.println(customer.getCustomerId());
@@ -102,5 +101,4 @@ public class CustomerServiceImpl implements CustomerService {
 		return pendingCust;
 	}
 
-	
 }

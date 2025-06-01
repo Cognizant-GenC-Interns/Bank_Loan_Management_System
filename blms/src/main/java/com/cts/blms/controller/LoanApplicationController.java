@@ -1,4 +1,5 @@
 package com.cts.blms.controller;
+
 import java.io.IOException;
 import java.net.URLConnection;
 import java.time.LocalDate;
@@ -28,67 +29,64 @@ import com.cts.blms.service.LoanApplicationService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
-
- 
 @Controller
 @RequestMapping("/loans")
 public class LoanApplicationController {
-	
+
 	@Autowired
 	private LoanApplicationService loanApplicationService1;
-	
+
 	@PostMapping("/approveLoan")
-	public String approveLoan(@RequestParam("loanId") Long id,@RequestParam("approvedDate") LocalDate approveDate) {
-		loanApplicationService1.approveLoan(id,approveDate);
-		return "redirect:/loans/appliedLoans";// 
-//		return "/createRepayment";
-		
+	public String approveLoan(@RequestParam("loanId") Long id, @RequestParam("approvedDate") LocalDate approveDate) {
+		loanApplicationService1.approveLoan(id, approveDate);
+		return "redirect:/loans/appliedLoans";//
+
 	}
-	
+
 	@PostMapping("/rejectLoan")
 	public String rejectLoan(@RequestParam("loanId") Long id) {
 		loanApplicationService1.rejectLoan(id);
 		return "redirect:/loans/appliedLoans";
-		
+
 	}
-	
+
 	@GetMapping("/assetImage/{id}")
 	public ResponseEntity<byte[]> getSalarySlipImage(@PathVariable Long id) {
-		LoanApplication loanApplication= loanApplicationService1.getLoanApplicationById(id);
+		LoanApplication loanApplication = loanApplicationService1.getLoanApplicationById(id);
 
-	    if (loanApplication == null || loanApplication.getAssetImage() == null) {
-	        return ResponseEntity.notFound().build();
-	    }
+		if (loanApplication == null || loanApplication.getAssetImage() == null) {
+			return ResponseEntity.notFound().build();
+		}
 
-	    // Guess MIME type from file name
-	    String mimeType = URLConnection.guessContentTypeFromName(loanApplication.getAssetName());
-	    if (mimeType == null) {
-	        mimeType = "application/octet-stream"; // Fallback if unknown
-	    }
+		// Guess MIME type from file name
+		String mimeType = URLConnection.guessContentTypeFromName(loanApplication.getAssetName());
+		if (mimeType == null) {
+			mimeType = "application/octet-stream"; // Fallback if unknown
+		}
 
-	    return ResponseEntity.ok()
-	            .contentType(MediaType.parseMediaType(mimeType))
-	            .body(loanApplication.getAssetImage());
+		return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType))
+				.body(loanApplication.getAssetImage());
 	}
-	
-	
+
 	@PostMapping("/saveAppliedLoan")
-	public String loanApply(@Valid @ModelAttribute("loanApplication") LoanApplication loanApplication,@RequestParam("assetFile") MultipartFile assetImage,HttpSession session,BindingResult result,Model model) throws IOException {
-		if(result.hasErrors()) {
+	public String loanApply(@Valid @ModelAttribute("loanApplication") LoanApplication loanApplication,
+			@RequestParam("assetFile") MultipartFile assetImage, HttpSession session, BindingResult result, Model model)
+			throws IOException {
+		if (result.hasErrors()) {
 			return "LoanApplicationForm";
 		}
-		Customer customer=(Customer) session.getAttribute("loggedCustomer");
-		LoanProduct loanProduct=(LoanProduct) session.getAttribute("selectedLoanProduct");
-		
+		Customer customer = (Customer) session.getAttribute("loggedCustomer");
+		LoanProduct loanProduct = (LoanProduct) session.getAttribute("selectedLoanProduct");
+
 		if (!assetImage.isEmpty()) {
 			loanApplication.setAssetImage(assetImage.getBytes());
 			loanApplication.setAssetName(assetImage.getOriginalFilename());
-			}
-		loanApplication=loanApplicationService1.getEligibility(customer,loanProduct,loanApplication);
-		
+		}
+		loanApplication = loanApplicationService1.getEligibility(customer, loanProduct, loanApplication);
+
 		loanApplicationService1.addLoanApplication(loanApplication);
-		model.addAttribute("loanApplication",loanApplication);
-		
+		model.addAttribute("loanApplication", loanApplication);
+
 		return "redirect:/user/userDashboard";
 	}
 //	
@@ -101,30 +99,30 @@ public class LoanApplicationController {
 //        return "userDashboard";
 //        
 //    }
-	
+
 	@PostMapping("/deleteLoan/{loanApplicationId}")
 	public String deleteLoan(@PathVariable long loanApplicationId, RedirectAttributes redirectAttributes) {
 		loanApplicationService1.deleteLoan(loanApplicationId);
 		return "redirect:/user/userDashboard";
 	}
-	
 
-	
 	@GetMapping("/appliedLoans")
-    public String getLoanProductsDetails(Model model,HttpSession session) {
-        List<LoanApplication> appliedLoans=loanApplicationService1.getAllLoanapplicationDetails();
-        List<LoanApplication> requestPendingLoans=null,approvedLoans=null;
-        if(!appliedLoans.isEmpty()) {
-			requestPendingLoans = appliedLoans.stream().filter(a->a.getLoanApplicationStatus()==LoanApplicationStatus.PENDING).toList();
-			approvedLoans=appliedLoans.stream().filter(a->a.getLoanApplicationStatus()==LoanApplicationStatus.APPROVED).toList();
-			
+	public String getLoanProductsDetails(Model model, HttpSession session) {
+		List<LoanApplication> appliedLoans = loanApplicationService1.getAllLoanapplicationDetails();
+		List<LoanApplication> requestPendingLoans = null, approvedLoans = null;
+		if (!appliedLoans.isEmpty()) {
+			requestPendingLoans = appliedLoans.stream()
+					.filter(a -> a.getLoanApplicationStatus() == LoanApplicationStatus.PENDING).toList();
+			approvedLoans = appliedLoans.stream()
+					.filter(a -> a.getLoanApplicationStatus() == LoanApplicationStatus.APPROVED).toList();
+
 		}
-       
-        model.addAttribute("requestPendingLoans",requestPendingLoans);
-        model.addAttribute("approvedLoans", approvedLoans);
-        
-        return "adminLoanHandler";// return "//";
-        
-    }
+
+		model.addAttribute("requestPendingLoans", requestPendingLoans);
+		model.addAttribute("approvedLoans", approvedLoans);
+
+		return "adminLoanHandler";// return "//";
+
+	}
 
 }

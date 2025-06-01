@@ -1,7 +1,5 @@
 package com.cts.blms.service;
 
-
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,8 +9,6 @@ import com.cts.blms.model.LoanProduct;
 
 import jakarta.validation.Valid;
 
- 
- 
 public interface LoanApplicationService {
 
 	LoanApplication addLoanApplication(@Valid LoanApplication loanApplication);
@@ -23,7 +19,7 @@ public interface LoanApplicationService {
 
 	void deleteLoan(long id);
 
-	LoanApplication getEligibility(Customer customer, LoanProduct loanProduct,LoanApplication loanApplication);
+	LoanApplication getEligibility(Customer customer, LoanProduct loanProduct, LoanApplication loanApplication);
 
 	LoanApplication approveLoan(Long id, LocalDate approveDate);
 
@@ -35,4 +31,3 @@ public interface LoanApplicationService {
 
 	List<LoanApplication> getCustomerOutstandingLoans(Customer customer);
 }
-
