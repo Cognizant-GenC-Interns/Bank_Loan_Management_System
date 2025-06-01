@@ -244,8 +244,10 @@ public class ReportServiceImpl implements ReportService {
 		List<Repayment> paidRepayments = repayments.stream().sorted(Comparator.comparing(Repayment::getDueDate))
 				.toList();
 		int i = 0;
+		double accumulated=0;
 		if(paidRepayments.size()>0) {
 		for (Repayment r : paidRepayments) {
+			accumulated+=r.getAmountDue() + r.getInterestAmount();
 			paymentSchedule.addCell(new Cell().add(new Paragraph("" + (i + 1))));
 			paymentSchedule.addCell(new Cell().add(new Paragraph("" + String.format("%.2f", r.getPrincipalPaid()!=null? r.getPrincipalPaid():0))));
 			paymentSchedule.addCell(new Cell().add(new Paragraph("" + String.format("%.2f", (r.getInterestPaid()!=null?r.getInterestPaid():0)))));
@@ -255,7 +257,7 @@ public class ReportServiceImpl implements ReportService {
 			paymentSchedule.addCell(new Cell().add(new Paragraph("" + (r.getPaymentDate()!=null?r.getPaymentDate():"-"))));
 			paymentSchedule.addCell(new Cell().add(new Paragraph("" + r.getFineAmount())));
 			paymentSchedule.addCell(new Cell()
-					.add(new Paragraph("" + String.format("%.2f", r.getAmountDue() + r.getInterestAmount()))));
+					.add(new Paragraph("" + String.format("%.2f", accumulated))));
 			paymentSchedule.addCell(new Cell().add(new Paragraph("" + r.getPaymentStatus())));
 			i++;
 		}

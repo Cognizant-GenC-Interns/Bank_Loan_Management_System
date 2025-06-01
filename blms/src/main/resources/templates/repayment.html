@@ -93,6 +93,7 @@
         <th>Interest Paid</th>
         <th>Principal Paid</th>
         <th>Total Amount Paid</th>
+        <th>Fine Amount</th>
       </tr>
     </thead>
     <tbody>
@@ -102,6 +103,7 @@
         <td th:text="${repayment.interestPaid}"></td>
         <td th:text="${repayment.principalPaid}"></td>
         <td th:text="${repayment.principalPaid + repayment.interestPaid}"></td>
+        <td th:text="${repayment.fineAmount}"></td>
       </tr>
     </tbody>
   </table>
@@ -128,6 +130,8 @@
                        th:attr="data-due-date=${repayment.dueDate}"
                       th:attrappend="data-repayment-id=${repayment.repaymentId}"
                        required>
+                       <div id="fine-info-[[${repayment.repaymentId}]]" class="text-danger mt-2"></div>
+                       
               </div>
             </div>
             <div class="modal-footer">
@@ -151,6 +155,35 @@ document.addEventListener("DOMContentLoaded", function () {
         input.min = today;
     });
 });
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".paymentDate").forEach(input => {
+        input.addEventListener("change", function () {
+            const paymentDate = new Date(this.value);
+            const dueDate = new Date(this.getAttribute("data-due-date"));
+            const repaymentId = this.getAttribute("data-repayment-id");
+
+            const fineContainerId = `fine-info-${repaymentId}`;
+            let fineContainer = document.getElementById(fineContainerId);
+
+            if (!fineContainer) {
+                fineContainer = document.createElement("div");
+                fineContainer.id = fineContainerId;
+                fineContainer.className = "text-danger mt-2";
+                this.closest(".modal-body").appendChild(fineContainer);
+            }
+
+            if (paymentDate > dueDate) {
+                const diffTime = paymentDate - dueDate;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                const fineAmount = diffDays * 10;
+                fineContainer.textContent = `⚠️ Payment is late by ${diffDays} day(s). Fine: ₹${fineAmount}`;
+            } else {
+                fineContainer.textContent = "";
+            }
+        });
+    });
+});
+
 </script>
 
 </body>
