@@ -80,15 +80,15 @@ public class RepaymentController {
 	@GetMapping("/paymentSchedule/{loanApplicationId}")
 	public String getPaymentSchedule(@PathVariable Long loanApplicationId,Model model) {
 
-List<Repayment> repaymentDetails = repaymentService.getRepayementByLoanApplicationBy(loanApplicationId).stream().sorted(Comparator.comparing(Repayment::getDueDate)).toList();
-Map<String,Object> repay=new HashMap<>();
+		List<Repayment> repaymentDetails = repaymentService.getRepayementByLoanApplicationById(loanApplicationId).stream().sorted(Comparator.comparing(Repayment::getDueDate)).toList();
+		Map<String,Object> repay=new HashMap<>();
 		repay.put("loanApplication", loanApplicationService.getLoanApplicationById(loanApplicationId));
 		for (Repayment repayment : repaymentDetails) {
 			System.out.println(repayment.getInterestPaid());
 			System.out.println(repayment.getPaymentStatus());
 		}
 		repay.put("UpcomingDue", repaymentDetails.stream().filter(v-> v.getPaymentStatus().equals(PaymentStatus.PENDING)).toList());
-		repay.put("CompletedDues",repaymentDetails.stream().filter(v-> v.getPaymentStatus().equals(PaymentStatus.COMPLETED)).toList());
+		repay.put("CompletedDues",repaymentDetails.stream().filter(v-> v.getPaymentStatus().equals(PaymentStatus.COMPLETED)).sorted(Comparator.comparing(Repayment::getDueDate)).toList());
 		model.addAllAttributes(repay);
 		return "repayment";
 //		try {

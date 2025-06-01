@@ -30,5 +30,9 @@ public interface LoanApplicationService {
 	LoanApplication rejectLoan(Long id);
 
 	LoanApplication getLoanApplicationById(Long id);
+
+	List<LoanApplication> getAllOutstandingLoans();
+
+	List<LoanApplication> getCustomerOutstandingLoans(Customer customer);
 }
 

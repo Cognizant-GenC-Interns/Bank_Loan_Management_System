@@ -19,10 +19,10 @@ public class LoanProduct {
     private Double interestRate;
 
     @Column(nullable = false)
-    private Double minAmount;
+    private Long minAmount;
 
     @Column(nullable = false)
-    private Double maxAmount;
+    private Long maxAmount;
 
     @Column(nullable = false)
     private Integer tenure;

@@ -50,6 +50,9 @@
                 <span class="ms-2">Big Bank</span>
             </a>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            	<a th:href="@{/report/getAllOutsatndingLoans}" class="btn btn-outline-primary" download>
+        	📥 All Outstanding loan Reports
+    	</a> 
                 <a th:href="@{/logout}" class="text-blue" title="Log Out">
                     <img th:src="@{/images/logout.png}" width="40" height="40" alt="User" class="rounded-circle">
                 </a>
@@ -72,7 +75,7 @@
 
            <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col" th:each="loan : ${requestPendingLoans}">
-                <div class="card h-100 border-warning shadow-sm">
+                <div class="card h-100 border-warning shadow-sm" th:attr="data-applied-date=${loan.applicationDate}">
                    <div class="card-header bg-warning text-dark fw-bold d-flex justify-content-between">
    					 <p class="mb-0">Loan ID: <span th:text="${loan.loanApplicationId}"></span></p>
     				 <p class="mb-0">Applied on: <span th:text="${loan.applicationDate}"></span></p>
@@ -102,7 +105,7 @@
             <input type="hidden" name="loanId" th:value="${loan.loanApplicationId}" />
             <div class="row g-2">
                 <div class="col-md-8">
-                    <input type="date" name="approvedDate" class="form-control approved-date" required />
+                    <input type="date" name="approvedDate" class="form-control approved-date"  required />
                 </div>
                 <div class="col-md-4">
                     <button type="submit" class="btn btn-outline-success w-100">✅</button>
@@ -156,6 +159,7 @@
                                 <th>Phone</th>
                                 <th>Applied Date</th>
                                 <th>Approved Date</th>
+                                <th>Loan Report</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -167,7 +171,7 @@
                                 <td th:text="${loan.customer.phone}"></td>
                                 <td><span th:text="${loan.applicationDate}"></span></td>
                                 <td><span th:text="${loan.approvedDate}"></span></td>
-                                
+                                <td><a class="btn btn-info" type="button" th:href="@{/report/loanReport/{Id}(Id=${loan.loanApplicationId})}">Loan Report</a></td>
                                 
                             </tr>
                         </tbody>
@@ -179,14 +183,32 @@
 </div>
 
 </body><script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const today = new Date().toISOString().split('T')[0];
-        document.querySelectorAll(".approved-date").forEach(input => {
-            input.value = today;
-            input.min = today;
+document.addEventListener("DOMContentLoaded", function () {
+    const today = new Date().toISOString().split('T')[0];
+    document.querySelectorAll(".approved-date").forEach(input => {
+        input.value = today;
+        input.min = today;
+    });
+
+    document.querySelectorAll("form").forEach(form => {
+        form.addEventListener("submit", function (e) {
+            const approvedDateInput = form.querySelector(".approved-date");
+            const approvedDate = new Date(approvedDateInput.value);
+
+            // Get the applied date from the closest card
+            const card = form.closest(".card");
+            const appliedDateStr = card.getAttribute("data-applied-date") || card.querySelector(".applied-date")?.textContent;
+            const appliedDate = new Date(appliedDateStr);
+
+            if (approvedDate <= appliedDate) {
+                e.preventDefault();
+                alert("Approved date must be greater than the applied date.");
+            }
         });
     });
+});
 </script>
+
 
 
 </html>

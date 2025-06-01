@@ -234,7 +234,7 @@ public class RepaymentServiceImpl implements RepaymentService{
 
 
 	@Override
-	public List<Repayment> getRepayementByLoanApplicationBy(Long loanApplicationId) {
+	public List<Repayment> getRepayementByLoanApplicationById(Long loanApplicationId) {
 		LoanApplication loanApplication=loanApplicationRepository.findById(loanApplicationId).get();
 		
 		

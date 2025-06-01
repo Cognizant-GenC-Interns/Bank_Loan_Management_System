@@ -220,6 +220,8 @@ header {
                     th:attr="data-bs-target='#verifiedModal__' + ${viterStat.index}">
                 View Details
             </button>
+          <a class="btn btn-primary" type="button" th:href="@{/report/getCustomerOutstandingLoan/{Id}(Id=${vcust.customerId})}" download>View Outstanding Loans</a>
+	 
         </div>
     
 

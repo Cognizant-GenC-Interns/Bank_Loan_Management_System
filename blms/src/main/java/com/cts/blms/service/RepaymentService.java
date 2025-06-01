@@ -13,7 +13,7 @@ public interface RepaymentService {
 	public void makePayment(Long repaymentId, double amountPaid, LocalDate paymentDate);
 	public String getOutstandingBalance(LoanApplication loanApplication);
 	public void createRepayment(Repayment repayment);
-	public List<Repayment> getRepayementByLoanApplicationBy(Long loanApplicationId);
+	public List<Repayment> getRepayementByLoanApplicationById(Long loanApplicationId);
 
 }
 

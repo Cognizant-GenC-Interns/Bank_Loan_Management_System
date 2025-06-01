@@ -26,7 +26,9 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer addCustomer(@Valid Customer customer) {		// TODO Auto-generated method stub
 		customer.setKycStatus(KycStatus.PENDING);
-		int creditScore = new Random().nextInt(901);
+		Random random=new Random();
+        int creditScore = random.nextInt(900 - 300 + 1) + 300;
+
 		customer.setCreditScore(creditScore);
 		if(repository.findByEmail(customer.getEmail()) != null) {
 			return customer;
@@ -45,7 +47,15 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer updateCustomerProfile(Customer customer) {
-		return repository.save(customer);
+		Customer originalCust=getCustomerDetailsById(customer.getCustomerId());
+		if(originalCust!=null) {
+			originalCust.setEmail(customer.getEmail());
+			originalCust.setName(customer.getName());
+			originalCust.setPhone(customer.getPhone());
+			originalCust.setAnnualSalary(customer.getAnnualSalary());
+			originalCust.setAddress(customer.getAddress());
+		}
+		return repository.save(originalCust);
 	}
 
 	@Override

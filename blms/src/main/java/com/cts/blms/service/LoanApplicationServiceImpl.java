@@ -217,4 +217,17 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 		
 		return approvedLoan;
 	}
+
+	@Override
+	public List<LoanApplication> getAllOutstandingLoans() {
+		// TODO Auto-generated method stub
+		return repository.getOutstandingLoans();
+		
+	}
+
+	@Override
+	public List<LoanApplication> getCustomerOutstandingLoans(Customer customer) {
+		// TODO Auto-generated method stub
+		return repository.getOutstandingLoansByCustomer(customer);
+	}
 }
