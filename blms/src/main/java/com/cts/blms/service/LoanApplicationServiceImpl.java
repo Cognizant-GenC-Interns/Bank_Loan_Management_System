@@ -196,6 +196,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 		loanApplication.setLoanApplicationStatus(LoanApplicationStatus.APPROVED);
 		loanApplication.setApprovedDate(approveDate);
 		loanApplication.setBalance(loanApplication.getRequestAmount());
+		loanApplication.setMonthsRemaining(loanApplication.getLoanProduct().getTenure());
 		
 		// Save the updated loan application status first to ensure consistency
 		LoanApplication approvedLoan = repository.save(loanApplication);

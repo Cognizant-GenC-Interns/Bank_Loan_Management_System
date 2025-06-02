@@ -3,5 +3,7 @@ package com.cts.blms.model;
 public enum LoanApplicationStatus {
 	PENDING,
 	APPROVED,
-	REJECTED
+	REJECTED,
+	SETTLED,
+	NOT_SETTLED
 }

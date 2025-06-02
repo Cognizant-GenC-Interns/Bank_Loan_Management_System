@@ -34,6 +34,9 @@ public class LoanApplication {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate applicationDate;
 	
+	@Column(name="months remaining")
+	private Integer monthsRemaining;
+	
 	
 	@Column(name="approved_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -62,6 +65,7 @@ public class LoanApplication {
 	
 	@Column(name="Emi_amount")
 	private double emiAmount;
+	
 	
 	@Column(name="Balance")
 	private double balance;

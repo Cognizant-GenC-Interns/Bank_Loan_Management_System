@@ -1,7 +1,6 @@
 package com.cts.blms.service;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 
 import java.util.Date;
@@ -54,6 +53,8 @@ public class RepaymentServiceImpl implements RepaymentService{
 	@Override
 	@Transactional
 	public void makePayment(Long repaymentId, double amountPaid, LocalDate paymentDate) {
+		
+		
 	    Repayment repayment = repaymentRepository.findById(repaymentId)
 	        .orElseThrow(() -> new RuntimeException("Repayment not found with ID: " + repaymentId));
 
@@ -62,10 +63,20 @@ public class RepaymentServiceImpl implements RepaymentService{
 	    double principalPaid=0.0;
 
 	    LoanApplication loan = repayment.getLoanApplication();
-
+	    
+	  
 	    if (loan.getLoanProduct() == null || loan.getLoanProduct().getTenure() == null || loan.getLoanProduct().getTenure() <= 0) {
 	        throw new RuntimeException("Invalid loan product or tenure for loan ID: " + loan.getLoanApplicationId());
 	    }
+	    
+	    if(loan.getMonthsRemaining()>0)
+		    loan.setMonthsRemaining(loan.getMonthsRemaining()-1);
+		    
+		    else
+		    {
+		    	System.out.println("Asset seized...");
+		    	return;
+		    }
 
 	    double minPrincipal = repayment.getAmountDue();
 	    double minInterest = repayment.getInterestAmount();
@@ -120,8 +131,7 @@ public class RepaymentServiceImpl implements RepaymentService{
 	    	else
 	    	{
 	    		principalPaid = amountPaid; 
-	    		loan.setBalance(loan.getBalance() - principalPaid); 
-	    		needToPay += (minPrincipal - amountPaid); 
+	    		loan.setBalance(loan.getBalance() - principalPaid);  
 	    		amountPaid = 0.0; 
 	    	}
 	    }
@@ -226,10 +236,10 @@ public class RepaymentServiceImpl implements RepaymentService{
 	    {
 	        return 0.0;
 	    }  
-	    double balance = loanApplication.getBalance(); 
+	    double principal=loanApplication.getRequestAmount(); 
 	    int tenure = loanApplication.getLoanProduct().getTenure();
 	    double interestRate = loanApplication.getLoanProduct().getInterestRate();
-	    return (balance * interestRate) / 100.0;
+	    return (principal * interestRate/100) / tenure;
 	}
 
 
