@@ -124,6 +124,8 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 		loanApplication.setApprovedDate(approveDate);
 		loanApplication.setBalance(loanApplication.getRequestAmount());
 
+		loanApplication.setMonthsRemaining(loanApplication.getLoanProduct().getTenure());
+		
 		// Save the updated loan application status first to ensure consistency
 		LoanApplication approvedLoan = repository.save(loanApplication);
 
@@ -132,7 +134,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 		repayment.setAmountDue(loanApplication.getRequestAmount() / loanApplication.getLoanProduct().getTenure());
 		LocalDate applicationDate = loanApplication.getApplicationDate();
 		LocalDate approvedDate = loanApplication.getApprovedDate();
-
+		System.out.println("approveLoan - Requested Amount : "+loanApplication.getRequestAmount());
 		if (applicationDate.isAfter(approvedDate) || applicationDate.equals(approvedDate)) {
 			repayment.setDueDate(applicationDate);
 		}

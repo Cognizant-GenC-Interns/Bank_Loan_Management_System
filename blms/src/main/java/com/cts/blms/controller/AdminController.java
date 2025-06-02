@@ -79,34 +79,32 @@ public class AdminController {
 	public ResponseEntity<byte[]> getPanCardImage(@PathVariable Long id) {
 		Customer customer = customerService.getCustomerDetailsById(id);
 
-		if (customer == null || customer.getPanImage() == null) {
-			return ResponseEntity.notFound().build();
-		}
+		if (customer != null && customer.getPanImage() != null) {
+			String mimeType = URLConnection.guessContentTypeFromName(customer.getPanImageName());
+			if (mimeType == null) {
+				mimeType = "application/octet-stream"; // Fallback if unknown
+			}
 
-		// Guess MIME type from file name
-		String mimeType = URLConnection.guessContentTypeFromName(customer.getPanImageName());
-		if (mimeType == null) {
-			mimeType = "application/octet-stream"; // Fallback if unknown
+			return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType)).body(customer.getPanImage());
 		}
+		return ResponseEntity.notFound().build();
 
-		return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType)).body(customer.getPanImage());
 	}
 
 	@GetMapping("/images/salary/{id}")
 	public ResponseEntity<byte[]> getSalarySlipImage(@PathVariable Long id) {
 		Customer customer = customerService.getCustomerDetailsById(id);
 
-		if (customer == null || customer.getSalarySlipImage() == null) {
-			return ResponseEntity.notFound().build();
-		}
+		if (customer != null && customer.getSalarySlipImage() != null) {
+			String mimeType = URLConnection.guessContentTypeFromName(customer.getSalarySlipImageName());
+			if (mimeType == null) {
+				mimeType = "application/octet-stream"; // Fallback if unknown
+			}
 
-		// Guess MIME type from file name
-		String mimeType = URLConnection.guessContentTypeFromName(customer.getSalarySlipImageName());
-		if (mimeType == null) {
-			mimeType = "application/octet-stream"; // Fallback if unknown
+			return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType))
+					.body(customer.getSalarySlipImage());
 		}
-
-		return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType)).body(customer.getSalarySlipImage());
+		return ResponseEntity.notFound().build();
 	}
 
 }

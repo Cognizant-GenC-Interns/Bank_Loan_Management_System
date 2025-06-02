@@ -111,17 +111,17 @@ public class CustomerController {
 	public ResponseEntity<byte[]> getSalarySlipImage(@PathVariable Long id) {
 		Customer customer = customerService.getCustomerDetailsById(id);
 
-		if (customer == null || customer.getProfileImage() == null) {
-			return ResponseEntity.notFound().build();
-		}
+		if (customer != null && customer.getProfileImage() != null) {
 
-		// Guess MIME type from file name
-		String mimeType = URLConnection.guessContentTypeFromName(customer.getProfileImageName());
-		if (mimeType == null) {
-			mimeType = "application/octet-stream"; // Fallback if unknown
-		}
+			// Guess MIME type from file name
+			String mimeType = URLConnection.guessContentTypeFromName(customer.getProfileImageName());
+			if (mimeType == null) {
+				mimeType = "application/octet-stream"; // Fallback if unknown
+			}
 
-		return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType)).body(customer.getProfileImage());
+			return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType)).body(customer.getProfileImage());
+		}
+		return ResponseEntity.notFound().build();
 	}
 
 	@GetMapping("/customerDetailsById")

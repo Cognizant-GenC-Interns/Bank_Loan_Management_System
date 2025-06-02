@@ -19,4 +19,6 @@ public interface RepaymentService {
 
 	public List<Repayment> getRepayementByLoanApplicationById(Long loanApplicationId);
 
+	public Repayment getRepayment(Long repaymentId);
+
 }

@@ -38,7 +38,8 @@ public class RepaymentController {
 	public String makePayment(@PathVariable Long repaymentId, @RequestParam double amountPaid,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate paymentDate) {
 		repaymentService.makePayment(repaymentId, amountPaid, paymentDate);
-		return "redirect:/user/userDashboard";
+		Repayment repayment=repaymentService.getRepayment(repaymentId);
+		return "redirect:/repayments/paymentSchedule/"+repayment.getLoanApplication().getLoanApplicationId();
 
 //		try {
 //			
@@ -53,13 +54,8 @@ public class RepaymentController {
 	@GetMapping("/outstandingBalance/{loanApplicationId}")
 	public ResponseEntity<String> getOutstandingBalance(@PathVariable Long loanApplicationId) {
 		try {
-			LoanApplication loanApplication = loanApplicationService.getLoanApplicationById(loanApplicationId); // Assuming
-																												// a
-																												// method
-																												// exists
-																												// in
-																												// LoanApplicationService
-			if (loanApplication == null) {
+			LoanApplication loanApplication = loanApplicationService.getLoanApplicationById(loanApplicationId); 
+			if (loanApplication != null) {
 				return new ResponseEntity<>("Loan Application not found with ID: " + loanApplicationId,
 						HttpStatus.NOT_FOUND);
 			}

@@ -54,18 +54,18 @@ public class LoanApplicationController {
 	public ResponseEntity<byte[]> getSalarySlipImage(@PathVariable Long id) {
 		LoanApplication loanApplication = loanApplicationService1.getLoanApplicationById(id);
 
-		if (loanApplication == null || loanApplication.getAssetImage() == null) {
-			return ResponseEntity.notFound().build();
-		}
+		if (loanApplication != null && loanApplication.getAssetImage() != null) {
 
-		// Guess MIME type from file name
-		String mimeType = URLConnection.guessContentTypeFromName(loanApplication.getAssetName());
-		if (mimeType == null) {
-			mimeType = "application/octet-stream"; // Fallback if unknown
-		}
+			// Guess MIME type from file name
+			String mimeType = URLConnection.guessContentTypeFromName(loanApplication.getAssetName());
+			if (mimeType == null) {
+				mimeType = "application/octet-stream"; // Fallback if unknown
+			}
 
-		return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType))
-				.body(loanApplication.getAssetImage());
+			return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType))
+					.body(loanApplication.getAssetImage());
+		}
+		return ResponseEntity.notFound().build();
 	}
 
 	@PostMapping("/saveAppliedLoan")

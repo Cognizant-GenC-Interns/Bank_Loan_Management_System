@@ -33,7 +33,12 @@ public class LoanApplication {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate applicationDate;
 
-	@Column(name = "approved_date")
+	
+	@Column(name="months remaining")
+	private Integer monthsRemaining;
+	
+	
+	@Column(name="approved_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate approvedDate;
 
@@ -61,10 +66,12 @@ public class LoanApplication {
 	@Column(name = "Emi_amount")
 	private double emiAmount;
 
-	@Column(name = "Balance")
+	
+	
+	@Column(name="Balance")
 	private double balance;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "loan_application_staus")
+	@Column(name = "loan_application_status")
 	private LoanApplicationStatus loanApplicationStatus;
 }
