@@ -3,93 +3,523 @@
 <head>
     <meta charset="UTF-8">
     <title>Asset Request Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --accent-blue: #60a5fa;
+            --light-blue: #dbeafe;
+            --navy-blue: #1e3a8a;
+            --sky-blue: #0ea5e9;
+            --dark-blue: #1e293b;
+            --gradient-primary: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+            --gradient-secondary: linear-gradient(135deg, #3b82f6 0%, #60a5fa 50%, #93c5fd 100%);
+            --gradient-accent: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+            --gradient-light: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            --gradient-navy: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--gradient-light);
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
         }
+
+        /* Background decoration */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 20%, rgba(30, 64, 175, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            animation: backgroundFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-30px, -30px) rotate(1deg); }
+            66% { transform: translate(30px, 30px) rotate(-1deg); }
+        }
+
         .form-container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 300px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 50px;
+            border-radius: 24px;
+            box-shadow: 
+                0 25px 50px rgba(30, 64, 175, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.3);
+            width: 100%;
+            max-width: 480px;
+            position: relative;
+            overflow: hidden;
+            animation: slideInUp 0.8s ease-out;
         }
-        .form-container h2 {
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--gradient-primary);
+            border-radius: 24px 24px 0 0;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
+            position: relative;
         }
+
+        .form-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.2);
+        }
+
+        .form-icon i {
+            font-size: 32px;
+            color: white;
+        }
+
+        .form-container h2 {
+            color: var(--navy-blue);
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .form-subtitle {
+            color: #64748b;
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 0;
+        }
+
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 25px;
+            position: relative;
         }
-        label {
+
+        .form-group label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-blue);
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
+
+        .form-group label i {
+            color: var(--secondary-blue);
+            font-size: 16px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
         input[type="text"],
         input[type="number"],
+        input[type="date"],
         input[type="file"] {
             width: 100%;
-            padding: 8px;
-            font-size: 14px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
+            padding: 16px 20px;
             font-size: 16px;
-            background-color: #007bff;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            background: #ffffff;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            color: var(--dark-blue);
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.1);
+            background: #ffffff;
+        }
+
+        input[type="file"] {
+            padding: 14px 20px;
+            cursor: pointer;
+            background: #f8fafc;
+            border-style: dashed;
+        }
+
+        input[type="file"]:hover {
+            background: #f1f5f9;
+            border-color: var(--accent-blue);
+        }
+
+        .file-upload-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .file-upload-text {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #64748b;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .amount-info {
+            background: var(--light-blue);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 13px;
+            color: var(--navy-blue);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .amount-info i {
+            color: var(--secondary-blue);
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: 600;
+            background: var(--gradient-primary);
             color: white;
             border: none;
+            border-radius: 12px;
             cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-top: 10px;
+            letter-spacing: 0.5px;
         }
-        button:hover {
-            background-color: #0056b3;
+
+        .submit-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .submit-button:hover::before {
+            left: 100%;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(30, 64, 175, 0.3);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        /* Input animations */
+        .form-group {
+            animation: fadeInLeft 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.3s; }
+        .form-group:nth-child(4) { animation-delay: 0.4s; }
+        .submit-button { animation-delay: 0.5s; }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .form-container {
+                padding: 35px 25px;
+            }
+            
+            .form-container h2 {
+                font-size: 24px;
+            }
+            
+            .form-icon {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .form-icon i {
+                font-size: 24px;
+            }
+        }
+
+        /* Loading state */
+        .submit-button.loading {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .submit-button.loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Enhanced focus states */
+        .input-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .input-wrapper:focus-within::after {
+            width: 100%;
+        }
+
+        /* Success animation preparation */
+        .form-container.success {
+            animation: pulse 0.6s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
 <body>
 <div class="form-container">
-    <h2>Asset Request Form</h2>
+    <div class="form-header">
+        <div class="form-icon">
+            <i class="bi bi-building"></i>
+        </div>
+        <h2>Asset Request Form</h2>
+        <p class="form-subtitle">Complete your loan application with asset details</p>
+    </div>
+    
     <form th:action="@{/loans/saveAppliedLoan}" method="post" enctype="multipart/form-data" th:object="${loanApplication}">
         <div class="form-group">
-            <label for="requestedAmount">Requested Amount</label>
-            
-			<input type="number" id="requestedAmount" name="requestedAmount" th:field="*{requestAmount}"
-				th:attr="min=${session.selectedLoanProduct.minAmount}, max=${session.selectedLoanProduct.maxAmount}"
-				required />
-				<small class="text-muted">Amount must be between ₹<span th:text="${session.selectedLoanProduct.minAmount}"></span> and ₹<span th:text="${session.selectedLoanProduct.maxAmount}"></span></small>
-				
-</div>
-        <div class="form-group">
-            <label for="Date">Date</label>
-            <input type="Date" id="applicationDate" class="applicationDate" name="applicationDate" th:field="*{applicationDate}" required />
+            <label for="requestedAmount">
+                <i class="bi bi-currency-rupee"></i>
+                Requested Amount
+            </label>
+            <div class="input-wrapper">
+                <input type="number" 
+                       id="requestedAmount" 
+                       name="requestedAmount" 
+                       th:field="*{requestAmount}"
+                       th:attr="min=${session.selectedLoanProduct.minAmount}, max=${session.selectedLoanProduct.maxAmount}"
+                       placeholder="Enter loan amount"
+                       required />
+            </div>
+            <div class="amount-info">
+                <i class="bi bi-info-circle"></i>
+                Amount must be between ₹<span th:text="${session.selectedLoanProduct.minAmount}"></span> and ₹<span th:text="${session.selectedLoanProduct.maxAmount}"></span>
+            </div>
         </div>
+
         <div class="form-group">
-            <label for="assetName">Asset Name</label>
-            <input type="text" id="assetName" name="assetName" th:field="*{nameOfAsset}"  />
+            <label for="applicationDate">
+                <i class="bi bi-calendar-date"></i>
+                Application Date
+            </label>
+            <div class="input-wrapper">
+                <input type="date" 
+                       id="applicationDate" 
+                       class="applicationDate" 
+                       name="applicationDate" 
+                       th:field="*{applicationDate}" 
+                       required />
+            </div>
         </div>
+
         <div class="form-group">
-            <label for="assetImage">Upload Asset Image</label>
-            <input type="file" id="assetImage" name="assetFile" accept="image/*"/>
+            <label for="assetName">
+                <i class="bi bi-house-door"></i>
+                Asset Name
+            </label>
+            <div class="input-wrapper">
+                <input type="text" 
+                       id="assetName" 
+                       name="assetName" 
+                       th:field="*{nameOfAsset}"
+                       placeholder="Enter asset name (e.g., House, Car, Equipment)"
+                       required />
+            </div>
         </div>
-        <button type="submit">Apply</button>
+
+        <div class="form-group">
+            <label for="assetImage">
+                <i class="bi bi-image"></i>
+                Upload Asset Image
+            </label>
+            <div class="file-upload-wrapper">
+                <input type="file" 
+                       id="assetImage" 
+                       name="assetFile" 
+                       accept="image/*"/>
+            </div>
+            <div class="file-upload-text">
+                <i class="bi bi-cloud-upload"></i>
+                Choose an image file (JPG, PNG, GIF)
+            </div>
+        </div>
+
+        <button type="submit" class="submit-button">
+            <i class="bi bi-send-fill"></i>
+            Submit Application
+        </button>
     </form>
 </div>
-</body>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+    // Set today's date as default and minimum date
     const today = new Date().toISOString().split('T')[0];
     document.querySelectorAll(".applicationDate").forEach(input => {
         input.value = today;
         input.min = today;
     });
+
+    // Enhanced form submission
+    const form = document.querySelector('form');
+    const submitButton = document.querySelector('.submit-button');
+    const formContainer = document.querySelector('.form-container');
+
+    form.addEventListener('submit', function(e) {
+        // Add loading state
+        submitButton.classList.add('loading');
+        submitButton.innerHTML = 'Processing...';
+        
+        // Add success animation to container
+        formContainer.classList.add('success');
+    });
+
+    // File input enhancement
+    const fileInput = document.getElementById('assetImage');
+    const fileText = document.querySelector('.file-upload-text');
+    
+    fileInput.addEventListener('change', function(e) {
+        if (e.target.files.length > 0) {
+            const fileName = e.target.files[0].name;
+            fileText.innerHTML = `<i class="bi bi-check-circle-fill" style="color: var(--secondary-blue);"></i> Selected: ${fileName}`;
+        } else {
+            fileText.innerHTML = `<i class="bi bi-cloud-upload"></i> Choose an image file (JPG, PNG, GIF)`;
+        }
+    });
+
+    // Input validation enhancement
+    const amountInput = document.getElementById('requestedAmount');
+    const amountInfo = document.querySelector('.amount-info');
+    
+    amountInput.addEventListener('input', function(e) {
+        const value = parseFloat(e.target.value);
+        const min = parseFloat(e.target.min);
+        const max = parseFloat(e.target.max);
+        
+        if (value < min || value > max) {
+            amountInfo.style.color = '#ef4444';
+            amountInfo.style.background = '#fef2f2';
+            e.target.style.borderColor = '#ef4444';
+        } else {
+            amountInfo.style.color = 'var(--navy-blue)';
+            amountInfo.style.background = 'var(--light-blue)';
+            e.target.style.borderColor = '#e2e8f0';
+        }
+    });
+
+    // Add smooth focus transitions
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.parentElement.style.transform = 'scale(1.02)';
+        });
+        
+        input.addEventListener('blur', function() {
+            this.parentElement.style.transform = 'scale(1)';
+        });
+    });
 });
 </script>
-
-
+</body>
 </html>

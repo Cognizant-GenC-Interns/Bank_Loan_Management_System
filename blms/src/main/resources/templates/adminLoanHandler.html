@@ -2,15 +2,33 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Loan Applications</title>
+    <title>Loan Applications - Big Bank</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
+        :root {
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --accent-blue: #60a5fa;
+            --light-blue: #dbeafe;
+            --navy-blue: #1e3a8a;
+            --sky-blue: #0ea5e9;
+            --dark-blue: #1e293b;
+            --gradient-primary: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+            --gradient-secondary: linear-gradient(135deg, #3b82f6 0%, #60a5fa 50%, #93c5fd 100%);
+            --gradient-accent: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+            --gradient-light: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            --gradient-navy: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        }
+
         html, body {
             margin: 0;
             padding: 0;
             height: 100%;
             overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--gradient-light);
         }
 
         header {
@@ -18,14 +36,53 @@
             top: 0;
             width: 100%;
             z-index: 1000;
+            box-shadow: 0 4px 20px rgba(30, 64, 175, 0.15);
         }
 
-       footer {
+        .navbar {
+            background: var(--gradient-primary) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white !important;
+            letter-spacing: -0.5px;
+        }
+
+        .navbar-brand img {
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-right: 0.75rem;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            color: white !important;
+        }
+
+        footer {
             position: relative;
             bottom: 0;
             width: 100%;
             z-index: 1000;
-			margin-top: 110px;
+            margin-top: 110px;
+            background: var(--gradient-navy) !important;
+            box-shadow: 0 -4px 20px rgba(30, 64, 175, 0.15);
         }
 
         .content-wrapper {
@@ -35,7 +92,241 @@
             left: 0;
             right: 0;
             overflow-y: auto;
-            padding: 20px;
+            padding: 30px;
+            background: var(--gradient-light);
+        }
+
+        .page-header {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(30, 64, 175, 0.15);
+        }
+
+        .page-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        .btn-professional {
+            background: var(--gradient-accent);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+        }
+
+        .btn-professional:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
+            color: white;
+        }
+
+        .loan-card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(30, 64, 175, 0.1);
+            transition: all 0.3s ease;
+            background: white;
+            overflow: hidden;
+        }
+
+        .loan-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(30, 64, 175, 0.15);
+        }
+
+        .card-header-professional {
+            background: var(--gradient-primary) !important;
+            color: white;
+            border: none;
+            padding: 1.25rem;
+            font-weight: 600;
+        }
+
+        .card-body-professional {
+            padding: 1.5rem;
+        }
+
+        .list-group-item-professional {
+            border: none;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0.75rem 0;
+            background: transparent;
+        }
+
+        .list-group-item-professional:last-child {
+            border-bottom: none;
+        }
+
+        .download-btn {
+            background: var(--gradient-secondary);
+            border: none;
+            color: white;
+            font-weight: 500;
+            padding: 0.75rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+
+        .action-btn-approve {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border: none;
+            color: white;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+        }
+
+        .action-btn-approve:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+        }
+
+        .action-btn-reject {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            border: none;
+            color: white;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+        }
+
+        .action-btn-reject:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.35);
+        }
+
+        .form-control-professional {
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control-professional:focus {
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .modal-content-professional {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 20px 80px rgba(30, 64, 175, 0.2);
+        }
+
+        .modal-header-professional {
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 16px 16px 0 0;
+            border: none;
+            padding: 1.5rem;
+        }
+
+        .table-professional {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(30, 64, 175, 0.1);
+        }
+
+        .table-professional thead {
+            background: var(--gradient-secondary);
+            color: white;
+        }
+
+        .table-professional th {
+            border: none;
+            padding: 1rem;
+            font-weight: 600;
+        }
+
+        .table-professional td {
+            border-color: #e2e8f0;
+            padding: 1rem;
+            vertical-align: middle;
+        }
+
+        .status-eligible {
+            color: #10b981;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .status-ineligible {
+            color: #ef4444;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .info-btn {
+            background: var(--gradient-accent);
+            border: none;
+            color: white;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .info-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .stats-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 16px rgba(30, 64, 175, 0.1);
+            border-left: 4px solid var(--secondary-blue);
+        }
+
+        .icon-circle {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
         }
     </style>
 </head>
@@ -43,18 +334,18 @@
 
 <!-- Header -->
 <header class="fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #6A89A7;">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center">
                 <img th:src="@{/images/logo.png}" alt="Logo" width="70" class="d-inline-block align-text-top">
-                <span class="ms-2">Big Bank</span>
+                <span class="ms-3">Big Bank</span>
             </a>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            	<a th:href="@{/report/getAllOutsatndingLoans}" class="btn btn-outline-primary" download>
-        	📥 All Outstanding loan Reports
-    	</a> 
-                <a th:href="@{/logout}" class="text-blue" title="Log Out">
-                    <img th:src="@{/images/logout.png}" width="40" height="40" alt="User" class="rounded-circle">
+                <a th:href="@{/report/getAllOutsatndingLoans}" class="nav-btn" download>
+                    <i class="fas fa-download me-2"></i>Outstanding Loan Reports
+                </a> 
+                <a th:href="@{/logout}" class="logout-btn" title="Log Out">
+                    <img th:src="@{/images/logout.png}" width="32" height="32" alt="Logout" class="rounded-circle">
                 </a>
             </div>
         </div>
@@ -63,116 +354,168 @@
 
 <!-- Main Content -->
 <div class="content-wrapper">
-    <div class="container">
-    <div class="text-center mb-4">
-   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="text-primary mb-0">Pending Loan Applications</h2>
-    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#approvedLoansModal">
-        ✅ View Approved Loans
-    </button>
-</div>
-   
-
-           <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col" th:each="loan : ${requestPendingLoans}">
-                <div class="card h-100 border-warning shadow-sm" th:attr="data-applied-date=${loan.applicationDate}">
-                   <div class="card-header bg-warning text-dark fw-bold d-flex justify-content-between">
-   					 <p class="mb-0">Loan ID: <span th:text="${loan.loanApplicationId}"></span></p>
-    				 <p class="mb-0">Applied on: <span th:text="${loan.applicationDate}"></span></p>
-					</div>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush text-start">
-                            <li class="list-group-item "><strong>Amount:</strong> ₹<span th:text="${loan.requestAmount}"></span></li>
-                            <li class="list-group-item"><strong>Applicant ID:</strong> <span th:text="${loan.customer.customerId}"></span></li>
-                            <li class="list-group-item"><strong>Name:</strong> <span th:text="${loan.customer.name}"></span></li>
-                            <li class="list-group-item"><strong>Email:</strong> <span th:text="${loan.customer.email}"></span></li>
-                            <li class="list-group-item"><strong>Mobile Number:</strong> <span th:text="${loan.customer.phone}"></span></li>
-                            <li class="list-group-item"><strong>Suggestion:</strong> <span th:if="${loan.eligibility != null}" th:text="${loan.eligibility}" style="color: red;"></span><span th:if="${loan.eligibility == null}" style="color: green;">Eligible</span>
-							</li>
-                            </ul>
-                        
-	<div class="mb-3 text-center">
-    	<a th:href="@{'/loans/assetImage/' + ${loan.loanApplicationId}}" class="btn btn-outline-primary w-100" download>
-        	📥 Download Asset Image
-    	</a>
-	</div>
-                        
-						
-  <div class="row g-2 align-items-end">
-    <!-- Approve Form -->
-    <div class="col-md-8">
-        <form th:action="@{/loans/approveLoan}" method="post">
-            <input type="hidden" name="loanId" th:value="${loan.loanApplicationId}" />
-            <div class="row g-2">
-                <div class="col-md-8">
-                    <input type="date" name="approvedDate" class="form-control approved-date"  required />
+    <div class="container-fluid">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="page-title">
+                        <i class="fas fa-clipboard-list me-3"></i>
+                        Loan Application Management
+                    </h1>
+                    <p class="mb-0 opacity-75">Review and process pending loan applications</p>
                 </div>
-                <div class="col-md-4">
-                    <button type="submit" class="btn btn-outline-success w-100">✅</button>
-                </div>
+                <button type="button" class="btn-professional" data-bs-toggle="modal" data-bs-target="#approvedLoansModal">
+                    <i class="fas fa-check-circle me-2"></i>View Approved Loans
+                </button>
             </div>
-        </form>
-    </div>
+        </div>
 
-    <!-- Reject Form -->
-    <div class="col-md-4">
-        <form th:action="@{/loans/rejectLoan}" method="post">
-            <input type="hidden" name="loanId" th:value="${loan.loanApplicationId}" />
-            <button type="submit" class="btn btn-outline-danger w-100">❌ </button>
-        </form>
-    </div>
-</div>
+        <!-- Loan Cards Grid -->
+        <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 g-4">
+            <div class="col" th:each="loan : ${requestPendingLoans}">
+                <div class="card loan-card h-100" th:attr="data-applied-date=${loan.applicationDate}">
+                    <div class="card-header card-header-professional d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-circle me-3">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Loan ID: <span th:text="${loan.loanApplicationId}"></span></h6>
+                                <small class="opacity-75">Applied: <span th:text="${loan.applicationDate}"></span></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body card-body-professional">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item list-group-item-professional">
+                                <div class="d-flex justify-content-between">
+                                    <strong><i class="fas fa-rupee-sign me-2 text-primary"></i>Amount:</strong>
+                                    <span class="fw-semibold">₹<span th:text="${loan.requestAmount}"></span></span>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-professional">
+                                <div class="d-flex justify-content-between">
+                                    <strong><i class="fas fa-id-card me-2 text-primary"></i>Applicant ID:</strong>
+                                    <span th:text="${loan.customer.customerId}"></span>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-professional">
+                                <div class="d-flex justify-content-between">
+                                    <strong><i class="fas fa-user me-2 text-primary"></i>Name:</strong>
+                                    <span th:text="${loan.customer.name}"></span>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-professional">
+                                <div class="d-flex justify-content-between">
+                                    <strong><i class="fas fa-envelope me-2 text-primary"></i>Email:</strong>
+                                    <span th:text="${loan.customer.email}" class="text-truncate" style="max-width: 150px;"></span>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-professional">
+                                <div class="d-flex justify-content-between">
+                                    <strong><i class="fas fa-phone me-2 text-primary"></i>Mobile:</strong>
+                                    <span th:text="${loan.customer.phone}"></span>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-professional">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <strong><i class="fas fa-clipboard-check me-2 text-primary"></i>Status:</strong>
+                                    <span th:if="${loan.eligibility != null}" th:text="${loan.eligibility}" class="status-ineligible"></span>
+                                    <span th:if="${loan.eligibility == null}" class="status-eligible">
+                                        <i class="fas fa-check-circle me-1"></i>Eligible
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        <div class="mt-4 mb-3">
+                            <a th:href="@{'/loans/assetImage/' + ${loan.loanApplicationId}}" class="download-btn" download>
+                                <i class="fas fa-download me-2"></i>Download Asset Image
+                            </a>
+                        </div>
+                        
+                        <div class="row g-2 align-items-end">
+                            <!-- Approve Form -->
+                            <div class="col-8">
+                                <form th:action="@{/loans/approveLoan}" method="post">
+                                    <input type="hidden" name="loanId" th:value="${loan.loanApplicationId}" />
+                                    <div class="row g-2">
+                                        <div class="col-8">
+                                            <input type="date" name="approvedDate" class="form-control form-control-professional approved-date" required />
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="submit" class="btn action-btn-approve w-100">
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
 
-
+                            <!-- Reject Form -->
+                            <div class="col-4">
+                                <form th:action="@{/loans/rejectLoan}" method="post">
+                                    <input type="hidden" name="loanId" th:value="${loan.loanApplicationId}" />
+                                    <button type="submit" class="btn action-btn-reject w-100">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </div>
-      </div> 
-</div>
-
 
 <!-- Footer -->
-<footer class="py-4 fixed-bottom" style="background-color: #384959;">
+<footer class="py-4 fixed-bottom">
     <div class="container text-center">
-        <p class="mb-0 text-white">&copy; 2025 LoanPortal. All Rights Reserved.</p>
+        <p class="mb-0 text-white opacity-75">&copy; 2025 Big Bank Loan Portal. All Rights Reserved.</p>
     </div>
 </footer>
+
 <!-- Approved Loans Modal -->
 <div class="modal fade" id="approvedLoansModal" tabindex="-1" aria-labelledby="approvedLoansModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header bg-success text-white">
-                <h5 class="modal-title" id="approvedLoansModalLabel">Approved Loan Applications</h5>
+        <div class="modal-content modal-content-professional">
+            <div class="modal-header modal-header-professional">
+                <h5 class="modal-title" id="approvedLoansModalLabel">
+                    <i class="fas fa-check-circle me-2"></i>Approved Loan Applications
+                </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped align-middle">
-                        <thead class="table-success">
+                    <table class="table table-professional align-middle">
+                        <thead>
                             <tr>
-                                <th>Loan ID</th>
-                                <th>Applicant ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Applied Date</th>
-                                <th>Approved Date</th>
-                                <th>Loan Report</th>
+                                <th><i class="fas fa-hashtag me-2"></i>Loan ID</th>
+                                <th><i class="fas fa-id-card me-2"></i>Applicant ID</th>
+                                <th><i class="fas fa-user me-2"></i>Name</th>
+                                <th><i class="fas fa-envelope me-2"></i>Email</th>
+                                <th><i class="fas fa-phone me-2"></i>Phone</th>
+                                <th><i class="fas fa-calendar me-2"></i>Applied Date</th>
+                                <th><i class="fas fa-calendar-check me-2"></i>Approved Date</th>
+                                <th><i class="fas fa-file-alt me-2"></i>Report</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="loan : ${approvedLoans}">
-                                <td th:text="${loan.loanApplicationId}"></td>
+                                <td class="fw-semibold" th:text="${loan.loanApplicationId}"></td>
                                 <td th:text="${loan.customer.customerId}"></td>
                                 <td th:text="${loan.customer.name}"></td>
                                 <td th:text="${loan.customer.email}"></td>
                                 <td th:text="${loan.customer.phone}"></td>
                                 <td><span th:text="${loan.applicationDate}"></span></td>
                                 <td><span th:text="${loan.approvedDate}"></span></td>
-                                <td><a class="btn btn-info" type="button" th:href="@{/report/loanReport/{Id}(Id=${loan.loanApplicationId})}">Loan Report</a></td>
-                                
+                                <td>
+                                    <a class="info-btn" th:href="@{/report/loanReport/{Id}(Id=${loan.loanApplicationId})}">
+                                        <i class="fas fa-file-download me-1"></i>Report
+                                    </a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -182,7 +525,7 @@
     </div>
 </div>
 
-</body><script>
+<script>
 document.addEventListener("DOMContentLoaded", function () {
     const today = new Date().toISOString().split('T')[0];
     document.querySelectorAll(".approved-date").forEach(input => {
@@ -209,6 +552,5 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-
-
+</body>
 </html>

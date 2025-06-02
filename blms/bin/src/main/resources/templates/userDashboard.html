@@ -42,6 +42,10 @@
       background-color: #6A89A7;
     }
     
+    #cancel{
+   
+    }
+    
     .content-wrapper {
       margin-left: 200px;
       padding: 20px;
@@ -89,13 +93,44 @@
 </nav>
 
 
-<div class="sidebar" >
-  <a onclick="showProfile()">Edit Profile</a>
-   <a onclick="showSection('loanProducts')">Apply Loans</a>
-   <a href="#" onclick="showSection('loanApplied')">Loan Applied</a>
+<div class="sidebar">
+	<a onclick="showSection('loanProducts')">Loan Products</a>
+	  <!-- Only show these links if KYC is not pending -->
+  <div th:if="${loggedCustomer.kycStatus.name() =='VERIFIED'}">
+  		<a href="#" onclick="showSection('applyLoans')">Apply Loans</a>
+  		<a href="#" onclick="showSection('loanApplied')">Loan Applied</a>
 </div>
+	
+  <a onclick="showProfile()">Edit Profile</a>
+  
+
+</div>
+
 <div class="content ">
 <div id="loanProducts" class="section active container mt-5">
+    <h3 class="mt-4">Available Loan Products</h3>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" th:each="loan : ${loanProducts}">
+            <div class="card h-100 border-0 shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h5 class="card-title mb-0" th:text="${loan.ProductName}">Loan Name</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mb-3">
+                        <li><strong>Interest Rate:</strong> <span th:text="${loan.interestRate} + '%'"></span></li>
+                        <li><strong>Min Amount:</strong> ₹<span th:text="${loan.minAmount}"></span></li>
+                        <li><strong>Max Amount:</strong> ₹<span th:text="${loan.maxAmount}"></span></li>
+                        <li><strong>Tenure:</strong> <span th:text="${loan.tenure}"></span> months</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="applyLoans" class="section container mt-5" style="display: none;">
     <h3 class="mt-4">Available Loan Products</h3>
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -137,12 +172,30 @@
                     <ul class="list-unstyled">
                         <li><strong>Requested Amount:</strong> ₹<span th:text="${loan2.requestAmount}"></span></li>
                         <li><strong>Status:</strong> <span th:text="${loan2.loanApplicationStatus}"></span></li>
+                        
                     </ul>
+                    
+<div th:if="${loan2.loanApplicationStatus.name() == 'APPROVED'}" class="text-center mt-3">
+      <a class="btn btn-info" type="button" th:href="@{/repayments/paymentSchedule/{Id}(Id=${loan2.loanApplicationId})}">Payment Schedule</a>
+	  <a class="btn btn-info" type="button" th:href="@{/report/repaymentReport/{Id}(Id=${loan2.loanApplicationId})}">Repayment Report</a>
+	  <a class="btn btn-info" type="button" th:href="@{/report/loanReport/{Id}(Id=${loan2.loanApplicationId})}">Loan Report</a>
+	 
+ </div>
+                    
                 </div>
+                <form th:if="${loan2.loanApplicationStatus.name() == 'PENDING'}"
+                th:action="@{/loans/deleteLoan/{Id}(Id=${loan2.loanApplicationId})}" method="post"
+                onsubmit="return confirm('Are you sure you want to delete this loan Application?');">
+                <div class="text-center mt-3 mb-3">
+                <button id="cancel" type="submit" class="btn btn-outline-danger btn-sm">Cancel</button>
+                </div>
+                </form>
+
             </div>
         </div>
     </div>
 </div>
+
 
 </div>
 
@@ -170,13 +223,16 @@
         <p><strong>Phone no:</strong> <span th:text="${loggedCustomer.phone}"></span></p>
         <p><strong>Address:</strong> <span th:text="${loggedCustomer.address}"></span></p>
         <p><strong>Kyc Status:</strong> <span th:text="${loggedCustomer.kycStatus}"></span></p>
+        <div class="text-start"><a class="btn btn-custom" th:href="@{'/report/getPortfolio/'+ ${loggedCustomer.customerId}}" download> 📥 Download Portfolio</a>
+        </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<!-- Payment Modal -->
 
-<!-- Profile Modal -->
+<!-- Edit Profile Modal -->
 <div class="modal fade" id="profile" tabindex="-1" aria-labelledby="profileLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content" th:if="${loggedCustomer!= null}">
@@ -197,22 +253,27 @@
 		  </div> 
           <div class="mb-3">
             <label for="name" class="form-label">Name</label>
+            <div class="error-message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
             <input type="text" th:value="${loggedCustomer.name}" th:field="*{name}" class="form-control" id="name">
           </div>
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
+            <div class="error-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
             <input type="email" th:value="${loggedCustomer.email}" th:field="*{email}" class="form-control" id="email">
           </div>
           <div class="mb-3">
             <label for="phone" class="form-label">Phone</label>
+            <div class="error-message" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
             <input type="text" th:value="${loggedCustomer.phone}" th:field="*{phone}" class="form-control" id="phone">
           </div>
           <div class="mb-3">
             <label for="address" class="form-label">Address</label>
+            <div class="error-message" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
             <input type="text" th:value="${loggedCustomer.address}" th:field="*{address}" class="form-control" id="address">
           </div>
           <div class="mb-3">
             <label for="annualSalary" class="form-label">Annual Salary</label>
+            <div class="error-message" th:if="${#fields.hasErrors('annualSalary')}" th:errors="*{annualSalary}"></div>
             <input type="text" th:value="${loggedCustomer.annualSalary}" th:field="*{annualSalary}" class="form-control" id="annualSalary">
           </div>
           <div class="mb-3">
