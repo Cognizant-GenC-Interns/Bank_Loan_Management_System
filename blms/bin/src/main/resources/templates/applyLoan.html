@@ -55,18 +55,23 @@
 <body>
 <div class="form-container">
     <h2>Asset Request Form</h2>
-    <form th:action="@{/saveAppliedLoan}" method="post" enctype="multipart/form-data" th:object="${loanApplication}">
+    <form th:action="@{/loans/saveAppliedLoan}" method="post" enctype="multipart/form-data" th:object="${loanApplication}">
         <div class="form-group">
             <label for="requestedAmount">Requested Amount</label>
-            <input type="number" id="requestedAmount" name="requestedAmount" th:field="*{requestAmount}" required />
-        </div>
+            
+			<input type="number" id="requestedAmount" name="requestedAmount" th:field="*{requestAmount}"
+				th:attr="min=${session.selectedLoanProduct.minAmount}, max=${session.selectedLoanProduct.maxAmount}"
+				required />
+				<small class="text-muted">Amount must be between ₹<span th:text="${session.selectedLoanProduct.minAmount}"></span> and ₹<span th:text="${session.selectedLoanProduct.maxAmount}"></span></small>
+				
+</div>
         <div class="form-group">
             <label for="Date">Date</label>
-            <input type="Date" id="applicationDate" name="applicationDate" th:field="*{applicationDate}" required />
+            <input type="Date" id="applicationDate" class="applicationDate" name="applicationDate" th:field="*{applicationDate}" required />
         </div>
         <div class="form-group">
             <label for="assetName">Asset Name</label>
-            <input type="text" id="assetName" name="assetName" th:field="*{nameOfAsset}" required />
+            <input type="text" id="assetName" name="assetName" th:field="*{nameOfAsset}"  />
         </div>
         <div class="form-group">
             <label for="assetImage">Upload Asset Image</label>
@@ -76,4 +81,15 @@
     </form>
 </div>
 </body>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const today = new Date().toISOString().split('T')[0];
+    document.querySelectorAll(".applicationDate").forEach(input => {
+        input.value = today;
+        input.min = today;
+    });
+});
+</script>
+
+
 </html>

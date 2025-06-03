@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Repayment Schedule - Big Bank</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      background-color: #f0f4f8;
+    }
+    .navbar {
+      background-color: #6A89A7;
+    }
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+    .container {
+      margin-top: 100px;
+    }
+    .table th {
+      background-color: #6A89A7;
+      color: white;
+    }
+    .btn-back {
+      margin-bottom: 20px;
+    }
+    .modal-header {
+      background-color: #6A89A7;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img th:src="@{/images/logo.png}" alt="Logo" width="40" height="40" class="me-2">
+      Big Bank
+    </a>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+  <a th:href="@{/user/userDashboard}" class="btn btn-outline-primary btn-back"><i class="bi bi-arrow-left"></i> Back</a>
+
+  <h2 class="mb-4">Repayment Schedule for Loan: <span th:text="${loanApplication.loanProduct.productName}"></span></h2>
+  <h5><strong>Principal Amount:</strong> <span th:text="${loanApplication.requestAmount}"></span></h5>
+  <h5><strong>Interest Rate:</strong> <span th:text="${loanApplication.loanProduct.interestRate}"></span></h5>
+  <h5><strong>Tenure:</strong> <span th:text="${loanApplication.loanProduct.tenure}"></span></h5>
+  <h5><strong>Outstanding Balance:</strong> <span th:text="${loanApplication.balance}"></span></h5>
+
+  <!-- Upcoming Dues -->
+  <h4 class="mt-5">Upcoming Dues</h4>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Due Date</th>
+        <th>Interest Amount</th>
+        <th>Principal Amount</th>
+        <th>Total Amount</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="repayment : ${UpcomingDue}">
+        <td><span th:text="${repayment.dueDate}"></span></td>
+        <td th:text="${repayment.interestAmount}"></td>
+        <td th:text="${repayment.amountDue}"></td>
+        <td th:text="${repayment.interestAmount + repayment.amountDue}"></td>
+        <td class="text-center">
+          <button class="btn btn-success btn-sm" data-bs-toggle="modal"
+                  th:attr="data-bs-target='#payModal__' + ${repayment.repaymentId}">
+            Pay
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Completed Dues -->
+  <h4 class="mt-5">Completed Dues</h4>
+  <table class="table table-bordered table-success">
+    <thead>
+      <tr>
+        <th>Due Date</th>
+        <th>Payment Date</th>
+        <th>Interest Paid</th>
+        <th>Principal Paid</th>
+        <th>Total Amount Paid</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="repayment : ${CompletedDues}">
+        <td th:text="${repayment.dueDate}"></td>
+        <td th:text="${repayment.paymentDate}"></td>
+        <td th:text="${repayment.interestPaid}"></td>
+        <td th:text="${repayment.principalPaid}"></td>
+        <td th:text="${repayment.principalPaid + repayment.interestPaid}"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Payment Modals -->
+  <div th:each="repayment : ${UpcomingDue}">
+    <div class="modal fade" th:id="'payModal__' + ${repayment.repaymentId}" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form th:action="@{/repayments/makePayment/{repaymentId}(repaymentId=${repayment.repaymentId})}" method="post">
+            <div class="modal-header">
+              <h5 class="modal-title">Make a Payment</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="amountPaid" class="form-label">Amount Paid</label>
+                <input type="number" class="form-control" name="amountPaid" required>
+              </div>
+              <div class="mb-3">
+                <label for="paymentDate" class="form-label">Payment Date</label>
+                <input type="date" class="form-control paymentDate"
+                       name="paymentDate"
+                       th:attr="data-due-date=${repayment.dueDate}"
+                      th:attrappend="data-repayment-id=${repayment.repaymentId}"
+                       required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success">Submit Payment</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- JavaScript -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const today = new Date().toISOString().split('T')[0];
+    document.querySelectorAll(".paymentDate").forEach(input => {
+        input.value = today;
+        input.min = today;
+    });
+});
+</script>
+
+</body>
+</html>
