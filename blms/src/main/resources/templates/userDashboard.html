@@ -481,7 +481,7 @@
                         </li>
                     </ul>
                     
-                    <div th:if="${loan2.loanApplicationStatus.name() == 'APPROVED'}" class="text-center mt-4">
+                    <div th:if="${loan2.loanApplicationStatus.name() == 'APPROVED' || loan2.loanApplicationStatus.name() == 'SETTLED'}" class="text-center mt-4">
                         <div class="d-grid gap-2">
                             <a class="btn btn-info" type="button" th:href="@{/repayments/paymentSchedule/{Id}(Id=${loan2.loanApplicationId})}">
                               <i class="bi bi-calendar-check me-2"></i>Payment Schedule

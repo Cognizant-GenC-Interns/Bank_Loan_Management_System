@@ -39,6 +39,12 @@
             z-index: 1000;
             box-shadow: 0 4px 20px rgba(30, 64, 175, 0.1);
         }
+        
+.error-message {
+    color: red;
+    font-size: 0.9em;
+  }
+        
  
         footer {
             position: relative;
@@ -705,22 +711,28 @@
         <div class="modal-body">
           <div class="mb-3">
             <label for="productName" class="form-label">Product Name</label>
+            <div class="error-message" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></div>
             <input type="text" class="form-control" id="productName" name="productName"  th:field="*{productName}" required>
           </div>
           <div class="mb-3">
             <label for="interestRate" class="form-label">Interest Rate (%)</label>
+            <div class="error-message" th:if="${#fields.hasErrors('interestRate')}" th:errors="*{interestRate}"></div>
             <input type="number" step="0.01" class="form-control" id="interestRate" name="interestRate" th:field="*{interestRate}" required>
           </div>
           <div class="mb-3">
             <label for="minAmount" class="form-label">Minimum Amount</label>
+            <div class="error-message" th:if="${#fields.hasErrors('minAmount')}" th:errors="*{minAmount}"></div>
             <input type="number" class="form-control" id="minAmount" name="minAmount" th:field="*{minAmount}" required>
           </div>
           <div class="mb-3">
-            <label for="msaxAmount" class="form-label">Maximum Amount</label>
-            <input type="number" class="form-control" id="maxAmount" name="maxAmount" th:field="*{maxAmount}" required>
+            <label for="maxAmount" class="form-label">Maximum Amount</label>
+            <div class="error-message" th:if="${#fields.hasErrors('maxAmount')}" th:errors="*{maxAmount}"></div>
+                        	
+            <input type="number" class="form-control" id="maxAmount"  th:field="*{maxAmount}" required>
           </div>
           <div class="mb-3">
             <label for="tenure" class="form-label">Tenure (months)</label>
+            <div class="error-message" th:if="${#fields.hasErrors('tenure')}" th:errors="*{tenure}"></div>
             <input type="number" class="form-control" id="tenure" name="tenure" th:field="*{tenure}" required>
           </div>
         </div>

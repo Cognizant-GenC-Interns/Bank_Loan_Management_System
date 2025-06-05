@@ -123,7 +123,7 @@ public class CustomerController {
 		}
 		return ResponseEntity.notFound().build();
 	}
-
+//notUsed
 	@GetMapping("/customerDetailsById")
 	public String getCustomerDetailsById(@RequestParam("id") long id, Model model) {
 		Customer customer = customerService.getCustomerDetailsById(id);

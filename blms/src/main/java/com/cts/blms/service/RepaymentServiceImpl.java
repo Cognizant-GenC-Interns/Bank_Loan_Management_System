@@ -77,12 +77,14 @@ public class RepaymentServiceImpl implements RepaymentService {
 	    }else
 		    {
 		    	System.out.println("Asset seized...");
+		    	loan.setLoanApplicationStatus(LoanApplicationStatus.NOT_SETTLED);
+		    	loanApplicationRepository.save(loan);
 		    	return;
 		    }
 
 		double minPrincipal = repayment.getAmountDue();
 		double minInterest = repayment.getInterestAmount();
-
+		BigDecimal LB;
 		long daysLate = getDaysBetween(repayment.getDueDate(), paymentDate);
 		double currentRepaymentFine = daysLate > 0 ? daysLate * 10 : 0.0;
 		repayment.setFineAmount(currentRepaymentFine);
@@ -91,12 +93,13 @@ public class RepaymentServiceImpl implements RepaymentService {
 		if (amountPaid >= currentRepaymentFine) {
 			amountPaid -= currentRepaymentFine;
 		} else {
-//cas2 2 :less than the fine amount
+			//cas2 2 :less than the fine amount
 			needToPay += (currentRepaymentFine - amountPaid);
 			amountPaid = 0.0;
 			repayment.setPaymentStatus(PaymentStatus.PENDING);
-			
-			loan.setBalance(loan.getBalance() + needToPay);
+			LB=BigDecimal.valueOf(loan.getBalance() + needToPay).setScale(2, RoundingMode.HALF_UP);
+		    loan.setBalance(LB.doubleValue());
+//			loan.setBalance(loan.getBalance() + needToPay);
 			repaymentRepository.save(repayment);
 			loanApplicationRepository.save(loan);
 			return;
@@ -116,22 +119,25 @@ public class RepaymentServiceImpl implements RepaymentService {
 //			return;
 		}
 		repayment.setInterestPaid(interestPaid);
-
+		
 //		repayment.setPrincipalPaid(amountPaid);
 //		if (amountPaid > 0) {
 		if (amountPaid >= minPrincipal) {
 		    principalPaid = minPrincipal;
 		    amountPaid -= minPrincipal;
-		    loan.setBalance(loan.getBalance() - principalPaid);
+		    LB=BigDecimal.valueOf(loan.getBalance() - principalPaid).setScale(2, RoundingMode.HALF_UP);
+		    loan.setBalance(LB.doubleValue());
 		} else {
 		    principalPaid = amountPaid;
 		    needToPay += (minPrincipal - amountPaid);
-		    loan.setBalance(loan.getBalance() - principalPaid);
+		    LB=BigDecimal.valueOf(loan.getBalance() - principalPaid).setScale(2, RoundingMode.HALF_UP);
+		    loan.setBalance(LB.doubleValue());
 		    amountPaid = 0.0;
 		}
 
 //		}
-		repayment.setPrincipalPaid(principalPaid+amountPaid);
+		BigDecimal pp=BigDecimal.valueOf(principalPaid+amountPaid);
+		repayment.setPrincipalPaid((pp).setScale(2, RoundingMode.HALF_UP).doubleValue());
 		double extraPaid=0;
 	    if(amountPaid > 0)
 	    {
@@ -140,7 +146,8 @@ public class RepaymentServiceImpl implements RepaymentService {
 	    	{
 	    		//case 5 :more than on month
 	    		extraPaid = minPrincipal; 
-	    		loan.setBalance(loan.getBalance() - principalPaid); 
+	    		LB=BigDecimal.valueOf(loan.getBalance() - principalPaid).setScale(2, RoundingMode.HALF_UP);
+			    loan.setBalance(LB.doubleValue());
 	    		amountPaid -= minPrincipal; 
 	    		if (amountPaid > 0) { 
 	    		    loan.setBalance(loan.getBalance() - amountPaid); 
@@ -150,7 +157,9 @@ public class RepaymentServiceImpl implements RepaymentService {
 	    	else
 	    	{
 	    		extraPaid = amountPaid; 
-	    		loan.setBalance(loan.getBalance() - principalPaid);  
+	    		LB=BigDecimal.valueOf(loan.getBalance() - principalPaid).setScale(2, RoundingMode.HALF_UP);
+			    loan.setBalance(LB.doubleValue());
+//	    		loan.setBalance(loan.getBalance() - principalPaid);  
 	    		amountPaid = 0.0; 
 	    	}
 	    }
@@ -224,10 +233,6 @@ public class RepaymentServiceImpl implements RepaymentService {
 		return ChronoUnit.DAYS.between(from, paymentDate);
 	}
 
-	private long getMonthsBetween(LocalDate from, LocalDate to) {
-		return ChronoUnit.MONTHS.between(from.withDayOfMonth(1), to.withDayOfMonth(1));
-	}
-
 	@Override
 	public String getOutstandingBalance(LoanApplication loanApplication) {
 		List<Repayment> repayments = repaymentRepository.findByLoanApplication(loanApplication);
@@ -270,7 +275,7 @@ public class RepaymentServiceImpl implements RepaymentService {
 
 		repayment.setInterestAmount(interestAmount.doubleValue());
 
-		System.out.println("Interest Amount per month:"+repayment.getInterestAmount());
+//		System.out.println("Interest Amount per month:"+repayment.getInterestAmount());
 		repaymentRepository.save(repayment);
 	}
 
@@ -280,7 +285,7 @@ public class RepaymentServiceImpl implements RepaymentService {
 	    {
 	        return 0.0;
 	    }  
-	    System.out.println("Entering calc total Interest:");
+//	    System.out.println("Entering calc total Interest:");
 	    double principal=loanApplication.getRequestAmount(); 
 	    double tenure = loanApplication.getLoanProduct().getTenure();
 	    double interestRate = loanApplication.getLoanProduct().getInterestRate();
@@ -288,7 +293,7 @@ public class RepaymentServiceImpl implements RepaymentService {
 //	    System.out.println((double)tenure/12);
 //	    System.out.println(interestRate);
 		   
-	    System.out.println(principal *(double)(tenure/12)* (double)interestRate/100);
+//	    System.out.println(principal *(double)(tenure/12)* (double)interestRate/100);
 //	    return (principal *(tenure/12)* interestRate/100) ;
 	    return principal *(double)(tenure/12)* (double)interestRate/100;
 	}

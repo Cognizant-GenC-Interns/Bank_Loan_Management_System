@@ -420,10 +420,11 @@
         </thead>
         <tbody>
           <tr th:each="repayment : ${UpcomingDue}">
-            <td><span th:text="${repayment.dueDate}">2024-01-15</span></td>
-            <td><span class="amount-highlight" th:text="${repayment.interestAmount}">₹500</span></td>
-            <td><span class="amount-highlight" th:text="${repayment.amountDue}">₹4,000</span></td>
-            <td><strong th:text="${repayment.interestAmount + repayment.amountDue}">₹4,500</strong></td>
+            <td><span th:text="${repayment.dueDate}"></span></td>
+            <td><span class="amount-highlight" th:text="${repayment.interestAmount}"></span></td>
+            <td><span class="amount-highlight" th:text="${repayment.amountDue}"></span></td>
+          <td>  <strong th:text="${#numbers.formatDecimal(repayment.interestAmount + repayment.amountDue, 2, 2)}"></strong>
+</td>
             <td class="text-center">
               <button class="btn btn-pay btn-sm" data-bs-toggle="modal"
                       th:attr="data-bs-target='#payModal__' + ${repayment.repaymentId}">
@@ -449,16 +450,18 @@
             <th><i class="bi bi-calendar-check me-2"></i>Payment Date</th>
             <th><i class="bi bi-percent me-2"></i>Interest Paid</th>
             <th><i class="bi bi-currency-rupee me-2"></i>Principal Paid</th>
+            <th><i class="bi bi-calculator me-2"></i>Fine Amount</th>
             <th><i class="bi bi-calculator me-2"></i>Total Paid</th>
           </tr>
         </thead>
         <tbody>
           <tr th:each="repayment : ${CompletedDues}">
-            <td th:text="${repayment.dueDate}">2023-12-15</td>
-            <td th:text="${repayment.paymentDate}">2023-12-14</td>
-            <td><span class="amount-highlight" th:text="${repayment.interestPaid}">₹500</span></td>
-            <td><span class="amount-highlight" th:text="${repayment.principalPaid}">₹4,000</span></td>
-            <td><strong th:text="${repayment.principalPaid + repayment.interestPaid}">₹4,500</strong></td>
+            <td th:text="${repayment.dueDate}"></td>
+            <td th:text="${repayment.paymentDate}"></td>
+            <td><span class="amount-highlight" th:text="${repayment.interestPaid}"></span></td>
+            <td><span class="amount-highlight" th:text="${repayment.principalPaid}"></span></td>
+            <td><span class="amount-highlight" th:text="${repayment.fineAmount}"></span></td>
+            <td>  <strong th:text="${#numbers.formatDecimal(repayment.principalPaid + repayment.interestPaid+repayment.fineAmount, 2, 2)}"></strong></td>
           </tr>
         </tbody>
       </table>
@@ -482,7 +485,7 @@
                 <label for="amountPaid" class="form-label">
                   <i class="bi bi-currency-rupee me-2"></i>Amount to Pay
                 </label>
-                <input type="number" class="form-control" name="amountPaid" placeholder="Enter amount" required>
+                <input type="number" class="form-control" name="amountPaid" placeholder="Enter amount" step="0.01" required>
               </div>
               <div class="mb-4">
                 <label for="paymentDate" class="form-label">
@@ -510,7 +513,7 @@
   </div>
 
 								</div>
-							</div>
+						<!-- 	</div>
 							<div class="modal-footer">
 								<button type="submit" class="btn btn-success">Submit
 									Payment</button>
@@ -524,7 +527,7 @@
 		</div>
 
 	</div>
-
+ -->
 	<!-- JavaScript -->
 	<script>
 document.addEventListener("DOMContentLoaded", function () {

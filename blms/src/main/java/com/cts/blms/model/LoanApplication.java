@@ -15,6 +15,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 
 @Entity
@@ -27,10 +30,12 @@ public class LoanApplication {
 	private long loanApplicationId;
 
 	@Column(name = "request_Amount")
+	@Positive(message = "Requested amount must be positive")
 	private double requestAmount;
 
 	@Column(name = "application_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message = "Application date is required")
 	private LocalDate applicationDate;
 
 	
@@ -69,6 +74,7 @@ public class LoanApplication {
 	
 	
 	@Column(name="Balance")
+	@PositiveOrZero(message = "Balance must be zero or positive")
 	private double balance;
 
 	@Enumerated(EnumType.STRING)

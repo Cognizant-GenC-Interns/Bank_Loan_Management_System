@@ -61,16 +61,16 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 		int creditScore = customer.getCreditScore();
 
 		if (creditScore < 500 && emiAmount < affordableAmount) {
-			String s = "credit score is bad and cannot affordable";
+			String s = "credit score is bad and can affordable";
 			loanApplication.setEligibility(s);
 		} else if (creditScore < 500 && emiAmount >= affordableAmount) {
-			String s = "credit score is bad but can affordable";
+			String s = "credit score is bad but cannot be affordable";
 			loanApplication.setEligibility(s);
 		} else if (creditScore >= 500 && emiAmount < affordableAmount) {
-			String s = "credit score is good but cannot affordable";
+			String s = "credit score is good but can affordable";
 			loanApplication.setEligibility(s);
 		} else if (creditScore >= 500 && emiAmount >= affordableAmount) {
-			String s = "credit score is good and affordable";
+			String s = "credit score is good and cannot beaffordable";
 			loanApplication.setEligibility(s);
 		}
 

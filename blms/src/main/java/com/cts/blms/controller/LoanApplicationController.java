@@ -101,7 +101,7 @@ public class LoanApplicationController {
 //    }
 
 	@PostMapping("/deleteLoan/{loanApplicationId}")
-	public String deleteLoan(@PathVariable long loanApplicationId, RedirectAttributes redirectAttributes) {
+	public String deleteLoan(@PathVariable long loanApplicationId) {
 		loanApplicationService1.deleteLoan(loanApplicationId);
 		return "redirect:/user/userDashboard";
 	}
