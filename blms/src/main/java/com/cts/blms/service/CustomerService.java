@@ -2,7 +2,7 @@ package com.cts.blms.service;
 
 import java.util.List;
 
-import com.cts.blms.model.Customer;
+import com.cts.blms.entity.Customer;
 
 import jakarta.validation.Valid;
 

@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.cts.blms.model.LoanApplication;
-import com.cts.blms.model.PaymentStatus;
-import com.cts.blms.model.Repayment;
+import com.cts.blms.entity.LoanApplication;
+import com.cts.blms.entity.PaymentStatus;
+import com.cts.blms.entity.Repayment;
 import com.cts.blms.service.LoanApplicationService;
 import com.cts.blms.service.RepaymentService;
 

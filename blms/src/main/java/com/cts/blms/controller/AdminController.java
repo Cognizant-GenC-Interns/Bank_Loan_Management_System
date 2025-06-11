@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.cts.blms.model.Admin;
-import com.cts.blms.model.Customer;
-import com.cts.blms.model.LoanProduct;
+import com.cts.blms.entity.Admin;
+import com.cts.blms.entity.Customer;
+import com.cts.blms.entity.LoanProduct;
 import com.cts.blms.service.AdminService;
 import com.cts.blms.service.CustomerService;
 import com.cts.blms.service.LoanApplicationService;

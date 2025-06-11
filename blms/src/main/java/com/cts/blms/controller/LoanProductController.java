@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.cts.blms.model.LoanProduct;
+import com.cts.blms.entity.LoanProduct;
 import com.cts.blms.service.LoanProductService;
 
 import jakarta.validation.Valid;

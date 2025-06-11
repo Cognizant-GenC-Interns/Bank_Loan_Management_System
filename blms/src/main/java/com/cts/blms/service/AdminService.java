@@ -1,6 +1,6 @@
 package com.cts.blms.service;
 
-import com.cts.blms.model.Admin;
+import com.cts.blms.entity.Admin;
 
 public interface AdminService {
 

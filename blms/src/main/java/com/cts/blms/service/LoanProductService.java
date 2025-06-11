@@ -3,7 +3,7 @@ package com.cts.blms.service;
 
 import java.util.List;
 
-import com.cts.blms.model.LoanProduct;
+import com.cts.blms.entity.LoanProduct;
 
 public interface LoanProductService {
 	public LoanProduct addLoanProduct(LoanProduct loan);

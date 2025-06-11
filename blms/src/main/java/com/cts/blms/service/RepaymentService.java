@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-import com.cts.blms.model.LoanApplication;
-import com.cts.blms.model.Repayment;
+import com.cts.blms.entity.LoanApplication;
+import com.cts.blms.entity.Repayment;
 
 public interface RepaymentService {
 

@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cts.blms.model.LoanProduct;
+import com.cts.blms.entity.LoanProduct;
 import com.cts.blms.repository.LoanProductRepository;
 
 @Service

@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.cts.blms.model.Customer;
-import com.cts.blms.model.KycStatus;
+import com.cts.blms.entity.Customer;
+import com.cts.blms.entity.KycStatus;
 import com.cts.blms.repository.CustomerRepository;
 
 import jakarta.validation.Valid;

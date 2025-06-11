@@ -11,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional; // Added for transactional integrity
 
-import com.cts.blms.model.LoanApplication;
-import com.cts.blms.model.LoanApplicationStatus;
-import com.cts.blms.model.PaymentStatus;
-import com.cts.blms.model.Repayment;
+import com.cts.blms.entity.LoanApplication;
+import com.cts.blms.entity.LoanApplicationStatus;
+import com.cts.blms.entity.PaymentStatus;
+import com.cts.blms.entity.Repayment;
 import com.cts.blms.repository.LoanApplicationRepository;
 import com.cts.blms.repository.RepaymentRepository;
 

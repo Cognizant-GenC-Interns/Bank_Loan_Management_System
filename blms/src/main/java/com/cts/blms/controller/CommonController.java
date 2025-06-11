@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.cts.blms.model.Customer;
+import com.cts.blms.entity.Customer;
 import com.cts.blms.service.LoanProductService;
 
 import jakarta.servlet.http.HttpSession;

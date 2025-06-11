@@ -1,4 +1,4 @@
-package com.cts.blms.model;
+package com.cts.blms.entity;
 
 public enum KycStatus {
 	PENDING, VERIFIED

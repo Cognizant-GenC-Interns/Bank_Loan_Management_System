@@ -1,4 +1,4 @@
-package com.cts.blms.model;
+package com.cts.blms.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

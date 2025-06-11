@@ -3,7 +3,7 @@ package com.cts.blms.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cts.blms.model.Admin;
+import com.cts.blms.entity.Admin;
 import com.cts.blms.repository.AdminRepository;
 
 @Service

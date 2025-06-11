@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import org.springframework.stereotype.Repository;
 
-import com.cts.blms.model.Customer;
-import com.cts.blms.model.LoanApplication;
+import com.cts.blms.entity.Customer;
+import com.cts.blms.entity.LoanApplication;
 
 @Repository
 public interface LoanApplicationRepository extends JpaRepository<LoanApplication, Long> {

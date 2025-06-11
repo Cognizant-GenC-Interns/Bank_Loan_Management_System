@@ -3,9 +3,9 @@ package com.cts.blms.service;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.cts.blms.model.Customer;
-import com.cts.blms.model.LoanApplication;
-import com.cts.blms.model.LoanProduct;
+import com.cts.blms.entity.Customer;
+import com.cts.blms.entity.LoanApplication;
+import com.cts.blms.entity.LoanProduct;
 
 import jakarta.validation.Valid;
 

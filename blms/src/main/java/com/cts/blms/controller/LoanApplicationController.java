@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.cts.blms.model.Customer;
-import com.cts.blms.model.LoanApplication;
-import com.cts.blms.model.LoanApplicationStatus;
-import com.cts.blms.model.LoanProduct;
+import com.cts.blms.entity.Customer;
+import com.cts.blms.entity.LoanApplication;
+import com.cts.blms.entity.LoanApplicationStatus;
+import com.cts.blms.entity.LoanProduct;
 import com.cts.blms.service.LoanApplicationService;
 
 import jakarta.servlet.http.HttpSession;

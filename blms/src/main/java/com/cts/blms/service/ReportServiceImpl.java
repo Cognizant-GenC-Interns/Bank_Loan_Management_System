@@ -8,10 +8,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cts.blms.model.Customer;
-import com.cts.blms.model.LoanApplication;
-import com.cts.blms.model.LoanProduct;
-import com.cts.blms.model.Repayment;
+import com.cts.blms.entity.Customer;
+import com.cts.blms.entity.LoanApplication;
+import com.cts.blms.entity.LoanProduct;
+import com.cts.blms.entity.Repayment;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.colors.ColorConstants;
